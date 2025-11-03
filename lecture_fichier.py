@@ -199,7 +199,7 @@ def trace_graph():
         fenetre.plot_frame.destroy()  # détruire l'ancien s'il existe
 
     fenetre.plot_frame = ctk.CTkFrame(fenetre)
-    fenetre.plot_frame.grid(row=2, column=0, columnspan=2, sticky="nsew")
+    fenetre.plot_frame.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
     # Canvas matplotlib dans le frame
     canvas = FigureCanvasTkAgg(fig, master=fenetre.plot_frame)
@@ -238,6 +238,8 @@ def window():
 
     bouton3 = ctk.CTkButton(fenetre, text="Tracer le graphique", command=trace_graph)
     bouton3.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    fenetre.bind('<Return>', lambda event: bouton3.invoke())
+    fenetre.bind('<KP_Enter>', lambda event: bouton3.invoke())
 
     fenetre.mainloop()
 
