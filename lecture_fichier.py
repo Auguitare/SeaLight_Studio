@@ -121,6 +121,14 @@ def trace_limit():
     ax.grid()
 
 
+def modifier_angles(data, decalage=0):
+    data["Angle °"] = data["Angle °"].apply(lambda x: x + decalage)
+    return data
+
+
+
+
+
 def trace_graph():
     global ax
 
@@ -128,7 +136,8 @@ def trace_graph():
     ax.clear()
 
     data = read_file()
-    data["Angle °"] = data["Angle °"].apply(lambda x: x - 90)
+    decalage = decalage_var.get()
+    data = modifier_angles(data, decalage=decalage)
 
     secteur_value = secteur.get()  # récupérer la valeur du Radiobutton
     if secteur_value == 1:
@@ -159,21 +168,25 @@ def trace_graph():
 
 
 def window():
-    global secteur  # pour qu'il soit accessible dans trace_graph
+    global secteur,decalage_var  # pour qu'il soit accessible dans trace_graph
     fenetre.title("graphe")
     fenetre.grid_rowconfigure(2, weight=1)
     fenetre.grid_columnconfigure(0, weight=1)
     fenetre.grid_columnconfigure(1, weight=1)
 
     secteur = ctk.IntVar(value=1)  # valeur par défaut
+    decalage_var = tk.IntVar(value=0)  # valeur par défaut
 
     rb1 = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
     rb1.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     rb2 = ctk.CTkRadioButton(fenetre, text="poupe", variable=secteur, value=2)
     rb2.grid(row=1, column=0, padx=10, pady=5, sticky="w")
 
+    entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
+    entry_decalage.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+
     bouton3 = ctk.CTkButton(fenetre, text="Tracer le graphique", command=trace_graph)
-    bouton3.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    bouton3.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
     fenetre.mainloop()
 
