@@ -1,5 +1,6 @@
 import pandas
 import tkinter as tk
+from tkinter import filedialog
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
@@ -9,9 +10,61 @@ fenetre = ctk.CTk()
 zone_limite_1 = dict()
 zone_limite_2 = dict()
 zone_limite_3 = dict()
+fichier_selectionne = None  # pour stocker le chemin du fichier choisi
+dernier_dossier = "."
 
 fig = Figure(figsize=(6, 4), dpi=100)
 ax = fig.add_subplot(111)
+
+
+def choisir_fichier():
+    global fichier_selectionne, dernier_dossier
+    fichier_selectionne = filedialog.askopenfilename(
+        title="Choisir un fichier de données",
+        filetypes=[("Fichiers texte", "*.txt"), ("Tous les fichiers", "*.*")],
+    )
+    if fichier_selectionne:
+        dernier_dossier = '/'.join(fichier_selectionne.split('/')[:-1])
+        label_fichier.configure(
+            text=f"Fichier sélectionné : {fichier_selectionne.split('/')[-1]}"
+        )
+    else:
+        label_fichier.configure(text="Aucun fichier sélectionné")
+
+
+def read_file():
+    global fichier_selectionne
+    if not fichier_selectionne:
+        tk.messagebox.showwarning(
+            "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
+        )
+        return None
+
+    lignes_a_sauter = set()
+    with open(fichier_selectionne, "r") as f:
+        lignes = f.readlines()
+        for i, ligne in enumerate(lignes):
+            if "Angle" in ligne:
+                lignes_a_sauter.update(range(0, i))
+                break
+
+    data_file = pandas.read_csv(
+        fichier_selectionne,
+        sep=";",
+        skiprows=lambda x: x in lignes_a_sauter,
+        skipfooter=2,
+        engine="python",
+        usecols=[
+            "Angle °",
+            "cd",
+            "X",
+            "Y",
+            "Tension V",
+            "Courant A",
+            "temperature ambiante °C",
+        ],
+    )
+    return data_file
 
 
 def hune_0():
@@ -96,34 +149,6 @@ def poupe_25():
     trace_limit()
 
 
-def read_file():
-    lignes_a_sauter = set()
-    with open("0.txt", "r") as f:
-        lignes = f.readlines()
-        for i, ligne in enumerate(lignes):
-            if "Angle" in ligne:
-                lignes_a_sauter.update(range(0, i))
-                break
-
-    data_file = pandas.read_csv(
-        "0.txt",
-        sep=";",
-        skiprows=lambda x: x in lignes_a_sauter,
-        skipfooter=2,
-        engine="python",
-        usecols=[
-            "Angle °",
-            "cd",
-            "X",
-            "Y",
-            "Tension V",
-            "Courant A",
-            "temperature ambiante °C",
-        ],
-    )
-    return data_file
-
-
 def trace_limit():
     # plot des limite remplie (pour plus de classe)
     ax.plot(
@@ -199,7 +224,7 @@ def trace_graph():
         fenetre.plot_frame.destroy()  # détruire l'ancien s'il existe
 
     fenetre.plot_frame = ctk.CTkFrame(fenetre)
-    fenetre.plot_frame.grid(row=2, column=0, columnspan=3, sticky="nsew")
+    fenetre.plot_frame.grid(row=3, column=0, columnspan=3, sticky="nsew")
 
     # Canvas matplotlib dans le frame
     canvas = FigureCanvasTkAgg(fig, master=fenetre.plot_frame)
@@ -213,7 +238,7 @@ def trace_graph():
 
 
 def window():
-    global secteur, angle, decalage_var  # pour qu'il soit accessible dans trace_graph
+    global secteur, angle, decalage_var,label_fichier  # pour qu'il soit accessible dans trace_graph
     fenetre.title("graphe")
     fenetre.grid_rowconfigure(2, weight=1)
     fenetre.grid_columnconfigure(0, weight=1)
@@ -221,7 +246,7 @@ def window():
 
     secteur = ctk.IntVar(value=1)  # valeur par défaut
     angle = ctk.IntVar(value=0)  # valeur par défaut
-    decalage_var = tk.IntVar(value=0)  # valeur par défaut
+    decalage_var = tk.DoubleVar(value=0)  # valeur par défaut
 
     rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
     rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
@@ -236,10 +261,19 @@ def window():
     entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="w")
 
-    bouton3 = ctk.CTkButton(fenetre, text="Tracer le graphique", command=trace_graph)
-    bouton3.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    fenetre.bind('<Return>', lambda event: bouton3.invoke())
-    fenetre.bind('<KP_Enter>', lambda event: bouton3.invoke())
+    button_trace = ctk.CTkButton(
+        fenetre, text="Tracer le graphique", command=trace_graph
+    )
+    button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    fenetre.bind("<Return>", lambda event: button_trace.invoke())
+    fenetre.bind("<KP_Enter>", lambda event: button_trace.invoke())
+
+    button_fichier = ctk.CTkButton(
+        fenetre, text="Choisir un fichier", command=choisir_fichier
+    )
+    button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    label_fichier = ctk.CTkLabel(fenetre, text="Aucun fichier sélectionné")
+    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
     fenetre.mainloop()
 
