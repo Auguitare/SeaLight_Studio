@@ -34,6 +34,27 @@ def hune_0():
     trace_limit()
 
 
+def hune_25():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [-132.5, -132.5, -117.5, -117.5, -132.5],
+        "y": [6.5, 59, 59, 6.5, 6.5],
+    }
+
+    zone_limite_2 = {
+        "x": [-112.5, -112.5, -107.5, -107.5, 107.5, 107.5, 112.5, 112.5, -112.5],
+        "y": [0, 29.5, 29.5, 59, 59, 29.5, 29.5, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [132.5, 132.5, 117.5, 112.5, 132.5],
+        "y": [59, 6.5, 6.5, 59, 59],
+    }
+
+    trace_limit()
+
+
 def poupe_0():
     global zone_limite_1, zone_limite_2, zone_limite_3
 
@@ -51,6 +72,27 @@ def poupe_0():
         "x": [267.5, 267.5, 252.5, 252.5, 267.5],
         "y": [15, 1.5, 1.5, 15, 15],
     }
+    trace_limit()
+
+
+def poupe_25():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [92.5, 92.5, 107.5, 107.5, 92.5],
+        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
+    }
+
+    zone_limite_2 = {
+        "x": [112.5, 112.5, 117.5, 117.5, 242.5, 242.5, 247.5, 247.5, 112.5],
+        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [267.5, 267.5, 252.5, 252.5, 267.5],
+        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
+    }
+
     trace_limit()
 
 
@@ -126,9 +168,6 @@ def modifier_angles(data, decalage=0):
     return data
 
 
-
-
-
 def trace_graph():
     global ax
 
@@ -140,10 +179,16 @@ def trace_graph():
     data = modifier_angles(data, decalage=decalage)
 
     secteur_value = secteur.get()  # récupérer la valeur du Radiobutton
-    if secteur_value == 1:
+    angle_value = angle.get()
+
+    if secteur_value == 1 and angle_value == 0:
         hune_0()
-    elif secteur_value == 2:
+    elif secteur_value == 1 and angle_value == 25:
+        hune_25()
+    elif secteur_value == 2 and angle_value == 0:
         poupe_0()
+    elif secteur_value == 2 and angle_value == 25:
+        poupe_25()
 
     # plot des données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
@@ -168,25 +213,31 @@ def trace_graph():
 
 
 def window():
-    global secteur,decalage_var  # pour qu'il soit accessible dans trace_graph
+    global secteur, angle, decalage_var  # pour qu'il soit accessible dans trace_graph
     fenetre.title("graphe")
     fenetre.grid_rowconfigure(2, weight=1)
     fenetre.grid_columnconfigure(0, weight=1)
     fenetre.grid_columnconfigure(1, weight=1)
 
     secteur = ctk.IntVar(value=1)  # valeur par défaut
+    angle = ctk.IntVar(value=0)  # valeur par défaut
     decalage_var = tk.IntVar(value=0)  # valeur par défaut
 
-    rb1 = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
-    rb1.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    rb2 = ctk.CTkRadioButton(fenetre, text="poupe", variable=secteur, value=2)
-    rb2.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
+    rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=secteur, value=2)
+    rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+
+    rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=angle, value=0)
+    rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=angle, value=25)
+    rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
     entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
-    entry_decalage.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="w")
 
     bouton3 = ctk.CTkButton(fenetre, text="Tracer le graphique", command=trace_graph)
-    bouton3.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+    bouton3.grid(row=1, column=2, padx=10, pady=5, sticky="w")
 
     fenetre.mainloop()
 
