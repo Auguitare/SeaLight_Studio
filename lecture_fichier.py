@@ -31,8 +31,7 @@ def trace_graph():
     ax.set_title("Intensité lumineuse en fonction de l'angle")
     ax.set_xlabel("Angle (°)")
     ax.set_ylabel("Intensité lumineuse (cd)")
-
-def data_update():
+    
     data['Angle °'] = data['Angle °'].apply(lambda x: x-90)
 
     # Intégration dans Tkinter
