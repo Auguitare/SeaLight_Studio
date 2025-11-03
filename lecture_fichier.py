@@ -1,5 +1,4 @@
 import pandas
-import matplotlib.pyplot as plt
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
