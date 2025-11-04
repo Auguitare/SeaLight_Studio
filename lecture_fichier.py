@@ -21,10 +21,15 @@ def choisir_fichier():
     global fichier_selectionne, dernier_dossier
     fichier_selectionne = filedialog.askopenfilename(
         title="Choisir un fichier de données",
-        filetypes=[("Fichiers texte", "*.txt"), ("Tous les fichiers", "*.*")],
+        filetypes=[
+            ("Fichiers texte", "*.txt"),
+            ("Fichiers de calcul", "*.csv"),
+            ("Tous les fichiers", "*.*"),
+        ],
     )
+
     if fichier_selectionne:
-        dernier_dossier = '/'.join(fichier_selectionne.split('/')[:-1])
+        dernier_dossier = "/".join(fichier_selectionne.split("/")[:-1])
         label_fichier.configure(
             text=f"Fichier sélectionné : {fichier_selectionne.split('/')[-1]}"
         )
@@ -238,7 +243,7 @@ def trace_graph():
 
 
 def window():
-    global secteur, angle, decalage_var,label_fichier  # pour qu'il soit accessible dans trace_graph
+    global secteur, angle, decalage_var, label_fichier  # pour qu'il soit accessible dans trace_graph
     fenetre.title("graphe")
     fenetre.grid_rowconfigure(2, weight=1)
     fenetre.grid_columnconfigure(0, weight=1)
