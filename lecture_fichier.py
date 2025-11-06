@@ -244,42 +244,49 @@ def trace_graph():
 
 def window():
     global secteur, angle, decalage_var, label_fichier  # pour qu'il soit accessible dans trace_graph
+
+    # mise en forme de la fenètre
     fenetre.title("graphe")
-    fenetre.grid_rowconfigure(2, weight=1)
+    fenetre.grid_rowconfigure(3, weight=1)
     fenetre.grid_columnconfigure(0, weight=1)
     fenetre.grid_columnconfigure(1, weight=1)
 
-    secteur = ctk.IntVar(value=1)  # valeur par défaut
-    angle = ctk.IntVar(value=0)  # valeur par défaut
-    decalage_var = tk.DoubleVar(value=0)  # valeur par défaut
+    # déclaration des valiables des boutons
+    secteur = ctk.IntVar(value=1)
+    angle = ctk.IntVar(value=0)
+    decalage_var = tk.DoubleVar(value=0)
 
+    # déclaration des input
     rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
-    rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=secteur, value=2)
-    rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-
     rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=angle, value=0)
-    rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
     rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=angle, value=25)
-    rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
-
-    entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
-    entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="w")
-
     button_trace = ctk.CTkButton(
         fenetre, text="Tracer le graphique", command=trace_graph
     )
-    button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    fenetre.bind("<Return>", lambda event: button_trace.invoke())
-    fenetre.bind("<KP_Enter>", lambda event: button_trace.invoke())
-
     button_fichier = ctk.CTkButton(
         fenetre, text="Choisir un fichier", command=choisir_fichier
     )
-    button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
+
+    # déclaration des labels d'information
     label_fichier = ctk.CTkLabel(fenetre, text="Aucun fichier sélectionné")
+
+    # déclaration des key bindings
+    fenetre.bind("<Return>", lambda event: button_trace.invoke())
+    fenetre.bind("<KP_Enter>", lambda event: button_trace.invoke())
+
+    # mise en positions des input et label
+    rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+    entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="w")
+    button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
     label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
+    # affichage de la fenetre
     fenetre.mainloop()
 
 
