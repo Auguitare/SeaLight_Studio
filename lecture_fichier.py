@@ -295,13 +295,13 @@ def trace_graph():
     # Choix du var_secteur et de l'angle
     var_secteur_value = var_secteur.get()
     angle_value = var_angle.get()
-    if var_secteur_value == 1 and angle_value == 0:
+    if var_secteur_value == "Hune" and angle_value == 0:
         hune_0()
-    elif var_secteur_value == 1 and angle_value == 25:
+    elif var_secteur_value == "Hune" and angle_value == 25:
         hune_25()
-    elif var_secteur_value == 2 and angle_value == 0:
+    elif var_secteur_value == "Poupe" and angle_value == 0:
         poupe_0()
-    elif var_secteur_value == 2 and angle_value == 25:
+    elif var_secteur_value == "Poupe" and angle_value == 25:
         poupe_25()
 
     # plot des données
@@ -354,13 +354,19 @@ def window():
     fenetre.grid_columnconfigure(2, weight=2)
 
     # déclaration des valiables des boutons
-    var_secteur = ctk.IntVar(value=1)
+    var_secteur = ctk.StringVar(value="Hune")
     var_angle = ctk.IntVar(value=0)
     var_decalage = tk.DoubleVar(value=0)
 
     # déclaration des input
-    rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=var_secteur, value=1)
-    rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=var_secteur, value=2)
+    secteur_menu = ctk.CTkOptionMenu(
+        fenetre,
+        values=["Hune", "Poupe"],
+        variable=var_secteur,
+    )
+
+    # rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=var_secteur, value=1)
+    # rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=var_secteur, value=2)
     rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=var_angle, value=0)
     rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=var_angle, value=25)
     button_trace = ctk.CTkButton(
@@ -379,8 +385,9 @@ def window():
     fenetre.bind("<KP_Enter>", lambda event: button_trace.invoke())
 
     # mise en positions des input et label
-    rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    # rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    # rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
     rb_0.grid(row=0, column=1, padx=10, pady=5)
     rb_25.grid(row=1, column=1, padx=10, pady=5)
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
