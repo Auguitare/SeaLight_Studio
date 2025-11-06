@@ -154,6 +154,90 @@ def poupe_25():
     trace_limit()
 
 
+def babord_0():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [-30, -30, -3, -3, -30],
+        "y": [1.5, 15, 15, 1.5, 1.5],
+    }
+
+    zone_limite_2 = {
+        "x": [0, 0, 0, 0, 107.5, 107.5, 112.5, 112.5, 0],
+        "y": [0, 7.5, 7.5, 15, 15, 7.5, 7.5, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [142.5, 142.5, 117.5, 117.5, 142.5],
+        "y": [15, 1.5, 1.5, 15, 15],
+    }
+
+    trace_limit()
+
+
+def babord_25():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [-30, -30, -3, -3, -30],
+        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
+    }
+
+    zone_limite_2 = {
+        "x": [0, 0, 0, 0, 107.5, 107.5, 112.5, 112.5, 0],
+        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [142.5, 142.5, 117.5, 117.5, 142.5],
+        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
+    }
+
+    trace_limit()
+
+
+def tribord_0():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [-142.5, -142.5, -117.5, -117.5, -142.5],
+        "y": [1.5, 15, 15, 1.5, 1.5],
+    }
+
+    zone_limite_2 = {
+        "x": [-112.5, -112.5, -107.5, -107.5, -5, -5, 0, 0, -112.5],
+        "y": [0, 7.5, 7.5, 15, 15, 7.5, 7.5, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [30, 30, 5, 5, 30],
+        "y": [15, 1.5, 1.5, 15, 15],
+    }
+
+    trace_limit()
+
+
+def tribord_25():
+    global zone_limite_1, zone_limite_2, zone_limite_3
+
+    zone_limite_1 = {
+        "x": [-142.5, -142.5, -117.5, -117.5, -142.5],
+        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
+    }
+
+    zone_limite_2 = {
+        "x": [-112.5, -112.5, -107.5, -107.5, -5, -5, 0, 0, -112.5],
+        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
+    }
+
+    zone_limite_3 = {
+        "x": [30, 30, 5, 5, 30],
+        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
+    }
+
+    trace_limit()
+
+
 def trace_limit():
     # plot des limite remplie (pour plus de classe)
     ax.plot(
@@ -259,7 +343,6 @@ def trace_graph():
     label_test7.grid(row=6, column=3, padx=10, pady=5, sticky="nw")
 
 
-
 def window():
     global var_secteur, var_angle, var_decalage, label_fichier  # pour qu'il soit accessible dans trace_graph
 
@@ -303,7 +386,7 @@ def window():
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
     button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky = "w")
+    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
     # affichage de la fenetre
     fenetre.mainloop()
