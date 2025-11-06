@@ -205,69 +205,88 @@ def trace_graph():
     ax.clear()
 
     data = read_file()
-    decalage = decalage_var.get()
+    decalage = var_decalage.get()
     data = modifier_angles(data, decalage=decalage)
 
-    secteur_value = secteur.get()  # récupérer la valeur du Radiobutton
-    angle_value = angle.get()
-
-    if secteur_value == 1 and angle_value == 0:
+    # Choix du var_secteur et de l'angle
+    var_secteur_value = var_secteur.get()
+    angle_value = var_angle.get()
+    if var_secteur_value == 1 and angle_value == 0:
         hune_0()
-    elif secteur_value == 1 and angle_value == 25:
+    elif var_secteur_value == 1 and angle_value == 25:
         hune_25()
-    elif secteur_value == 2 and angle_value == 0:
+    elif var_secteur_value == 2 and angle_value == 0:
         poupe_0()
-    elif secteur_value == 2 and angle_value == 25:
+    elif var_secteur_value == 2 and angle_value == 25:
         poupe_25()
 
     # plot des données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
     trace_limit()
 
-    # Créer un frame conteneur pour canvas + toolbar
+    # Créer une frame conteneur pour canvas + toolbar
     if hasattr(fenetre, "plot_frame"):
         fenetre.plot_frame.destroy()  # détruire l'ancien s'il existe
 
     fenetre.plot_frame = ctk.CTkFrame(fenetre)
-    fenetre.plot_frame.grid(row=3, column=0, columnspan=3, sticky="nsew")
+    fenetre.plot_frame.grid(row=3, column=0, columnspan=3, rowspan=4, sticky="nsew")
 
-    # Canvas matplotlib dans le frame
+    # Canvas matplotlib dans la frame
     canvas = FigureCanvasTkAgg(fig, master=fenetre.plot_frame)
     canvas.draw()
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-    # Toolbar dans le frame
+    # Toolbar(important pour zoom et save) dans la frame
     toolbar = NavigationToolbar2Tk(canvas, fenetre.plot_frame)
     toolbar.update()
     toolbar.pack(side=tk.TOP, fill=tk.X)
 
+    # ajout de label relativ au graphe
+    label_test1 = ctk.CTkLabel(fenetre, text="test 1")
+    label_test2 = ctk.CTkLabel(fenetre, text="test 2")
+    label_test3 = ctk.CTkLabel(fenetre, text="test 3")
+    label_test4 = ctk.CTkLabel(fenetre, text="test 4")
+    label_test5 = ctk.CTkLabel(fenetre, text="test 5")
+    label_test6 = ctk.CTkLabel(fenetre, text="test 6")
+    label_test7 = ctk.CTkLabel(fenetre, text="test 7")
+    fenetre.grid_columnconfigure(3, weight=1)
+    label_test1.grid(row=0, column=3, padx=10, pady=5, sticky="w")
+    label_test2.grid(row=1, column=3, padx=10, pady=5, sticky="w")
+    label_test3.grid(row=2, column=3, padx=10, pady=5, sticky="w")
+    label_test4.grid(row=3, column=3, padx=10, pady=5, sticky="nw")
+    label_test5.grid(row=4, column=3, padx=10, pady=5, sticky="nw")
+    label_test6.grid(row=5, column=3, padx=10, pady=5, sticky="nw")
+    label_test7.grid(row=6, column=3, padx=10, pady=5, sticky="nw")
+
+
 
 def window():
-    global secteur, angle, decalage_var, label_fichier  # pour qu'il soit accessible dans trace_graph
+    global var_secteur, var_angle, var_decalage, label_fichier  # pour qu'il soit accessible dans trace_graph
 
     # mise en forme de la fenètre
     fenetre.title("graphe")
-    fenetre.grid_rowconfigure(3, weight=1)
-    fenetre.grid_columnconfigure(0, weight=1)
-    fenetre.grid_columnconfigure(1, weight=1)
+    fenetre.grid_rowconfigure(6, weight=1)
+    fenetre.grid_columnconfigure(0, weight=2)
+    fenetre.grid_columnconfigure(1, weight=2)
+    fenetre.grid_columnconfigure(2, weight=2)
 
     # déclaration des valiables des boutons
-    secteur = ctk.IntVar(value=1)
-    angle = ctk.IntVar(value=0)
-    decalage_var = tk.DoubleVar(value=0)
+    var_secteur = ctk.IntVar(value=1)
+    var_angle = ctk.IntVar(value=0)
+    var_decalage = tk.DoubleVar(value=0)
 
     # déclaration des input
-    rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=secteur, value=1)
-    rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=secteur, value=2)
-    rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=angle, value=0)
-    rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=angle, value=25)
+    rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=var_secteur, value=1)
+    rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=var_secteur, value=2)
+    rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=var_angle, value=0)
+    rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=var_angle, value=25)
     button_trace = ctk.CTkButton(
         fenetre, text="Tracer le graphique", command=trace_graph
     )
     button_fichier = ctk.CTkButton(
         fenetre, text="Choisir un fichier", command=choisir_fichier
     )
-    entry_decalage = ctk.CTkEntry(fenetre, textvariable=decalage_var)
+    entry_decalage = ctk.CTkEntry(fenetre, textvariable=var_decalage)
 
     # déclaration des labels d'information
     label_fichier = ctk.CTkLabel(fenetre, text="Aucun fichier sélectionné")
@@ -279,12 +298,12 @@ def window():
     # mise en positions des input et label
     rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
-    rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
-    entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="w")
-    button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    rb_0.grid(row=0, column=1, padx=10, pady=5)
+    rb_25.grid(row=1, column=1, padx=10, pady=5)
+    entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
+    button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
     button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
+    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky = "w")
 
     # affichage de la fenetre
     fenetre.mainloop()
