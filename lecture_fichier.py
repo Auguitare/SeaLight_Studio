@@ -50,9 +50,11 @@ def read_file():
         lignes = f.readlines()
         for i, ligne in enumerate(lignes):
             if "Angle" in ligne:
-                lignes_a_sauter.update(range(0, i))
+                lignes_a_sauter.update(range(0, i),range(i+1,i+3))
+                print(i)
                 break
-
+    
+    print(lignes_a_sauter)
     data_file = pandas.read_csv(
         fichier_selectionne,
         sep=";",
