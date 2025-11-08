@@ -303,6 +303,14 @@ def trace_graph():
         poupe_0()
     elif var_secteur_value == "Poupe" and angle_value == 25:
         poupe_25()
+    elif var_secteur_value == "Babord" and angle_value == 0:
+        babord_0()
+    elif var_secteur_value == "Babord" and angle_value == 25:
+        babord_25()
+    elif var_secteur_value == "Tribord" and angle_value == 0:
+        tribord_0()
+    elif var_secteur_value == "Tribord" and angle_value == 25:
+        tribord_25()
 
     # plot des données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
@@ -361,7 +369,7 @@ def window():
     # déclaration des input
     secteur_menu = ctk.CTkOptionMenu(
         fenetre,
-        values=["Hune", "Poupe"],
+        values=["Hune", "Poupe","Babord","Tribord"],
         variable=var_secteur,
     )
 
