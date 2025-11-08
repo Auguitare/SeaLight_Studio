@@ -50,11 +50,9 @@ def read_file():
         lignes = f.readlines()
         for i, ligne in enumerate(lignes):
             if "Angle" in ligne:
-                lignes_a_sauter.update(range(0, i),range(i+1,i+3))
-                print(i)
+                lignes_a_sauter.update(range(0, i), range(i + 1, i + 3))
                 break
-    
-    print(lignes_a_sauter)
+
     data_file = pandas.read_csv(
         fichier_selectionne,
         sep=";",
@@ -91,7 +89,6 @@ def hune_0():
         "x": [132.5, 132.5, 117.5, 117.5, 132.5],
         "y": [118, 6.5, 6.5, 118, 118],
     }
-    trace_limit()
 
 
 def hune_25():
@@ -112,8 +109,6 @@ def hune_25():
         "y": [59, 6.5, 6.5, 59, 59],
     }
 
-    trace_limit()
-
 
 def poupe_0():
     global zone_limite_1, zone_limite_2, zone_limite_3
@@ -132,7 +127,6 @@ def poupe_0():
         "x": [267.5, 267.5, 252.5, 252.5, 267.5],
         "y": [15, 1.5, 1.5, 15, 15],
     }
-    trace_limit()
 
 
 def poupe_25():
@@ -153,8 +147,6 @@ def poupe_25():
         "y": [7.5, 1.5, 1.5, 7.5, 7.5],
     }
 
-    trace_limit()
-
 
 def babord_0():
     global zone_limite_1, zone_limite_2, zone_limite_3
@@ -173,8 +165,6 @@ def babord_0():
         "x": [142.5, 142.5, 117.5, 117.5, 142.5],
         "y": [15, 1.5, 1.5, 15, 15],
     }
-
-    trace_limit()
 
 
 def babord_25():
@@ -195,8 +185,6 @@ def babord_25():
         "y": [7.5, 1.5, 1.5, 7.5, 7.5],
     }
 
-    trace_limit()
-
 
 def tribord_0():
     global zone_limite_1, zone_limite_2, zone_limite_3
@@ -215,8 +203,6 @@ def tribord_0():
         "x": [30, 30, 5, 5, 30],
         "y": [15, 1.5, 1.5, 15, 15],
     }
-
-    trace_limit()
 
 
 def tribord_25():
@@ -237,11 +223,26 @@ def tribord_25():
         "y": [7.5, 1.5, 1.5, 7.5, 7.5],
     }
 
-    trace_limit()
 
+def trace_limit(secteur, angle):
+    if secteur == "Hune" and angle == 0:
+        hune_0()
+    elif secteur == "Hune" and angle == 25:
+        hune_25()
+    elif secteur == "Poupe" and angle == 0:
+        poupe_0()
+    elif secteur == "Poupe" and angle == 25:
+        poupe_25()
+    elif secteur == "Babord" and angle == 0:
+        babord_0()
+    elif secteur == "Babord" and angle == 25:
+        babord_25()
+    elif secteur == "Tribord" and angle == 0:
+        tribord_0()
+    elif secteur == "Tribord" and angle == 25:
+        tribord_25()
 
-def trace_limit():
-    # plot des limite remplie (pour plus de classe)
+    # trace zone interdite 1
     ax.plot(
         zone_limite_1["x"], zone_limite_1["y"], color="red", linestyle="--", alpha=0.5
     )
@@ -252,6 +253,7 @@ def trace_limit():
         alpha=0.2,
         label="Zone limite 1",
     )
+    # trace zone interdite 2
     ax.plot(
         zone_limite_2["x"], zone_limite_2["y"], color="red", linestyle="--", alpha=0.5
     )
@@ -262,6 +264,7 @@ def trace_limit():
         alpha=0.2,
         label="Zone limite 2",
     )
+    # trace zone interdite 3
     ax.plot(
         zone_limite_3["x"], zone_limite_3["y"], color="red", linestyle="--", alpha=0.5
     )
@@ -287,36 +290,20 @@ def modifier_angles(data, decalage=0):
 def trace_graph():
     global ax
 
-    # Clear l'axe avant de tracer (important si tu traces plusieurs fois)
+    # Clear l'axe avant de tracer
     ax.clear()
 
     data = read_file()
     decalage = var_decalage.get()
     data = modifier_angles(data, decalage=decalage)
 
-    # Choix du var_secteur et de l'angle
+    # Choix du secteur et de l'angle des limites
     var_secteur_value = var_secteur.get()
     angle_value = var_angle.get()
-    if var_secteur_value == "Hune" and angle_value == 0:
-        hune_0()
-    elif var_secteur_value == "Hune" and angle_value == 25:
-        hune_25()
-    elif var_secteur_value == "Poupe" and angle_value == 0:
-        poupe_0()
-    elif var_secteur_value == "Poupe" and angle_value == 25:
-        poupe_25()
-    elif var_secteur_value == "Babord" and angle_value == 0:
-        babord_0()
-    elif var_secteur_value == "Babord" and angle_value == 25:
-        babord_25()
-    elif var_secteur_value == "Tribord" and angle_value == 0:
-        tribord_0()
-    elif var_secteur_value == "Tribord" and angle_value == 25:
-        tribord_25()
+    trace_limit(var_secteur_value, angle_value)
 
     # plot des données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
-    trace_limit()
 
     # Créer une frame conteneur pour canvas + toolbar
     if hasattr(fenetre, "plot_frame"):
@@ -371,7 +358,7 @@ def window():
     # déclaration des input
     secteur_menu = ctk.CTkOptionMenu(
         fenetre,
-        values=["Hune", "Poupe","Babord","Tribord"],
+        values=["Hune", "Poupe", "Babord", "Tribord"],
         variable=var_secteur,
     )
 
