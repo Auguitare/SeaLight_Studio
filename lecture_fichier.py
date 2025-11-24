@@ -320,24 +320,24 @@ def trace_graph():
     # Toolbar(important pour zoom et save) dans la frame
     toolbar = NavigationToolbar2Tk(canvas, fenetre.plot_frame)
     toolbar.update()
-    toolbar.pack(side=tk.TOP, fill=tk.X)
+    toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
-    # ajout de label relativ au graphe
-    label_test1 = ctk.CTkLabel(fenetre, text="test 1")
-    label_test2 = ctk.CTkLabel(fenetre, text="test 2")
-    label_test3 = ctk.CTkLabel(fenetre, text="test 3")
-    label_test4 = ctk.CTkLabel(fenetre, text="test 4")
-    label_test5 = ctk.CTkLabel(fenetre, text="test 5")
-    label_test6 = ctk.CTkLabel(fenetre, text="test 6")
-    label_test7 = ctk.CTkLabel(fenetre, text="test 7")
-    fenetre.grid_columnconfigure(3, weight=1)
-    label_test1.grid(row=0, column=3, padx=10, pady=5, sticky="w")
-    label_test2.grid(row=1, column=3, padx=10, pady=5, sticky="w")
-    label_test3.grid(row=2, column=3, padx=10, pady=5, sticky="w")
-    label_test4.grid(row=3, column=3, padx=10, pady=5, sticky="nw")
-    label_test5.grid(row=4, column=3, padx=10, pady=5, sticky="nw")
-    label_test6.grid(row=5, column=3, padx=10, pady=5, sticky="nw")
-    label_test7.grid(row=6, column=3, padx=10, pady=5, sticky="nw")
+    # # ajout de label relativ au graphe
+    # label_test1 = ctk.CTkLabel(fenetre, text="test 1")
+    # label_test2 = ctk.CTkLabel(fenetre, text="test 2")
+    # label_test3 = ctk.CTkLabel(fenetre, text="test 3")
+    # label_test4 = ctk.CTkLabel(fenetre, text="test 4")
+    # label_test5 = ctk.CTkLabel(fenetre, text="test 5")
+    # label_test6 = ctk.CTkLabel(fenetre, text="test 6")
+    # label_test7 = ctk.CTkLabel(fenetre, text="test 7")
+    # fenetre.grid_columnconfigure(3, weight=1)
+    # label_test1.grid(row=0, column=3, padx=10, pady=5, sticky="w")
+    # label_test2.grid(row=1, column=3, padx=10, pady=5, sticky="w")
+    # label_test3.grid(row=2, column=3, padx=10, pady=5, sticky="w")
+    # label_test4.grid(row=3, column=3, padx=10, pady=5, sticky="nw")
+    # label_test5.grid(row=4, column=3, padx=10, pady=5, sticky="nw")
+    # label_test6.grid(row=5, column=3, padx=10, pady=5, sticky="nw")
+    # label_test7.grid(row=6, column=3, padx=10, pady=5, sticky="nw")
 
 
 def window():
@@ -362,8 +362,6 @@ def window():
         variable=var_secteur,
     )
 
-    # rb_hune = ctk.CTkRadioButton(fenetre, text="hune", variable=var_secteur, value=1)
-    # rb_poupe = ctk.CTkRadioButton(fenetre, text="poupe", variable=var_secteur, value=2)
     rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=var_angle, value=0)
     rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=var_angle, value=25)
     button_trace = ctk.CTkButton(
@@ -383,10 +381,8 @@ def window():
 
     # mise en positions des input et label
     secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    # rb_hune.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    # rb_poupe.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    rb_0.grid(row=0, column=1, padx=10, pady=5)
-    rb_25.grid(row=1, column=1, padx=10, pady=5)
+    rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
     button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
