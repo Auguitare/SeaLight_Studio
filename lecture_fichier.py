@@ -1,3 +1,5 @@
+import zone as z
+
 import pandas
 import tkinter as tk
 from tkinter import filedialog
@@ -7,9 +9,6 @@ from matplotlib.figure import Figure
 
 fenetre = ctk.CTk()
 
-zone_limite_1 = dict()
-zone_limite_2 = dict()
-zone_limite_3 = dict()
 fichier_selectionne = None  # pour stocker le chemin du fichier choisi
 dernier_dossier = "."
 
@@ -64,213 +63,53 @@ def read_file():
             "cd",
             "X",
             "Y",
-            "Tension V",
-            "Courant A",
-            "temperature ambiante °C",
+            "lux",
         ],
     )
     return data_file
 
 
-def hune_0():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-132.5, -132.5, -117.5, -117.5, -132.5],
-        "y": [6.5, 118, 118, 6.5, 6.5],
-    }
-
-    zone_limite_2 = {
-        "x": [-112.5, -112.5, -107.5, -107.5, 107.5, 107.5, 112.5, 112.5, -112.5],
-        "y": [0, 59, 59, 118, 118, 59, 59, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [132.5, 132.5, 117.5, 117.5, 132.5],
-        "y": [118, 6.5, 6.5, 118, 118],
-    }
-
-
-def hune_25():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-132.5, -132.5, -117.5, -117.5, -132.5],
-        "y": [6.5, 59, 59, 6.5, 6.5],
-    }
-
-    zone_limite_2 = {
-        "x": [-112.5, -112.5, -107.5, -107.5, 107.5, 107.5, 112.5, 112.5, -112.5],
-        "y": [0, 29.5, 29.5, 59, 59, 29.5, 29.5, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [132.5, 132.5, 117.5, 112.5, 132.5],
-        "y": [59, 6.5, 6.5, 59, 59],
-    }
-
-
-def poupe_0():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    # Secteur interdit 1
-    zone_limite_1 = {"x": [85, 85, 107.5, 107.5, 85], "y": [1.5, 15, 15, 1.5, 1.5]}
-
-    # Secteur interdit 2
-    zone_limite_2 = {
-        "x": [112.5, 112.5, 117.5, 117.5, 242.5, 242.5, 247.5, 247.5, 112.5],
-        "y": [0, 7.5, 7.5, 15, 15, 7.5, 7.5, 0, 0],
-    }
-
-    # Secteur interdit 3
-    zone_limite_3 = {
-        "x": [267.5, 267.5, 252.5, 252.5, 267.5],
-        "y": [15, 1.5, 1.5, 15, 15],
-    }
-
-
-def poupe_25():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [92.5, 92.5, 107.5, 107.5, 92.5],
-        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
-    }
-
-    zone_limite_2 = {
-        "x": [112.5, 112.5, 117.5, 117.5, 242.5, 242.5, 247.5, 247.5, 112.5],
-        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [267.5, 267.5, 252.5, 252.5, 267.5],
-        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
-    }
-
-
-def babord_0():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-30, -30, -3, -3, -30],
-        "y": [1.5, 15, 15, 1.5, 1.5],
-    }
-
-    zone_limite_2 = {
-        "x": [0, 0, 0, 0, 107.5, 107.5, 112.5, 112.5, 0],
-        "y": [0, 7.5, 7.5, 15, 15, 7.5, 7.5, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [142.5, 142.5, 117.5, 117.5, 142.5],
-        "y": [15, 1.5, 1.5, 15, 15],
-    }
-
-
-def babord_25():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-30, -30, -3, -3, -30],
-        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
-    }
-
-    zone_limite_2 = {
-        "x": [0, 0, 0, 0, 107.5, 107.5, 112.5, 112.5, 0],
-        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [142.5, 142.5, 117.5, 117.5, 142.5],
-        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
-    }
-
-
-def tribord_0():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-142.5, -142.5, -117.5, -117.5, -142.5],
-        "y": [1.5, 15, 15, 1.5, 1.5],
-    }
-
-    zone_limite_2 = {
-        "x": [-112.5, -112.5, -107.5, -107.5, -5, -5, 0, 0, -112.5],
-        "y": [0, 7.5, 7.5, 15, 15, 7.5, 7.5, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [30, 30, 5, 5, 30],
-        "y": [15, 1.5, 1.5, 15, 15],
-    }
-
-
-def tribord_25():
-    global zone_limite_1, zone_limite_2, zone_limite_3
-
-    zone_limite_1 = {
-        "x": [-142.5, -142.5, -117.5, -117.5, -142.5],
-        "y": [1.5, 7.5, 7.5, 1.5, 1.5],
-    }
-
-    zone_limite_2 = {
-        "x": [-112.5, -112.5, -107.5, -107.5, -5, -5, 0, 0, -112.5],
-        "y": [0, 3.75, 3.75, 7.5, 7.5, 3.75, 3.75, 0, 0],
-    }
-
-    zone_limite_3 = {
-        "x": [30, 30, 5, 5, 30],
-        "y": [7.5, 1.5, 1.5, 7.5, 7.5],
-    }
-
-
-def trace_limit(secteur, angle):
-    if secteur == "Hune" and angle == 0:
-        hune_0()
-    elif secteur == "Hune" and angle == 25:
-        hune_25()
-    elif secteur == "Poupe" and angle == 0:
-        poupe_0()
-    elif secteur == "Poupe" and angle == 25:
-        poupe_25()
-    elif secteur == "Babord" and angle == 0:
-        babord_0()
-    elif secteur == "Babord" and angle == 25:
-        babord_25()
-    elif secteur == "Tribord" and angle == 0:
-        tribord_0()
-    elif secteur == "Tribord" and angle == 25:
-        tribord_25()
+def trace_limit(secteur, range, inclinaison):
+    if secteur == "Hune" :
+        z.hune(range, inclinaison)
+    elif secteur == "Poupe" :
+        z.poupe(range, inclinaison)
+    elif secteur == "Babord" :
+        z.babord(range, inclinaison)
+    elif secteur == "Tribord" :
+        z.tribord(range, inclinaison)
+    elif secteur == "Vide":
+        z.only_value()
 
     # trace zone interdite 1
     ax.plot(
-        zone_limite_1["x"], zone_limite_1["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_1["x"], z.zone_limite_1["y"], color="red", linestyle="--", alpha=0.5
     )
     ax.fill(
-        zone_limite_1["x"],
-        zone_limite_1["y"],
+        z.zone_limite_1["x"],
+        z.zone_limite_1["y"],
         color="red",
         alpha=0.2,
         label="Zone limite 1",
     )
     # trace zone interdite 2
     ax.plot(
-        zone_limite_2["x"], zone_limite_2["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_2["x"], z.zone_limite_2["y"], color="red", linestyle="--", alpha=0.5
     )
     ax.fill(
-        zone_limite_2["x"],
-        zone_limite_2["y"],
+        z.zone_limite_2["x"],
+        z.zone_limite_2["y"],
         color="red",
         alpha=0.2,
         label="Zone limite 2",
     )
     # trace zone interdite 3
     ax.plot(
-        zone_limite_3["x"], zone_limite_3["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_3["x"], z.zone_limite_3["y"], color="red", linestyle="--", alpha=0.5
     )
     ax.fill(
-        zone_limite_3["x"],
-        zone_limite_3["y"],
+        z.zone_limite_3["x"],
+        z.zone_limite_3["y"],
         color="red",
         alpha=0.2,
         label="Zone limite 3",
@@ -279,7 +118,10 @@ def trace_limit(secteur, angle):
     ax.set_title("Intensité lumineuse en fonction de l'angle")
     ax.set_xlabel("Angle (°)")
     ax.set_ylabel("Intensité lumineuse (cd)")
-    ax.grid()
+    ax.minorticks_on()
+    ax.grid(which='major', alpha=0.7)
+    ax.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.4)
+    # ax.grid()
 
 
 def modifier_angles(data, decalage=0):
@@ -300,7 +142,8 @@ def trace_graph():
     # Choix du secteur et de l'angle des limites
     var_secteur_value = var_secteur.get()
     angle_value = var_angle.get()
-    trace_limit(var_secteur_value, angle_value)
+    range_value = int(var_range.get())
+    trace_limit(var_secteur_value, range_value, angle_value)
 
     # plot des données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
@@ -341,7 +184,7 @@ def trace_graph():
 
 
 def window():
-    global var_secteur, var_angle, var_decalage, label_fichier  # pour qu'il soit accessible dans trace_graph
+    global var_secteur, var_range, var_angle, var_decalage, label_fichier  # pour qu'il soit accessible dans trace_graph
 
     # mise en forme de la fenètre
     fenetre.title("graphe")
@@ -351,25 +194,35 @@ def window():
     fenetre.grid_columnconfigure(2, weight=2)
 
     # déclaration des valiables des boutons
-    var_secteur = ctk.StringVar(value="Hune")
+    var_secteur = ctk.StringVar(value="Vide")
+    var_range = ctk.StringVar(value="2")
     var_angle = ctk.IntVar(value=0)
     var_decalage = tk.DoubleVar(value=0)
 
     # déclaration des input
     secteur_menu = ctk.CTkOptionMenu(
         fenetre,
-        values=["Hune", "Poupe", "Babord", "Tribord"],
+        values=["Vide", "Hune", "Poupe", "Babord", "Tribord"],
         variable=var_secteur,
+    )
+
+    range_menu = ctk.CTkOptionMenu(
+        fenetre,
+        values=["1", "2", "3", "4", "5", "6"],
+        variable = var_range,
     )
 
     rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=var_angle, value=0)
     rb_25 = ctk.CTkRadioButton(fenetre, text="+/-25°", variable=var_angle, value=25)
+
     button_trace = ctk.CTkButton(
         fenetre, text="Tracer le graphique", command=trace_graph
     )
+
     button_fichier = ctk.CTkButton(
         fenetre, text="Choisir un fichier", command=choisir_fichier
     )
+
     entry_decalage = ctk.CTkEntry(fenetre, textvariable=var_decalage)
 
     # déclaration des labels d'information
@@ -381,12 +234,13 @@ def window():
 
     # mise en positions des input et label
     secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    range_menu.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
     rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
     rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
-    button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
     # affichage de la fenetre
     fenetre.mainloop()
