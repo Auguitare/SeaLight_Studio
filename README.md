@@ -2,6 +2,8 @@
 
 Création d'une application simple permettant de tracer les graphes de puissance lumineuse des test optique d'un feux de navigation.
 
-# PyInstaller Windows parameter
+### PyInstaller Windows parameter
 
+```Python
 python -m PyInstaller .\lecture_fichier.py --clean -F --noconsole
+```
