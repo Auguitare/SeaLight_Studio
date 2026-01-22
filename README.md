@@ -2,12 +2,6 @@
 
 Création d'une application simple permettant de tracer les graphes de puissance lumineuse des test optique d'un feux de navigation.
 
-### PyInstaller Windows parameter
-
-```Python
-python -m PyInstaller .\lecture_fichier.py --clean -F --noconsole
-```
-
 ## Working in a venv
 ```bash
 sudo apt install python3.12-venv
@@ -23,4 +17,10 @@ source .venv/bin/activate
 ### install libraries
 ```bash
 pip install -r requirements.txt
+```
+
+## PyInstaller parameter
+
+```Python
+python -m PyInstaller .\lecture_fichier.py --clean -F --noconsole
 ```
