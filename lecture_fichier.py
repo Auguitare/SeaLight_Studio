@@ -47,17 +47,15 @@ class App(ctk.CTk):
 
     def ouvrir_photometry(self):
         """Ouvre la fenêtre de photométrie"""
-        self.withdraw()  # Cache la fenêtre principale
+        self.destroy()  # Cache la fenêtre principale
         import photometry as p
         p.window()
-        self.deiconify()  # Réaffiche la fenêtre principale après fermeture
 
     def ouvrir_autre(self):
         """Ouvre la fenêtre de colorimétrie"""
-        self.withdraw()  # Cache la fenêtre principale
+        self.destroy()  # Cache la fenêtre principale
         import colorimetry as c
         c.window()
-        self.deiconify()  # Réaffiche la fenêtre principale après fermeture
 
 if __name__ == "__main__":
     app = App()

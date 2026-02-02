@@ -56,11 +56,8 @@ def read_file():
         skipfooter=2,
         engine="python",
         usecols=[
-            "Angle °",
-            "cd",
             "X",
             "Y",
-            "lux",
         ],
     )
     return data_file
