@@ -228,7 +228,7 @@ def window():
     var_secteur = ctk.StringVar(value="Vide")
     var_range = ctk.StringVar(value="2")
     var_angle = ctk.IntVar(value=0)
-    var_decalage = tk.DoubleVar(value=0)
+    var_decalage = ctk.DoubleVar(value=0)
     print(var_decalage.get())
 
     # déclaration des input
