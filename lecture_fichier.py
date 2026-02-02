@@ -3,8 +3,8 @@ import colorimetry as c
 
 import pandas
 import tkinter as tk
-import customtkinter as ctk
 from tkinter import filedialog
+import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
