@@ -1,11 +1,10 @@
-import zone as z
 import photometry as p
 import colorimetry as c
 
 import pandas
 import tkinter as tk
-from tkinter import filedialog
 import customtkinter as ctk
+from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
@@ -15,7 +14,6 @@ class Application(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        # Configuration de la fenêtre principale
         self.title("Analyse Photométrique et Colorimétrique")
 
         # Variables globales pour les fichiers
@@ -25,8 +23,6 @@ class Application(ctk.CTk):
         # Créer le système d'onglets
         self.tabview = ctk.CTkTabview(self)
         self.tabview.pack(padx=20, pady=20, fill="both", expand=True)
-
-        # Ajouter les onglets
         self.tabview.add("Photométrie")
         self.tabview.add("Colorimétrie")
 
@@ -57,7 +53,8 @@ class Application(ctk.CTk):
         self.fig_photo = Figure(figsize=(8, 5), dpi=100)
         self.ax_photo = self.fig_photo.add_subplot(111)
 
-        # Widgets - Ligne 0
+        # Ligne 0
+            # colone 0 - secteur
         secteur_menu = ctk.CTkOptionMenu(
             tab,
             values=["Vide", "Hune", "Poupe", "Babord", "Tribord"],
@@ -65,21 +62,22 @@ class Application(ctk.CTk):
         )
         secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
+            # colone 1 - angle (0°)
         rb_0 = ctk.CTkRadioButton(tab, text="0°", variable=self.var_angle, value=0)
         rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
-        label_decalage = ctk.CTkLabel(tab, text="Décalage d'angle:")
+            # colone 2 - décalage d'angle
+        label_decalage = ctk.CTkLabel(tab, text="Décalage (°):")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
-
         entry_decalage = ctk.CTkEntry(
             tab,
             textvariable=self.var_decalage,
-            width=100,
-            placeholder_text="Décalage (°)",
+            width=50,
         )
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
 
-        # Widgets - Ligne 1
+        # Ligne 1
+            # colone 0 - distance de visibilité
         range_menu = ctk.CTkOptionMenu(
             tab,
             values=["1", "2", "3", "4", "5", "6"],
@@ -87,17 +85,20 @@ class Application(ctk.CTk):
         )
         range_menu.grid(row=1, column=0, padx=10, pady=5, sticky="w")
 
+            # colone 1 - angle +/-25°
         rb_25 = ctk.CTkRadioButton(
             tab, text="+/-25°", variable=self.var_angle, value=25
         )
         rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
+            # colone 2 - tracer le graphique
         button_trace_photo = ctk.CTkButton(
             tab, text="Tracer le graphique", command=p.trace_photometry
         )
         button_trace_photo.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
-        # Widgets - Ligne 2
+        #Ligne 2
+            # colone 0 et 1 - select file
         button_fichier_photo = ctk.CTkButton(
             tab,
             text="Choisir un fichier",
@@ -110,7 +111,7 @@ class Application(ctk.CTk):
             row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w"
         )
 
-        # Zone du graphe - Ligne 3
+        # Ligne 3 - graphic place
         self.photo_plot_frame = ctk.CTkFrame(tab)
         self.photo_plot_frame.grid(
             row=3, column=0, columnspan=3, padx=10, pady=10, sticky="nsew"
