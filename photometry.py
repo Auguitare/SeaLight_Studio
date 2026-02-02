@@ -255,6 +255,10 @@ def window():
         fenetre, text="Choisir un fichier", command=choisir_fichier
     )
 
+    button_back = ctk.CTkButton(
+        fenetre, text="Retour", command=fermer_autre
+    )
+
     entry_decalage = ctk.CTkEntry(fenetre, textvariable=var_decalage)
 
     # déclaration des labels d'information
@@ -273,6 +277,7 @@ def window():
     label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
     entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
+    button_back.grid(row=2, column=2, padx=10, pady=5, sticky="e")
 
     # affichage de la fenetre
     fenetre.mainloop()
