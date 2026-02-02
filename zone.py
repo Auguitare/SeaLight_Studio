@@ -1,3 +1,5 @@
+import tkinter as tk
+
 zone_limite_1 = dict()
 zone_limite_2 = dict()
 zone_limite_3 = dict()
