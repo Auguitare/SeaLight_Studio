@@ -3,8 +3,8 @@ import customtkinter as ctk
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.geometry("400x300")
-        self.title("Page de choix")
+        self.geometry("500x400")
+        self.title("Starting Page")
 
         # Titre
         self.label_titre = ctk.CTkLabel(
