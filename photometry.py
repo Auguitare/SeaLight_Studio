@@ -6,13 +6,12 @@ import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
-fenetre = ctk.CTk()
-
 fichier_selectionne = None  # pour stocker le chemin du fichier choisi
 dernier_dossier = "."
 
-fig = Figure(figsize=(6, 4), dpi=100)
-ax = fig.add_subplot(111)
+fig = None
+ax = None
+fenetre = None
 
 
 def choisir_fichier():
@@ -69,20 +68,24 @@ def read_file():
 
 
 def trace_limit(secteur, range, inclinaison):
-    if secteur == "Hune" :
+    if secteur == "Hune":
         z.hune(range, inclinaison)
-    elif secteur == "Poupe" :
+    elif secteur == "Poupe":
         z.poupe(range, inclinaison)
-    elif secteur == "Babord" :
+    elif secteur == "Babord":
         z.babord(range, inclinaison)
-    elif secteur == "Tribord" :
+    elif secteur == "Tribord":
         z.tribord(range, inclinaison)
     elif secteur == "Vide":
         z.only_value()
 
     # trace zone interdite 1
     ax.plot(
-        z.zone_limite_1["x"], z.zone_limite_1["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_1["x"],
+        z.zone_limite_1["y"],
+        color="red",
+        linestyle="--",
+        alpha=0.5,
     )
     ax.fill(
         z.zone_limite_1["x"],
@@ -93,7 +96,11 @@ def trace_limit(secteur, range, inclinaison):
     )
     # trace zone interdite 2
     ax.plot(
-        z.zone_limite_2["x"], z.zone_limite_2["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_2["x"],
+        z.zone_limite_2["y"],
+        color="red",
+        linestyle="--",
+        alpha=0.5,
     )
     ax.fill(
         z.zone_limite_2["x"],
@@ -104,7 +111,11 @@ def trace_limit(secteur, range, inclinaison):
     )
     # trace zone interdite 3
     ax.plot(
-        z.zone_limite_3["x"], z.zone_limite_3["y"], color="red", linestyle="--", alpha=0.5
+        z.zone_limite_3["x"],
+        z.zone_limite_3["y"],
+        color="red",
+        linestyle="--",
+        alpha=0.5,
     )
     ax.fill(
         z.zone_limite_3["x"],
@@ -118,8 +129,8 @@ def trace_limit(secteur, range, inclinaison):
     ax.set_xlabel("Angle (°)")
     ax.set_ylabel("Intensité lumineuse (cd)")
     ax.minorticks_on()
-    ax.grid(which='major', alpha=0.7)
-    ax.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.4)
+    ax.grid(which="major", alpha=0.7)
+    ax.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
     # ax.grid()
 
 
@@ -182,8 +193,29 @@ def trace_graph():
     # label_test7.grid(row=6, column=3, padx=10, pady=5, sticky="nw")
 
 
+def fermer_autre(self, fenetre):
+    """Ferme la fenêtre secondaire et réaffiche le menu"""
+    fenetre.destroy()
+    self.deiconify()
+
+
 def window():
-    global var_secteur, var_range, var_angle, var_decalage, label_fichier  # pour qu'il soit accessible dans trace_graph
+    global \
+        var_secteur, \
+        var_range, \
+        var_angle, \
+        var_decalage, \
+        label_fichier, \
+        fenetre, \
+        fig, \
+        ax
+
+    # Créer une nouvelle fenêtre
+    fenetre = ctk.CTk()
+
+    # Initialiser la figure matplotlib
+    fig = Figure(figsize=(6, 4), dpi=100)
+    ax = fig.add_subplot(111)
 
     # mise en forme de la fenetre
     fenetre.title("graphe")
@@ -197,6 +229,7 @@ def window():
     var_range = ctk.StringVar(value="2")
     var_angle = ctk.IntVar(value=0)
     var_decalage = tk.DoubleVar(value=0)
+    print(var_decalage.get())
 
     # déclaration des input
     secteur_menu = ctk.CTkOptionMenu(
@@ -208,7 +241,7 @@ def window():
     range_menu = ctk.CTkOptionMenu(
         fenetre,
         values=["1", "2", "3", "4", "5", "6"],
-        variable = var_range,
+        variable=var_range,
     )
 
     rb_0 = ctk.CTkRadioButton(fenetre, text="0°", variable=var_angle, value=0)
@@ -242,6 +275,4 @@ def window():
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
     # affichage de la fenetre
-    # fenetre.mainloop()
-
-
+    fenetre.mainloop()
