@@ -242,6 +242,6 @@ def window():
     button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
     # affichage de la fenetre
-    fenetre.mainloop()
+    # fenetre.mainloop()
 
 
