@@ -19,12 +19,23 @@ class Application(ctk.CTk):
         tab_photo = self.tabview.tab("Photométrie")
         tab_color = self.tabview.tab("Colorimétrie")
 
-        # ========== Photometrie ==========
+        # ========== UI Photometrie ==========
+        # Configuration de la grille
+        tab_photo.grid_rowconfigure(0, weight=0)
+        tab_photo.grid_rowconfigure(1, weight=0)
+        tab_photo.grid_rowconfigure(2, weight=0)
+        tab_photo.grid_rowconfigure(3, weight=1)
+        tab_photo.grid_columnconfigure(0, weight=1)
+        tab_photo.grid_columnconfigure(1, weight=1)
+        tab_photo.grid_columnconfigure(2, weight=1)
+
+        # Variable de la page
         var_secteur = ctk.StringVar(value="Vide")
         var_range = ctk.StringVar(value="2")
         var_angle = ctk.IntVar(value=0)
-        var_decalage = tk.DoubleVar(value=0)
+        var_decalage = tk.DoubleVar(value=0.0)
 
+        ## Gestion des bouton/menu
         # position du feux
         secteur_menu = ctk.CTkOptionMenu(
             tab_photo,
@@ -51,35 +62,35 @@ class Application(ctk.CTk):
 
         # Bouton de traçage de graphique
         button_trace = ctk.CTkButton(
-            tab_photo, text="Tracer le graphique", command=self.charger_photometrie
+            tab_photo, text="Tracer le graphique", command=self.trace
         )
         button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
         # Bouton de choix de fichier
         button_fichier = ctk.CTkButton(
-            tab_photo, text="Choisir un fichier", command=self.analyser_photometrie
+            tab_photo, text="Choisir un fichier", command=self.file
         )
         button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         label_fichier = ctk.CTkLabel(tab_photo, text="Aucun fichier sélectionné")
         label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
         # Entrée de dcalage
-        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=var_decalage, width=100)
+        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=var_decalage, width=40)
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
-        label_decalage = ctk.CTkLabel(tab_photo, text="Angle de décalage(°):")
+        label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
 
         # déclaration des key bindings
         tab_photo.bind("<Return>", lambda event: button_trace.invoke())
         tab_photo.bind("<KP_Enter>", lambda event: button_trace.invoke())
 
-    def charger_photometrie(self):
-        print("Chargement photométrie...")
-        # Votre code ici
 
-    def analyser_photometrie(self):
-        print("Analyse photométrie...")
-        # Votre code ici
+
+    def trace(self):
+        print("test trace")
+
+    def file(self):
+        print("test file")
 
 
 app = Application()
