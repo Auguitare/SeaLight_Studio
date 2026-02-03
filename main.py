@@ -1,5 +1,9 @@
 import tkinter as tk
 import customtkinter as ctk
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+
 import file_orga as f
 
 
@@ -9,8 +13,9 @@ class Application(ctk.CTk):
         super().__init__()
 
         self.file_choosen = None
+        self.data = None
 
-        self.title("Analyse des données photométrique feux de navigation")
+        self.title("Analyse des données photométrique des feux de navigation")
 
         # onglets
         self.tabview = ctk.CTkTabview(self)
@@ -83,6 +88,29 @@ class Application(ctk.CTk):
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
 
+
+        # ========== GRAPHIQUE PHOTOMÉTRIE ==========
+        self.frame_graph_photo = ctk.CTkFrame(tab_photo)
+        self.frame_graph_photo.grid(row=3, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
+        
+        # figure matplotlib
+        self.fig_photo = Figure(figsize=(8, 5), dpi=100)
+        self.ax_photo = self.fig_photo.add_subplot(111)
+        self.ax_photo.set_title("Intensité lumineuse en fonction de l'angle")
+        self.ax_photo.set_xlabel("Angle (°)")
+        self.ax_photo.set_ylabel("Intensité (cd)")
+        self.ax_photo.minorticks_on()
+        self.ax_photo.grid(which="major", alpha=0.7)
+        self.ax_photo.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
+        
+        # Intégration
+        self.canvas_photo = FigureCanvasTkAgg(self.fig_photo, master=self.frame_graph_photo)
+        self.canvas_photo.draw()
+        self.canvas_photo.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(self.canvas_photo, self.frame_graph_photo)
+        toolbar.update()
+        toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
         # ========== UI Colorimetrie ==========
         # Configuration de la grille
