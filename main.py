@@ -61,10 +61,10 @@ class Application(ctk.CTk):
         rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
         # Bouton de traçage de graphique
-        button_trace = ctk.CTkButton(
+        button_trace_photo = ctk.CTkButton(
             tab_photo, text="Tracer le graphique", command=self.trace_photo
         )
-        button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
+        button_trace_photo.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
         # Bouton de choix de fichier
         button_fichier = ctk.CTkButton(
@@ -79,12 +79,6 @@ class Application(ctk.CTk):
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
-
-        # déclaration des key bindings
-        tab_photo.bind("<Return>", lambda event: button_trace.invoke())
-        tab_photo.bind("<KP_Enter>", lambda event: button_trace.invoke())
-
-
 
 
         # ========== UI Colorimetrie ==========
@@ -113,24 +107,34 @@ class Application(ctk.CTk):
         self.label_fichier = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
         self.label_fichier.grid(row=1, column=1, padx=10, pady=5, sticky="w")
         
-        button_trace = ctk.CTkButton(
+        button_trace_colo = ctk.CTkButton(
             tab_color, text="Tracer le graphique", command=self.trace_colo
         )
-        button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
+        button_trace_colo.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
 
+        # déclaration des key bindings
+        self.bind("<Return>", self.input_handle)
+        self.bind("<KP_Enter>", self.input_handle)
 
 
 
     def trace_photo(self):
-        print("test trace")
+        print("test trace photo")
 
     def trace_colo(self):
-        print("test trace")
+        print("test trace colo")
 
     def file(self):
         print("test file")
 
+
+    def input_handle(self, event):
+        current_tab = self.tabview.get()
+        if current_tab == "Photométrie":
+            self.trace_photo()
+        elif current_tab == "Colorimétrie":
+            self.trace_colo()
 
 
 app = Application()
