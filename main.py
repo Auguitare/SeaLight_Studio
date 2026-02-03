@@ -86,6 +86,21 @@ class Application(ctk.CTk):
 
 
 
+
+        # ========== UI Colorimetrie ==========
+        # Configuration de la grille
+        tab_color.grid_rowconfigure(0, weight=0)
+        tab_color.grid_rowconfigure(1, weight=0)
+        tab_color.grid_rowconfigure(2, weight=1)
+        tab_color.grid_columnconfigure(0, weight=1)
+        tab_color.grid_columnconfigure(1, weight=1)
+        tab_color.grid_columnconfigure(2, weight=1)
+
+
+
+
+
+
     def trace(self):
         print("test trace")
 
