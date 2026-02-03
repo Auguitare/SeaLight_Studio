@@ -95,7 +95,7 @@ class Application(ctk.CTk):
         self.frame_graph_photo.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
         
         # figure matplotlib
-        self.fig_photo = Figure(figsize=(8, 5), dpi=100)
+        self.fig_photo = Figure(figsize=(8, 5))
         self.ax_photo = self.fig_photo.add_subplot(111)
         self.ax_photo.set_title("Intensité lumineuse en fonction de l'angle")
         self.ax_photo.set_xlabel("Angle (°)")
@@ -149,7 +149,7 @@ class Application(ctk.CTk):
         self.frame_graph_color.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
         
         # figure matplotlib
-        self.fig_color = Figure(figsize=(8, 5), dpi=100)
+        self.fig_color = Figure(figsize=(8, 5))
         
         self.ax_color = self.fig_color.add_subplot(111)
         self.ax_color.set_title("Diagramme chromatique")
