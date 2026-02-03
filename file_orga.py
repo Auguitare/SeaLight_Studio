@@ -22,7 +22,7 @@ def read_file(fichier_selectionne):
         lignes = f.readlines()
         for i, ligne in enumerate(lignes):
             if "Angle" in ligne:
-                lignes_a_sauter.update(range(0, i), range(i + 1, i + 3))
+                lignes_a_sauter.update(range(0, i))
                 break
 
     data_file = pd.read_csv(
