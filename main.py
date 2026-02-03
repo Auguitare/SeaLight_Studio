@@ -1,6 +1,6 @@
-import pandas
 import tkinter as tk
 import customtkinter as ctk
+import file_orga as f
 
 
 class Application(ctk.CTk):
@@ -126,8 +126,7 @@ class Application(ctk.CTk):
         print("test trace colo")
 
     def file(self):
-        print("test file")
-
+        f.choisir_fichier()
 
     def input_handle(self, event):
         current_tab = self.tabview.get()
