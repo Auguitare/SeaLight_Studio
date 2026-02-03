@@ -152,7 +152,7 @@ class Application(ctk.CTk):
         self.fig_color = Figure(figsize=(8, 5), dpi=100)
         
         self.ax_color = self.fig_color.add_subplot(111)
-        self.ax_color.set_title("Diagramme de chromaticité")
+        self.ax_color.set_title("Diagramme chromatique")
         self.ax_color.set_xlabel("X")
         self.ax_color.set_ylabel("Y")
         self.ax_color.minorticks_on()
@@ -194,8 +194,8 @@ class Application(ctk.CTk):
             return None
         else:
             self.data = f.read_file(self.file_choosen)
-            # c.trace_graph(self.data, self.ax_colo)
-            # self.canvas_photo.draw()
+            c.trace_graph(self.data, self.ax_color)
+            self.canvas_color.draw()
 
     def file(self):
         self.file_choosen = f.choisir_fichier()

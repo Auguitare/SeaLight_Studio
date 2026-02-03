@@ -1,12 +1,8 @@
-from matplotlib.figure import Figure
-
-
-
 def trace_graph(data, ax, decalage):
     if data is None:
         return
 
-    # ax.clear()
+    ax.clear()
     
     # Appliquer le décalage
     decalage = decalage.get()
