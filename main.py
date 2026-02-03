@@ -62,7 +62,7 @@ class Application(ctk.CTk):
 
         # Bouton de traçage de graphique
         button_trace = ctk.CTkButton(
-            tab_photo, text="Tracer le graphique", command=self.trace
+            tab_photo, text="Tracer le graphique", command=self.trace_photo
         )
         button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
@@ -104,16 +104,33 @@ class Application(ctk.CTk):
         )
         label_info.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="w")
 
+        # === Ligne 1 ===
+        button_fichier = ctk.CTkButton(
+            tab_color, text="Choisir un fichier", command=self.file
+        )
+        button_fichier.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        
+        self.label_fichier = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
+        self.label_fichier.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        
+        button_trace = ctk.CTkButton(
+            tab_color, text="Tracer le graphique", command=self.trace_colo
+        )
+        button_trace.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
 
 
 
 
-    def trace(self):
+    def trace_photo(self):
+        print("test trace")
+
+    def trace_colo(self):
         print("test trace")
 
     def file(self):
         print("test file")
+
 
 
 app = Application()
