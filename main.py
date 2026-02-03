@@ -5,6 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 
 import file_orga as f
+import tab_photo as p
 
 
 class Application(ctk.CTk):
@@ -38,17 +39,17 @@ class Application(ctk.CTk):
         tab_photo.grid_columnconfigure(2, weight=1)
 
         # Variable de la page
-        var_secteur = ctk.StringVar(value="Vide")
-        var_range = ctk.StringVar(value="2")
-        var_angle = ctk.IntVar(value=0)
-        var_decalage = tk.DoubleVar(value=0.0)
+        self.var_secteur = ctk.StringVar(value="Vide")
+        self.var_range = ctk.StringVar(value="2")
+        self.var_angle = ctk.IntVar(value=0)
+        self.var_decalage = tk.DoubleVar(value=0.0)
 
         ## Gestion des bouton/menu
         # position du feux
         secteur_menu = ctk.CTkOptionMenu(
             tab_photo,
             values=["Vide", "Hune", "Poupe", "Babord", "Tribord"],
-            variable=var_secteur,
+            variable=self.var_secteur,
         )
         secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
@@ -56,14 +57,14 @@ class Application(ctk.CTk):
         range_menu = ctk.CTkOptionMenu(
             tab_photo,
             values=["1", "2", "3", "4", "5", "6"],
-            variable=var_range,
+            variable=self.var_range,
         )
         range_menu.grid(row=1, column=0, padx=10, pady=5, sticky="w")
 
         # Radio bouton d'angle
-        rb_0 = ctk.CTkRadioButton(tab_photo, text="0°", variable=var_angle, value=0)
+        rb_0 = ctk.CTkRadioButton(tab_photo, text="0°", variable=self.var_angle, value=0)
         rb_25 = ctk.CTkRadioButton(
-            tab_photo, text="+/-25°", variable=var_angle, value=25
+            tab_photo, text="+/-25°", variable=self.var_angle, value=25
         )
         rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
         rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
@@ -83,7 +84,7 @@ class Application(ctk.CTk):
         self.label_fichier_photo.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
         # Entrée de dcalage
-        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=var_decalage, width=40)
+        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=self.var_decalage, width=40)
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
@@ -182,7 +183,8 @@ class Application(ctk.CTk):
             return None
         else:
             self.data = f.read_file(self.file_choosen)
-            print(self.data)
+            p.trace_graph(self.data, self.ax_photo, self.var_decalage)
+            self.canvas_photo.draw()
 
     def trace_color(self):
         if not self.file_choosen:
