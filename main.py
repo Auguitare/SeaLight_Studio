@@ -89,9 +89,9 @@ class Application(ctk.CTk):
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
 
 
-        # ========== GRAPHIQUE PHOTOMÉTRIE ==========
+        # == GRAPHIQUE PHOTOMÉTRIE == 
         self.frame_graph_photo = ctk.CTkFrame(tab_photo)
-        self.frame_graph_photo.grid(row=3, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
+        self.frame_graph_photo.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
         
         # figure matplotlib
         self.fig_photo = Figure(figsize=(8, 5), dpi=100)
@@ -135,13 +135,37 @@ class Application(ctk.CTk):
         )
         button_fichier.grid(row=1, column=0, padx=10, pady=5, sticky="w")
         
-        self.label_fichier_colo = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
-        self.label_fichier_colo.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        self.label_fichier_color = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
+        self.label_fichier_color.grid(row=1, column=1, padx=10, pady=5, sticky="w")
         
-        button_trace_colo = ctk.CTkButton(
-            tab_color, text="Tracer le graphique", command=self.trace_colo
+        button_trace_color = ctk.CTkButton(
+            tab_color, text="Tracer le graphique", command=self.trace_color
         )
-        button_trace_colo.grid(row=1, column=2, padx=10, pady=5, sticky="e")
+        button_trace_color.grid(row=1, column=2, padx=10, pady=5, sticky="e")
+
+        # == GRAPHIQUE Colorimétrie == 
+        self.frame_graph_color = ctk.CTkFrame(tab_color)
+        self.frame_graph_color.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
+        
+        # figure matplotlib
+        self.fig_color = Figure(figsize=(8, 5), dpi=100)
+        
+        self.ax_color = self.fig_color.add_subplot(111)
+        self.ax_color.set_title("Diagramme de chromaticité")
+        self.ax_color.set_xlabel("X")
+        self.ax_color.set_ylabel("Y")
+        self.ax_color.minorticks_on()
+        self.ax_color.grid(which="major", alpha=0.7)
+        self.ax_color.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
+        
+        # Intégration
+        self.canvas_color = FigureCanvasTkAgg(self.fig_color, master=self.frame_graph_color)
+        self.canvas_color.draw()
+        self.canvas_color.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(self.canvas_color, self.frame_graph_color)
+        toolbar.update()
+        toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
 
         # déclaration des key bindings
@@ -160,7 +184,7 @@ class Application(ctk.CTk):
             self.data = f.read_file(self.file_choosen)
             print(self.data)
 
-    def trace_colo(self):
+    def trace_color(self):
         if not self.file_choosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
@@ -176,14 +200,14 @@ class Application(ctk.CTk):
             return
         name = f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
         self.label_fichier_photo.configure(text = name)
-        self.label_fichier_colo.configure(text = name)
+        self.label_fichier_color.configure(text = name)
 
     def input_handle(self, event):
         current_tab = self.tabview.get()
         if current_tab == "Photométrie":
             self.trace_photo()
         elif current_tab == "Colorimétrie":
-            self.trace_colo()
+            self.trace_color()
 
 
 app = Application()
