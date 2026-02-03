@@ -5,8 +5,6 @@ import file_orga as f
 
 class Application(ctk.CTk):
 
-    global file_choosen
-
     def __init__(self):
         super().__init__()
 
@@ -123,18 +121,30 @@ class Application(ctk.CTk):
 
 
     def trace_photo(self):
-        print("test trace photo")
+        if not self.file_choosen:
+            tk.messagebox.showwarning(
+                "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
+            )
+            return None
+        else:
+            self.data = f.read_file(self.file_choosen)
 
     def trace_colo(self):
-        print("test trace colo")
+        if not self.file_choosen:
+            tk.messagebox.showwarning(
+                "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
+            )
+            return None
+        else:
+            self.data = f.read_file(self.file_choosen)
 
     def file(self):
-        file_choosen = f.choisir_fichier()
+        self.file_choosen = f.choisir_fichier()
         self.label_fichier_photo.configure(
-            text=f"Fichier sélectionné : {'/'.join(file_choosen.split('/')[-3:])}"
+            text=f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
         )
         self.label_fichier_colo.configure(
-            text=f"Fichier sélectionné : {'/'.join(file_choosen.split('/')[-3:])}"
+            text=f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
         )
 
     def input_handle(self, event):
