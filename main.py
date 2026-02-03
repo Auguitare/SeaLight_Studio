@@ -1,11 +1,11 @@
 import tkinter as tk
 import customtkinter as ctk
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
 import file_orga as f
 import tab_photo as p
+import tab_colo as c
 
 
 class Application(ctk.CTk):
@@ -194,7 +194,8 @@ class Application(ctk.CTk):
             return None
         else:
             self.data = f.read_file(self.file_choosen)
-            print(self.data)
+            # c.trace_graph(self.data, self.ax_colo)
+            # self.canvas_photo.draw()
 
     def file(self):
         self.file_choosen = f.choisir_fichier()
