@@ -8,6 +8,8 @@ class Application(ctk.CTk):
     def __init__(self):
         super().__init__()
 
+        self.file_choosen = None
+
         self.title("Analyse des données photométrique feux de navigation")
 
         # onglets
@@ -128,6 +130,7 @@ class Application(ctk.CTk):
             return None
         else:
             self.data = f.read_file(self.file_choosen)
+            print(self.data)
 
     def trace_colo(self):
         if not self.file_choosen:
@@ -137,15 +140,15 @@ class Application(ctk.CTk):
             return None
         else:
             self.data = f.read_file(self.file_choosen)
+            print(self.data)
 
     def file(self):
         self.file_choosen = f.choisir_fichier()
-        self.label_fichier_photo.configure(
-            text=f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
-        )
-        self.label_fichier_colo.configure(
-            text=f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
-        )
+        if not self.file_choosen:    
+            return
+        name = f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
+        self.label_fichier_photo.configure(text = name)
+        self.label_fichier_colo.configure(text = name)
 
     def input_handle(self, event):
         current_tab = self.tabview.get()
