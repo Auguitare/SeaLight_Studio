@@ -96,6 +96,14 @@ class Application(ctk.CTk):
         tab_color.grid_columnconfigure(1, weight=1)
         tab_color.grid_columnconfigure(2, weight=1)
 
+        # === Ligne 0 ===
+        label_info = ctk.CTkLabel(
+            tab_color,
+            text="Colorimétrie - Diagramme de chromaticité (X, Y)",
+            font=ctk.CTkFont(size=14, weight="bold"),
+        )
+        label_info.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="w")
+
 
 
 
