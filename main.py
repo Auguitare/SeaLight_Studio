@@ -20,7 +20,7 @@ class Application(ctk.CTk):
 
         # onglets
         self.tabview = ctk.CTkTabview(self)
-        self.tabview.pack(padx=20, pady=20, fill="both", expand=True)
+        self.tabview.pack(padx=0, pady=0, fill="both", expand=True)
         self.tabview.add("Photométrie")
         self.tabview.add("Colorimétrie")
         self.tabview.set("Photométrie")
