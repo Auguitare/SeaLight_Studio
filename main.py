@@ -4,6 +4,9 @@ import file_orga as f
 
 
 class Application(ctk.CTk):
+
+    global file_choosen
+
     def __init__(self):
         super().__init__()
 
@@ -71,8 +74,8 @@ class Application(ctk.CTk):
             tab_photo, text="Choisir un fichier", command=self.file
         )
         button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-        label_fichier = ctk.CTkLabel(tab_photo, text="Aucun fichier sélectionné")
-        label_fichier.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
+        self.label_fichier_photo = ctk.CTkLabel(tab_photo, text="Aucun fichier sélectionné")
+        self.label_fichier_photo.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
         # Entrée de dcalage
         entry_decalage = ctk.CTkEntry(tab_photo, textvariable=var_decalage, width=40)
@@ -104,8 +107,8 @@ class Application(ctk.CTk):
         )
         button_fichier.grid(row=1, column=0, padx=10, pady=5, sticky="w")
         
-        self.label_fichier = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
-        self.label_fichier.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        self.label_fichier_colo = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
+        self.label_fichier_colo.grid(row=1, column=1, padx=10, pady=5, sticky="w")
         
         button_trace_colo = ctk.CTkButton(
             tab_color, text="Tracer le graphique", command=self.trace_colo
@@ -126,7 +129,13 @@ class Application(ctk.CTk):
         print("test trace colo")
 
     def file(self):
-        f.choisir_fichier()
+        file_choosen = f.choisir_fichier()
+        self.label_fichier_photo.configure(
+            text=f"Fichier sélectionné : {'/'.join(file_choosen.split('/')[-3:])}"
+        )
+        self.label_fichier_colo.configure(
+            text=f"Fichier sélectionné : {'/'.join(file_choosen.split('/')[-3:])}"
+        )
 
     def input_handle(self, event):
         current_tab = self.tabview.get()
