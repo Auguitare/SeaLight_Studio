@@ -34,9 +34,9 @@ def read_file(fichier_selectionne):
         usecols=[
             "Angle °",
             "cd",
+            "lux",
             "X",
             "Y",
-            "lux",
         ],
     )
     return data_file
