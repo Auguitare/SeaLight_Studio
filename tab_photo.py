@@ -7,7 +7,7 @@ def trace_graph(data, ax, decalage):
     # Appliquer le décalage
     decalage = decalage.get()
     data["Angle °"] = data["Angle °"].apply(lambda x: x + decalage)
-    
+
     # Tracer les données
     ax.plot(data["Angle °"], data["cd"], color="steelblue")
     
