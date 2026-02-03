@@ -1,6 +1,5 @@
 import pandas
 import tkinter as tk
-from tkinter import filedialog
 import customtkinter as ctk
 
 
@@ -15,6 +14,7 @@ class Application(ctk.CTk):
         self.tabview.pack(padx=20, pady=20, fill="both", expand=True)
         self.tabview.add("Photométrie")
         self.tabview.add("Colorimétrie")
+        self.tabview.set("Photométrie")
 
         tab_photo = self.tabview.tab("Photométrie")
         tab_color = self.tabview.tab("Colorimétrie")
