@@ -21,6 +21,12 @@ python3 lecture_fichier.py
 
 ## PyInstaller parameter
 
+### Working on windows
 ```Python
 python -m PyInstaller .\lecture_fichier.py --clean -F --noconsole
+```
+
+### working on linux
+```Python
+python3 -m PyInstaller main.py --clean -F --noconsole --hidden-import='PIL._tkinter_finder'
 ```
