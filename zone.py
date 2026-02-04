@@ -72,9 +72,9 @@ def tribord(range, inclinaison):
 
 def only_value():
     zone = {}
-    zone[1] = {"x": [], "y": []}
-    zone[2] = {"x": [], "y": []}
-    zone[3] = {"x": [], "y": []}
+    zone[1] = {"X": [], "Y": []}
+    zone[2] = {"X": [], "Y": []}
+    zone[3] = {"X": [], "Y": []}
 
     zone[1]["X"] = [0]
     zone[1]["Y"] = [0]
