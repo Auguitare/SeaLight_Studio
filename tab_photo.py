@@ -39,7 +39,6 @@ def trace_limit(ax, secteur, range_val, inclinaison):
             zone["Y"],
             color="red",
             alpha=0.2,
-            label=f"Zone limite {zone_num}",
         )
     
     ax.set_title("Intensité lumineuse en fonction de l'angle")
