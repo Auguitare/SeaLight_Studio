@@ -25,18 +25,23 @@ def read_file(fichier_selectionne):
                 lignes_a_sauter.update(range(0, i))
                 break
 
-    data_file = pd.read_csv(
-        fichier_selectionne,
-        sep=";",
-        skiprows=lambda x: x in lignes_a_sauter,
-        skipfooter=2,
-        engine="python",
-        usecols=[
-            "Angle °",
-            "cd",
-            "lux",
-            "X",
-            "Y",
-        ],
-    )
-    return data_file
+    try:
+        data_file = pd.read_csv(
+            fichier_selectionne,
+            sep=";",
+            skiprows=lambda x: x in lignes_a_sauter,
+            skipfooter=2,
+            engine="python",
+            usecols=[
+                "Angle °",
+                "cd",
+                "lux",
+                "X",
+                "Y",
+            ],
+        )
+        return data_file
+    except FileNotFoundError:
+        tk.messagebox.showerror("Erreur", "Fichier introuvable")
+    except pd.errors.ParserError:
+        tk.messagebox.showerror("Erreur", "Format de fichier invalide")
