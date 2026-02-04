@@ -1,4 +1,11 @@
 def trace_graph(data, ax):
+    """
+    Trace les points de données sur le graphique.
+
+    Args:
+        data (dict): Dictionnaire contenant les coordonnées 'X' et 'Y'.
+        ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer.
+    """
     if data is None:
         return
 
@@ -9,7 +16,12 @@ def trace_graph(data, ax):
 
 
 def trace_limit(ax):
-    """Trace les zones limites"""
+    """
+    Trace les zones limites de couleur sur le diagramme chromatique.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer les limites.
+    """
     zone_white = {
         "X": [0.525, 0.525, 0.452, 0.310, 0.31, 0.443, 0.525],
         "Y": [0.382, 0.44, 0.44, 0.348, 0.283, 0.382, 0.382],

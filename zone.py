@@ -2,6 +2,18 @@ import tkinter as tk
 
 
 def intensity_calc(light_range, inclinaison):
+    """
+    Calcule la puissance maximale basée sur la portée de la lumière et l'inclinaison,
+    et retourne un dictionnaire de valeurs d'intensité pour trois zones.
+
+    Args:
+        light_range (int): La portée de la lumière (1-6).
+        inclinaison (float/int): L'angle d'inclinaison. Si non nul, la puissance est divisée par deux.
+
+    Returns:
+        dict: Un dictionnaire contenant les données
+        d'intensité (valeurs Y) pour les zones 1, 2 et 3.
+    """
     max_power = 0
     match light_range:
         case 1:
@@ -50,6 +62,16 @@ def intensity_calc(light_range, inclinaison):
 
 
 def hune(light_range, inclinaison):
+    """
+    Définit les coordonnées pour les zones de feu de hune.
+
+    Args:
+        light_range (int): La portée de la lumière.
+        inclinaison (float/int): L'angle d'inclinaison.
+
+    Returns:
+        dict: Le dictionnaire d'intensité avec les coordonnées X ajoutées pour chaque zone.
+    """
     zone = intensity_calc(light_range, inclinaison)
 
     zone[1]["X"] = [-132.5, -132.5, -117.5, -117.5, -132.5]
@@ -60,6 +82,16 @@ def hune(light_range, inclinaison):
 
 
 def poupe(light_range, inclinaison):
+    """
+    Définit les coordonnées pour les zones de feu de poupe.
+
+    Args:
+        light_range (int): La portée de la lumière.
+        inclinaison (float/int): L'angle d'inclinaison.
+
+    Returns:
+        dict: Le dictionnaire d'intensité avec les coordonnées X ajoutées pour chaque zone.
+    """
     zone = intensity_calc(light_range, inclinaison)
 
     zone[1]["X"] = [85, 85, 107.5, 107.5, 85]
@@ -70,6 +102,16 @@ def poupe(light_range, inclinaison):
 
 
 def babord(light_range, inclinaison):
+    """
+    Définit les coordonnées pour les zones de feu de bâbord.
+
+    Args:
+        light_range (int): La portée de la lumière.
+        inclinaison (float/int): L'angle d'inclinaison.
+
+    Returns:
+        dict: Le dictionnaire d'intensité avec les coordonnées X ajoutées pour chaque zone.
+    """
     zone = intensity_calc(light_range, inclinaison)
 
     zone[1]["X"] = [-30, -30, -3, -3, -30]
@@ -80,6 +122,16 @@ def babord(light_range, inclinaison):
 
 
 def tribord(light_range, inclinaison):
+    """
+    Définit les coordonnées pour les zones de feu de tribord.
+
+    Args:
+        light_range (int): La portée de la lumière.
+        inclinaison (float/int): L'angle d'inclinaison.
+
+    Returns:
+        dict: Le dictionnaire d'intensité avec les coordonnées X ajoutées pour chaque zone.
+    """
     zone = intensity_calc(light_range, inclinaison)
 
     zone[1]["X"] = [-142.5, -142.5, -117.5, -117.5, -142.5]
@@ -90,6 +142,12 @@ def tribord(light_range, inclinaison):
 
 
 def only_value():
+    """
+    Retourne un dictionnaire de zone avec des coordonnées initialisées à zéro.
+
+    Returns:
+        dict: Une structure de dictionnaire pour trois zones avec des valeurs X et Y vides ou nulles.
+    """
     zone = {}
     zone[1] = {"X": [], "Y": []}
     zone[2] = {"X": [], "Y": []}

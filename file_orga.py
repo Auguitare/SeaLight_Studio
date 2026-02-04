@@ -4,6 +4,13 @@ import pandas as pd
 
 
 def choisir_fichier():
+    """
+    Ouvre une boîte de dialogue pour sélectionner un fichier de données.
+
+    Returns:
+        str: Le chemin du fichier sélectionné ou une chaîne vide si annulé.
+    """
+    
     fichier_selectionne = tk.filedialog.askopenfilename(
         title="Choisir un fichier de données",
         filetypes=[
@@ -17,6 +24,17 @@ def choisir_fichier():
 
 
 def read_file(fichier_selectionne):
+    """
+    Lit un fichier CSV/texte et retourne un DataFrame pandas contenant les colonnes utiles.
+
+    Saute les lignes d'en-tête jusqu'à trouver "Angle" et ignore les deux dernières lignes.
+
+    Args:
+        fichier_selectionne (str): Chemin du fichier à lire.
+
+    Returns:
+        pd.DataFrame: DataFrame contenant les données, ou None en cas d'erreur.
+    """
     lignes_a_sauter = set()
     with open(fichier_selectionne, "r", encoding="utf-8") as f:
         lignes = f.readlines()

@@ -9,7 +9,15 @@ import tab_colo as c
 
 
 class Application(ctk.CTk):
+    """
+    Classe principale de l'application d'analyse des données photométriques.
+    Gère l'interface utilisateur, le chargement des fichiers et l'affichage des graphiques.
+    """
+
     def __init__(self):
+        """
+        Initialise la fenêtre principale, les onglets et les éléments de l'UI.
+        """
         super().__init__()
 
         self.file_choosen = None
@@ -184,6 +192,10 @@ class Application(ctk.CTk):
         self.bind("<KP_Enter>", self.input_handle)
 
     def trace_photo(self):
+        """
+        Lit les données du fichier sélectionné et trace le graphique de photométrie.
+        Affiche un avertissement si aucun fichier n'est sélectionné.
+        """
         if not self.file_choosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
@@ -201,6 +213,10 @@ class Application(ctk.CTk):
             self.canvas_photo.draw()
 
     def trace_color(self):
+        """
+        Lit les données du fichier sélectionné et trace le graphique de colorimétrie.
+        Affiche un avertissement si aucun fichier n'est sélectionné.
+        """
         if not self.file_choosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
@@ -213,6 +229,9 @@ class Application(ctk.CTk):
             self.canvas_color.draw()
 
     def file(self):
+        """
+        Ouvre une boîte de dialogue pour sélectionner un fichier et met à jour les labels d'information.
+        """
         self.file_choosen = f.choisir_fichier()
         if not self.file_choosen:
             return
@@ -221,6 +240,13 @@ class Application(ctk.CTk):
         self.label_fichier_color.configure(text=name)
 
     def input_handle(self, event):
+        """
+        Gère l'événement de pression sur la touche Entrée pour lancer le traçage
+        du graphique correspondant à l'onglet actif.
+
+        Args:
+            event: L'événement tkinter capturé.
+        """
         current_tab = self.tabview.get()
         if current_tab == "Photométrie":
             self.trace_photo()

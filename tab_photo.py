@@ -2,6 +2,14 @@ import zone as z
 
 
 def trace_graph(data, ax, decalage):
+    """
+    Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire si necessaire.
+
+    Args:
+        data (pd.DataFrame): Données contenant les colonnes 'Angle °' et 'cd'.
+        ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer.
+        decalage (tkinter.DoubleVar): Objet possédant une méthode get() pour obtenir le décalage.
+    """
     if data is None:
         return
 
@@ -16,7 +24,15 @@ def trace_graph(data, ax, decalage):
 
 
 def trace_limit(ax, secteur, range_val, inclinaison):
-    """Trace les zones limites"""
+    """
+    Trace les zones limites (zones interdites) sur le graphique de photométrie.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer les limites.
+        secteur (str): Nom du secteur ("Hune", "Poupe", "Babord", "Tribord", "Vide").
+        range_val (float): Valeur de la portée.
+        inclinaison (float): Valeur de l'inclinaison.
+    """
     zone_interdite = {}
     if secteur == "Hune":
         zone_interdite = z.hune(range_val, inclinaison)
