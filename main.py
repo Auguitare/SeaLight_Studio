@@ -84,10 +84,10 @@ class Application(ctk.CTk):
         self.label_fichier_photo.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
 
         # Entrée de dcalage
-        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=self.var_decalage, width=40)
+        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=self.var_decalage, width=50)
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
-        label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5, sticky="w")
+        label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5)
 
 
         # == GRAPHIQUE PHOTOMÉTRIE == 
