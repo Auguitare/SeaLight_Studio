@@ -18,7 +18,7 @@ def choisir_fichier():
 
 def read_file(fichier_selectionne):
     lignes_a_sauter = set()
-    with open(fichier_selectionne, "r") as f:
+    with open(fichier_selectionne, "r", encoding="utf-8") as f:
         lignes = f.readlines()
         for i, ligne in enumerate(lignes):
             if "Angle" in ligne:
@@ -53,4 +53,3 @@ def read_file(fichier_selectionne):
             f"Colonnes manquantes dans le fichier : {str(e).split('[')[-1].strip(']')}"
         )
         return None
-

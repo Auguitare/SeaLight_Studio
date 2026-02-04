@@ -3,28 +3,39 @@ def trace_graph(data, ax):
         return
 
     ax.clear()
-    
+
     # Tracer les données
-    ax.scatter(data["X"], data["Y"], c='black', s=5, alpha=0.6)
-    
+    ax.scatter(data["X"], data["Y"], c="black", s=5, alpha=0.6)
+
 
 def trace_limit(ax):
     """Trace les zones limites"""
-    zone_white = {"X":[0.525, 0.525, 0.452, 0.310, 0.31, 0.443, 0.525], "Y":[0.382, 0.44, 0.44, 0.348, 0.283, 0.382, 0.382]  }
-    ax.plot(zone_white["X"], zone_white["Y"], color='grey',linestyle = "--", alpha=0.5)
+    zone_white = {
+        "X": [0.525, 0.525, 0.452, 0.310, 0.31, 0.443, 0.525],
+        "Y": [0.382, 0.44, 0.44, 0.348, 0.283, 0.382, 0.382],
+    }
+    ax.plot(zone_white["X"], zone_white["Y"], color="grey", linestyle="--", alpha=0.5)
 
-    zone_green = {"X":[0.028, 0.009, 0.3, 0.203, 0.028], "Y":[0.385, 0.723, 0.511, 0.356, 0.385]}
-    ax.plot(zone_green["X"], zone_green["Y"], color='g', linestyle = "--", alpha=0.5)
+    zone_green = {
+        "X": [0.028, 0.009, 0.3, 0.203, 0.028],
+        "Y": [0.385, 0.723, 0.511, 0.356, 0.385],
+    }
+    ax.plot(zone_green["X"], zone_green["Y"], color="g", linestyle="--", alpha=0.5)
     ax.fill(zone_green["X"], zone_green["Y"], color="g", alpha=0.2)
 
-    zone_red = {"X":[0.68, 0.66, 0.721, 0.735, 0.68], "Y":[0.32, 0.32, 0.265, 0.259, 0.32]}
-    ax.plot(zone_red["X"], zone_red["Y"], color='r', linestyle = "--", alpha=0.5)
+    zone_red = {
+        "X": [0.68, 0.66, 0.721, 0.735, 0.68],
+        "Y": [0.32, 0.32, 0.265, 0.259, 0.32],
+    }
+    ax.plot(zone_red["X"], zone_red["Y"], color="r", linestyle="--", alpha=0.5)
     ax.fill(zone_red["X"], zone_red["Y"], color="r", alpha=0.2)
 
-    zone_yellow = {"X":[0.612, 0.618, 0.575, 0.575, 0.612], "Y":[0.382, 0.382, 0.425, 0.406, 0.382]}
-    ax.plot(zone_yellow["X"], zone_yellow["Y"], color='y', linestyle = "--", alpha=0.5)
+    zone_yellow = {
+        "X": [0.612, 0.618, 0.575, 0.575, 0.612],
+        "Y": [0.382, 0.382, 0.425, 0.406, 0.382],
+    }
+    ax.plot(zone_yellow["X"], zone_yellow["Y"], color="y", linestyle="--", alpha=0.5)
     ax.fill(zone_yellow["X"], zone_yellow["Y"], color="y", alpha=0.2)
-
 
     ax.set_title("Diagramme chromatique")
     ax.set_xlabel("X")

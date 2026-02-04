@@ -9,7 +9,6 @@ import tab_colo as c
 
 
 class Application(ctk.CTk):
-
     def __init__(self):
         super().__init__()
 
@@ -62,7 +61,9 @@ class Application(ctk.CTk):
         range_menu.grid(row=1, column=0, padx=10, pady=5, sticky="w")
 
         # Radio bouton d'angle
-        rb_0 = ctk.CTkRadioButton(tab_photo, text="0°", variable=self.var_angle, value=0)
+        rb_0 = ctk.CTkRadioButton(
+            tab_photo, text="0°", variable=self.var_angle, value=0
+        )
         rb_25 = ctk.CTkRadioButton(
             tab_photo, text="+/-25°", variable=self.var_angle, value=25
         )
@@ -80,27 +81,41 @@ class Application(ctk.CTk):
             tab_photo, text="Choisir un fichier", command=self.file
         )
         button_fichier.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-        self.label_fichier_photo = ctk.CTkLabel(tab_photo, text="Aucun fichier sélectionné")
-        self.label_fichier_photo.grid(row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w")
+        self.label_fichier_photo = ctk.CTkLabel(
+            tab_photo, text="Aucun fichier sélectionné"
+        )
+        self.label_fichier_photo.grid(
+            row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w"
+        )
 
         # Entrée de dcalage
-        entry_decalage = ctk.CTkEntry(tab_photo, textvariable=self.var_decalage, width=50)
+        entry_decalage = ctk.CTkEntry(
+            tab_photo, textvariable=self.var_decalage, width=50
+        )
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
         label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5)
 
-
-        # == GRAPHIQUE PHOTOMÉTRIE == 
+        # == GRAPHIQUE PHOTOMÉTRIE ==
         self.frame_graph_photo = ctk.CTkFrame(tab_photo)
-        self.frame_graph_photo.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
-        
+        self.frame_graph_photo.grid(
+            row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew"
+        )
+
         # figure matplotlib
         self.fig_photo = Figure(figsize=(8, 5))
         self.ax_photo = self.fig_photo.add_subplot(111)
-        p.trace_limit(self.ax_photo, self.var_secteur.get(), int(self.var_range.get()), self.var_angle.get())
+        p.trace_limit(
+            self.ax_photo,
+            self.var_secteur.get(),
+            int(self.var_range.get()),
+            self.var_angle.get(),
+        )
 
         # Intégration
-        self.canvas_photo = FigureCanvasTkAgg(self.fig_photo, master=self.frame_graph_photo)
+        self.canvas_photo = FigureCanvasTkAgg(
+            self.fig_photo, master=self.frame_graph_photo
+        )
         self.canvas_photo.draw()
         self.canvas_photo.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
@@ -130,27 +145,33 @@ class Application(ctk.CTk):
             tab_color, text="Choisir un fichier", command=self.file
         )
         button_fichier.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-        
-        self.label_fichier_color = ctk.CTkLabel(tab_color, text="Aucun fichier sélectionné")
+
+        self.label_fichier_color = ctk.CTkLabel(
+            tab_color, text="Aucun fichier sélectionné"
+        )
         self.label_fichier_color.grid(row=1, column=1, padx=10, pady=5, sticky="w")
-        
+
         button_trace_color = ctk.CTkButton(
             tab_color, text="Tracer le graphique", command=self.trace_color
         )
         button_trace_color.grid(row=1, column=2, padx=10, pady=5, sticky="e")
 
-        # == GRAPHIQUE Colorimétrie == 
+        # == GRAPHIQUE Colorimétrie ==
         self.frame_graph_color = ctk.CTkFrame(tab_color)
-        self.frame_graph_color.grid(row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew")
-        
+        self.frame_graph_color.grid(
+            row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew"
+        )
+
         # figure matplotlib
         self.fig_color = Figure(figsize=(8, 5))
-        
+
         self.ax_color = self.fig_color.add_subplot(111)
         c.trace_limit(self.ax_color)
 
         # Intégration
-        self.canvas_color = FigureCanvasTkAgg(self.fig_color, master=self.frame_graph_color)
+        self.canvas_color = FigureCanvasTkAgg(
+            self.fig_color, master=self.frame_graph_color
+        )
         self.canvas_color.draw()
         self.canvas_color.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
@@ -158,12 +179,9 @@ class Application(ctk.CTk):
         toolbar.update()
         toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
-
         # déclaration des key bindings
         self.bind("<Return>", self.input_handle)
         self.bind("<KP_Enter>", self.input_handle)
-
-
 
     def trace_photo(self):
         if not self.file_choosen:
@@ -174,7 +192,12 @@ class Application(ctk.CTk):
         else:
             self.data = f.read_file(self.file_choosen)
             p.trace_graph(self.data, self.ax_photo, self.var_decalage)
-            p.trace_limit(self.ax_photo, self.var_secteur.get(), int(self.var_range.get()), self.var_angle.get())
+            p.trace_limit(
+                self.ax_photo,
+                self.var_secteur.get(),
+                int(self.var_range.get()),
+                self.var_angle.get(),
+            )
             self.canvas_photo.draw()
 
     def trace_color(self):
@@ -191,11 +214,11 @@ class Application(ctk.CTk):
 
     def file(self):
         self.file_choosen = f.choisir_fichier()
-        if not self.file_choosen:    
+        if not self.file_choosen:
             return
         name = f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
-        self.label_fichier_photo.configure(text = name)
-        self.label_fichier_color.configure(text = name)
+        self.label_fichier_photo.configure(text=name)
+        self.label_fichier_color.configure(text=name)
 
     def input_handle(self, event):
         current_tab = self.tabview.get()
