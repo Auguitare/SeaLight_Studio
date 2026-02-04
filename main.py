@@ -13,7 +13,6 @@ class Application(ctk.CTk):
     Classe principale de l'application d'analyse des données photométriques.
     Gère l'interface utilisateur, le chargement des fichiers et l'affichage des graphiques.
     """
-
     def __init__(self):
         """
         Initialise la fenêtre principale, les onglets et les éléments de l'UI.
@@ -200,7 +199,7 @@ class Application(ctk.CTk):
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
             )
-            return None
+
         else:
             self.data = f.read_file(self.file_choosen)
             p.trace_graph(self.data, self.ax_photo, self.var_decalage)
@@ -221,7 +220,7 @@ class Application(ctk.CTk):
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
             )
-            return None
+
         else:
             self.data = f.read_file(self.file_choosen)
             c.trace_graph(self.data, self.ax_color)
@@ -230,7 +229,8 @@ class Application(ctk.CTk):
 
     def file(self):
         """
-        Ouvre une boîte de dialogue pour sélectionner un fichier et met à jour les labels d'information.
+        Ouvre une boîte de dialogue pour sélectionner
+        un fichier et met à jour les labels d'information.
         """
         self.file_choosen = f.choisir_fichier()
         if not self.file_choosen:
@@ -239,7 +239,7 @@ class Application(ctk.CTk):
         self.label_fichier_photo.configure(text=name)
         self.label_fichier_color.configure(text=name)
 
-    def input_handle(self, event):
+    def input_handle(self, _):
         """
         Gère l'événement de pression sur la touche Entrée pour lancer le traçage
         du graphique correspondant à l'onglet actif.
