@@ -58,7 +58,7 @@ def trace_limit(ax):
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_xlim([0, 0.8])
-    ax.set_ylim([0, 0.8])
+    ax.set_ylim([0.2, 0.8])
     ax.minorticks_on()
     ax.grid(which="major", alpha=0.7)
     ax.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
