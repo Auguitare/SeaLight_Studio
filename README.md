@@ -1,6 +1,6 @@
 # Mantagua Graph tracer
 
-Création d'une application simple permettant de tracer les graphes de puissance lumineuse des test optique d'un feux de navigation.
+Création d'une application simple permettant de tracer les graphes de puissance lumineuseet de colorimétrie des test optique d'un feux de navigation.
 
 ## Create a venv
 `sudo apt install python3.12-venv`
