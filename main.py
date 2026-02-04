@@ -7,6 +7,7 @@ import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
+import platform
 
 import file_orga as f
 import tab_photo as p
@@ -28,6 +29,15 @@ class Application(ctk.CTk):
         self.data = None
 
         self.title("Analyse des données photométrique des feux de navigation")
+        try:
+            if platform.system() == "Windows":
+                self.iconbitmap("icon.ico")
+            else:
+                icon = tk.PhotoImage(file="icon.png")
+                self.iconphoto(False, icon)
+        except Exception as e:
+            print(f"Impossible de charger l'icône: {e}")
+
 
         # onglets
         self.tabview = ctk.CTkTabview(self)
