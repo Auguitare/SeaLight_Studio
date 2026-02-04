@@ -1,6 +1,7 @@
 import tkinter as tk
 
 def intensity_calc(range, inclinaison):
+    max_power = 0
     match range:
         case 1:
             max_power = 1.1
@@ -70,7 +71,11 @@ def tribord(range, inclinaison):
 
 
 def only_value():
-    zone = intensity_calc(1, 0)
+    zone = {}
+    zone[1] = {"x": [], "y": []}
+    zone[2] = {"x": [], "y": []}
+    zone[3] = {"x": [], "y": []}
+
     zone[1]["X"] = [0]
     zone[1]["Y"] = [0]
     zone[2]["X"] = [0]
