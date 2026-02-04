@@ -43,5 +43,14 @@ def read_file(fichier_selectionne):
         return data_file
     except FileNotFoundError:
         tk.messagebox.showerror("Erreur", "Fichier introuvable")
+        return None
     except pd.errors.ParserError:
         tk.messagebox.showerror("Erreur", "Format de fichier invalide")
+        return None
+    except ValueError as e:
+        tk.messagebox.showerror(
+            "Colone manquante", 
+            f"Colonnes manquantes dans le fichier : {str(e).split('[')[-1].strip(']')}"
+        )
+        return None
+
