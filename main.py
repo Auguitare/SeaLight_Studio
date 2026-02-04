@@ -184,6 +184,7 @@ class Application(ctk.CTk):
         else:
             self.data = f.read_file(self.file_choosen)
             p.trace_graph(self.data, self.ax_photo, self.var_decalage)
+            p.trace_limit(self.ax_photo, self.var_secteur.get(), int(self.var_range.get()), self.var_angle.get())
             self.canvas_photo.draw()
 
     def trace_color(self):
