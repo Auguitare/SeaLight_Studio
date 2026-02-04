@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['main.py'],
+    ['icon.ico', 'main.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [('O', None, 'OPTION'), ('O', None, 'OPTION')],
-    name='main',
+    name='icon',
     debug=False,
     bootloader_ignore_signals=False,
     strip=True,
@@ -35,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['icon.ico'],
+    icon=['='],
 )

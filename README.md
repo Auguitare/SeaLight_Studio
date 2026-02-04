@@ -23,10 +23,10 @@ python3 lecture_fichier.py
 
 ### Working on windows
 ```Python
-python -m PyInstaller .\lecture_fichier.py --clean -F --noconsole
+python -m PyInstaller main.py --clean -F --noconsole --icon icon.ico
 ```
 
 ### working on linux
 ```Python
-python3 -m PyInstaller main.py --clean -F --noconsole --hidden-import='PIL._tkinter_finder'
+python3 -OO -m PyInstaller --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' --icon icon.ico main.py
 ```
