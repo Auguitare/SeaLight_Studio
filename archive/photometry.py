@@ -1,3 +1,8 @@
+"""
+Archive : Ancienne implémentation de l'onglet de photométrie.
+Ce module contient une version de classe pour gérer l'interface, les paramètres
+de secteur et le traçage de l'intensité lumineuse.
+"""
 import zone as z
 import tkinter as tk
 import customtkinter as ctk

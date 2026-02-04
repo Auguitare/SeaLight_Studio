@@ -1,3 +1,8 @@
+"""
+Module de gestion de l'affichage photométrique.
+Gère le traçage de l'intensité lumineuse en fonction de l'angle, l'application
+de décalages angulaires et la visualisation des zones de conformité pour différents secteurs.
+"""
 import zone as z
 
 

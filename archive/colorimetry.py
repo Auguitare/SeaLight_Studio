@@ -1,3 +1,8 @@
+"""
+Archive : Ancienne implémentation de l'onglet de colorimétrie.
+Ce module contient une version de classe pour gérer l'interface et le traçage
+du diagramme de chromaticité.
+"""
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk

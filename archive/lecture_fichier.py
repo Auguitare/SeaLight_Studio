@@ -1,3 +1,8 @@
+"""
+Archive : Ancienne version du script principal de l'application.
+Regroupe la logique de sélection de fichier, de lecture et la structure
+principale de l'interface utilisateur avant refactorisation.
+"""
 import pandas
 import tkinter as tk
 from tkinter import filedialog

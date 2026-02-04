@@ -1,6 +1,9 @@
+"""
+Module de gestion des fichiers
+Gère l'import des fichiers et la la transmormation en donnée
+"""
 import tkinter as tk
 import pandas as pd
-
 
 
 def choisir_fichier():
@@ -10,7 +13,7 @@ def choisir_fichier():
     Returns:
         str: Le chemin du fichier sélectionné ou une chaîne vide si annulé.
     """
-    
+
     fichier_selectionne = tk.filedialog.askopenfilename(
         title="Choisir un fichier de données",
         filetypes=[
@@ -67,7 +70,7 @@ def read_file(fichier_selectionne):
         return None
     except ValueError as e:
         tk.messagebox.showerror(
-            "Colone manquante", 
-            f"Colonnes manquantes dans le fichier : {str(e).split('[')[-1].strip(']')}"
+            "Colone manquante",
+            f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}",
         )
         return None

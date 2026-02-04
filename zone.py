@@ -1,3 +1,8 @@
+"""
+Module de calcul des zones d'intensité et des coordonnées géométriques.
+Définit les limites d'intensité lumineuse et les secteurs angulaires pour les différents
+types de feux de navigation (Hune, Poupe, Babord, Tribord) selon les normes.
+"""
 import tkinter as tk
 
 

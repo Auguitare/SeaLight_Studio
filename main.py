@@ -1,3 +1,8 @@
+"""
+Script principal de l'application d'analyse des données photométriques et colorimétriques.
+Ce module initialise l'interface utilisateur avec customtkinter, gère les onglets de navigation,
+le chargement des fichiers de données et coordonne l'affichage des graphiques.
+"""
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
