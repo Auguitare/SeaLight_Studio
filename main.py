@@ -97,13 +97,8 @@ class Application(ctk.CTk):
         # figure matplotlib
         self.fig_photo = Figure(figsize=(8, 5))
         self.ax_photo = self.fig_photo.add_subplot(111)
-        self.ax_photo.set_title("Intensité lumineuse en fonction de l'angle")
-        self.ax_photo.set_xlabel("Angle (°)")
-        self.ax_photo.set_ylabel("Intensité (cd)")
-        self.ax_photo.minorticks_on()
-        self.ax_photo.grid(which="major", alpha=0.7)
-        self.ax_photo.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
-        
+        p.trace_limit(self.ax_photo, self.var_secteur.get(), int(self.var_range.get()), self.var_angle.get())
+
         # Intégration
         self.canvas_photo = FigureCanvasTkAgg(self.fig_photo, master=self.frame_graph_photo)
         self.canvas_photo.draw()
@@ -152,13 +147,8 @@ class Application(ctk.CTk):
         self.fig_color = Figure(figsize=(8, 5))
         
         self.ax_color = self.fig_color.add_subplot(111)
-        self.ax_color.set_title("Diagramme chromatique")
-        self.ax_color.set_xlabel("X")
-        self.ax_color.set_ylabel("Y")
-        self.ax_color.minorticks_on()
-        self.ax_color.grid(which="major", alpha=0.7)
-        self.ax_color.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
-        
+        c.trace_limit(self.ax_color)
+
         # Intégration
         self.canvas_color = FigureCanvasTkAgg(self.fig_color, master=self.frame_graph_color)
         self.canvas_color.draw()
