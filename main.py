@@ -196,6 +196,7 @@ class Application(ctk.CTk):
         else:
             self.data = f.read_file(self.file_choosen)
             c.trace_graph(self.data, self.ax_color)
+            c.trace_limit(self.ax_color)
             self.canvas_color.draw()
 
     def file(self):
