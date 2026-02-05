@@ -120,6 +120,7 @@ class Application(ctk.CTk):
             tab_photo,
             text="Facteur d'intensité 1.5",
             variable=self.var_intensity_factor,
+            command=self.trace_intensity_factor
         )
         checkbox_intensity_factor.grid(row=1, column=2, padx=(45,10), pady=5, sticky="e")
 
@@ -252,6 +253,14 @@ class Application(ctk.CTk):
             c.trace_graph(self.data, self.ax_color)
             c.trace_limit(self.ax_color)
             self.canvas_color.draw()
+
+    def trace_intensity_factor(self):
+        self.intensity_factor, = self.ax_photo.plot([1, 2, 3])
+        if not self.var_intensity_factor.get():
+            self.intensity_factor.remove()
+        self.canvas_photo.draw()
+
+
 
     def file(self):
         """
