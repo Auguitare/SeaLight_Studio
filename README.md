@@ -23,10 +23,17 @@ python3 lecture_fichier.py
 
 ### Working on windows
 ```Python
-python -m PyInstaller main.py --clean -F --noconsole --icon icon.ico
+python -OO -m PyInstaller main.py 
+--optimize 2
+--clean
+--onefile
+--noconsole
+--name Photometrie
+--icon icon.ico
+--add-data icon.ico:image/.
 ```
 
 ### working on linux
 ```Python
-python3 -OO -m PyInstaller --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' --icon icon.ico main.py
+python3 -OO -m PyInstaller main.py --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' -n photometrie --icon icon.ico 
 ```
