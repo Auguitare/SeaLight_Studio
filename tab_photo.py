@@ -6,7 +6,7 @@ de décalages angulaires et la visualisation des zones de conformité pour diff�
 import zone as z
 
 
-def trace_graph(data, ax, decalage, previous_line):
+def trace_graph(data, ax, decalage, previous_line=None):
     """
     Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire si necessaire.
 
@@ -30,7 +30,7 @@ def trace_graph(data, ax, decalage, previous_line):
     return line
 
 
-def trace_limit(ax, secteur, range_val, inclinaison):
+def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
     """
     Trace les zones limites (zones interdites) sur le graphique de photométrie.
 
@@ -39,7 +39,12 @@ def trace_limit(ax, secteur, range_val, inclinaison):
         secteur (str): Nom du secteur ("Hune", "Poupe", "Babord", "Tribord", "Vide").
         range_val (float): Valeur de la portée.
         inclinaison (float): Valeur de l'inclinaison.
+        previous_limits (list, optional): Liste des artistes précédemment tracés à supprimer.
     """
+    if previous_limits is not None:
+        for artist in previous_limits:
+            artist.remove()
+
     zone_interdite = {}
     if secteur == "Hune":
         zone_interdite = z.hune(range_val, inclinaison)
@@ -53,15 +58,18 @@ def trace_limit(ax, secteur, range_val, inclinaison):
         zone_interdite = z.only_value()
 
     # Tracer les zones
+    new_limits = []
     for zone_num in [1, 2, 3]:
         zone = zone_interdite[zone_num]
-        ax.plot(zone["X"], zone["Y"], color="red", linestyle="--", alpha=0.5)
-        ax.fill(
+        limits_line = ax.plot(zone["X"], zone["Y"], color="red", linestyle="--", alpha=0.5)
+        new_limits.extend(limits_line)
+        limit_fill = ax.fill(
             zone["X"],
             zone["Y"],
             color="red",
             alpha=0.2,
         )
+        new_limits.extend(limit_fill)
 
     ax.set_title("Intensité lumineuse en fonction de l'angle")
     ax.set_xlabel("Angle (°)")
@@ -69,3 +77,4 @@ def trace_limit(ax, secteur, range_val, inclinaison):
     ax.minorticks_on()
     ax.grid(which="major", alpha=0.7)
     ax.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
+    return new_limits
