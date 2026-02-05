@@ -3,6 +3,8 @@ Module de gestion de l'affichage colorimétrique.
 Contient les fonctions permettant de tracer les données de chromaticité (X, Y)
 et de superposer les zones limites réglementaires pour les différentes couleurs de feux.
 """
+
+
 def trace_graph(data, ax):
     """
     Trace les points de données sur le graphique.

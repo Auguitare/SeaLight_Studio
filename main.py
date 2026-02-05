@@ -40,7 +40,7 @@ class Application(ctk.CTk):
             else:
                 icon = tk.PhotoImage(file="icon.png")
                 self.iconphoto(False, icon)
-        except Exception as e:
+        except tk.TclError as e:
             print(f"Impossible de charger l'icône: {e}")
 
         # onglets
@@ -264,6 +264,10 @@ class Application(ctk.CTk):
             self.canvas_color.draw()
 
     def trace_intensity_factor(self):
+        """
+        Affiche ou masque la ligne du facteur d'intensité sur le graphique de photométrie
+        en fonction de l'état de la variable de contrôle.
+        """
         if self.var_intensity_factor.get():
             if self.intensity_factor is None:
                 (self.intensity_factor,) = self.ax_photo.plot(

@@ -3,6 +3,7 @@ Module de gestion de l'affichage photométrique.
 Gère le traçage de l'intensité lumineuse en fonction de l'angle, l'application
 de décalages angulaires et la visualisation des zones de conformité pour différents secteurs.
 """
+
 import zone as z
 
 
@@ -61,7 +62,9 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
     new_limits = []
     for zone_num in [1, 2, 3]:
         zone = zone_interdite[zone_num]
-        limits_line = ax.plot(zone["X"], zone["Y"], color="red", linestyle="--", alpha=0.5)
+        limits_line = ax.plot(
+            zone["X"], zone["Y"], color="red", linestyle="--", alpha=0.5
+        )
         new_limits.extend(limits_line)
         limit_fill = ax.fill(
             zone["X"],
