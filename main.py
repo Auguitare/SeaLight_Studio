@@ -4,11 +4,11 @@ Ce module initialise l'interface utilisateur avec customtkinter, gère les ongle
 le chargement des fichiers de données et coordonne l'affichage des graphiques.
 """
 
+import platform
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
-import platform
 
 import file_orga as f
 import tab_photo as p
@@ -31,6 +31,7 @@ class Application(ctk.CTk):
         self.data = None
         self.intensity_factor = None
         self.current_photo_line = None
+        self.current_photo_limits = []
 
         self.title("Analyse des données photométrique des feux de navigation")
         try:
@@ -143,11 +144,12 @@ class Application(ctk.CTk):
         # figure matplotlib
         self.fig_photo = Figure(figsize=(8, 5))
         self.ax_photo = self.fig_photo.add_subplot(111)
-        p.trace_limit(
+        self.current_photo_limits = p.trace_limit(
             self.ax_photo,
             self.var_secteur.get(),
             int(self.var_range.get()),
             self.var_angle.get(),
+            self.current_photo_limits,
         )
 
         # Intégration
@@ -236,11 +238,12 @@ class Application(ctk.CTk):
             self.current_photo_line = p.trace_graph(
                 self.data, self.ax_photo, self.var_decalage, self.current_photo_line
             )
-            p.trace_limit(
+            self.current_photo_limits = p.trace_limit(
                 self.ax_photo,
                 self.var_secteur.get(),
                 int(self.var_range.get()),
                 self.var_angle.get(),
+                self.current_photo_limits,
             )
             self.canvas_photo.draw()
 
