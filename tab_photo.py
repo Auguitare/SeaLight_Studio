@@ -6,7 +6,7 @@ de décalages angulaires et la visualisation des zones de conformité pour diff�
 import zone as z
 
 
-def trace_graph(data, ax, decalage):
+def trace_graph(data, ax, decalage, previous_line):
     """
     Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire si necessaire.
 
@@ -18,14 +18,16 @@ def trace_graph(data, ax, decalage):
     if data is None:
         return
 
-    ax.clear()
+    if previous_line is not None:
+        previous_line.remove()
 
     # Appliquer le décalage
     decalage = decalage.get()
     data["Angle °"] = data["Angle °"].apply(lambda x: x + decalage)
 
     # Tracer les données
-    ax.plot(data["Angle °"], data["cd"], color="steelblue")
+    (line,) = ax.plot(data["Angle °"], data["cd"], color="steelblue")
+    return line
 
 
 def trace_limit(ax, secteur, range_val, inclinaison):

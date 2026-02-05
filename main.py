@@ -30,6 +30,7 @@ class Application(ctk.CTk):
         self.file_choosen = None
         self.data = None
         self.intensity_factor = None
+        self.current_photo_line = None
 
         self.title("Analyse des données photométrique des feux de navigation")
         try:
@@ -232,7 +233,9 @@ class Application(ctk.CTk):
 
         else:
             self.data = f.read_file(self.file_choosen)
-            p.trace_graph(self.data, self.ax_photo, self.var_decalage)
+            self.current_photo_line = p.trace_graph(
+                self.data, self.ax_photo, self.var_decalage, self.current_photo_line
+            )
             p.trace_limit(
                 self.ax_photo,
                 self.var_secteur.get(),
@@ -261,7 +264,7 @@ class Application(ctk.CTk):
         if self.var_intensity_factor.get():
             if self.intensity_factor is None:
                 (self.intensity_factor,) = self.ax_photo.plot(
-                    [1, 1, 3], label="Facteur 1.5", color='r'
+                    [1, 1, 3], label="Facteur 1.5", color="r"
                 )
 
         else:
