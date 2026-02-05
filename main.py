@@ -3,6 +3,7 @@ Script principal de l'application d'analyse des données photométriques et colo
 Ce module initialise l'interface utilisateur avec customtkinter, gère les onglets de navigation,
 le chargement des fichiers de données et coordonne l'affichage des graphiques.
 """
+
 import tkinter as tk
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -19,6 +20,7 @@ class Application(ctk.CTk):
     Classe principale de l'application d'analyse des données photométriques.
     Gère l'interface utilisateur, le chargement des fichiers et l'affichage des graphiques.
     """
+
     def __init__(self):
         """
         Initialise la fenêtre principale, les onglets et les éléments de l'UI.
@@ -38,7 +40,6 @@ class Application(ctk.CTk):
         except Exception as e:
             print(f"Impossible de charger l'icône: {e}")
 
-
         # onglets
         self.tabview = ctk.CTkTabview(self)
         self.tabview.pack(padx=0, pady=0, fill="both", expand=True)
@@ -55,17 +56,19 @@ class Application(ctk.CTk):
         tab_photo.grid_rowconfigure(1, weight=0)
         tab_photo.grid_rowconfigure(2, weight=0)
         tab_photo.grid_rowconfigure(3, weight=1)
-        tab_photo.grid_columnconfigure(0, weight=1)
+        tab_photo.grid_columnconfigure(0, weight=0)
         tab_photo.grid_columnconfigure(1, weight=1)
-        tab_photo.grid_columnconfigure(2, weight=1)
+        tab_photo.grid_columnconfigure(2, weight=0)
+        # tab_photo.grid_columnconfigure(3, weight=5)
 
         # Variable de la page
         self.var_secteur = ctk.StringVar(value="Vide")
         self.var_range = ctk.StringVar(value="2")
         self.var_angle = ctk.IntVar(value=0)
         self.var_decalage = tk.DoubleVar(value=0.0)
+        self.var_intensity_factor = ctk.BooleanVar(value=False)
 
-        ## Gestion des bouton/menu
+        # ===== Gestion des bouton/menu =====
         # position du feux
         secteur_menu = ctk.CTkOptionMenu(
             tab_photo,
@@ -92,12 +95,6 @@ class Application(ctk.CTk):
         rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
         rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
-        # Bouton de traçage de graphique
-        button_trace_photo = ctk.CTkButton(
-            tab_photo, text="Tracer le graphique", command=self.trace_photo
-        )
-        button_trace_photo.grid(row=1, column=2, padx=10, pady=5, sticky="e")
-
         # Bouton de choix de fichier
         button_fichier = ctk.CTkButton(
             tab_photo, text="Choisir un fichier", command=self.file
@@ -107,16 +104,30 @@ class Application(ctk.CTk):
             tab_photo, text="Aucun fichier sélectionné"
         )
         self.label_fichier_photo.grid(
-            row=2, column=1, columnspan=2, padx=10, pady=5, sticky="w"
+            row=2, column=1, columnspan=2, padx=(10,10), pady=5, sticky="w"
         )
 
-        # Entrée de dcalage
+        # Entrée de decalage
         entry_decalage = ctk.CTkEntry(
             tab_photo, textvariable=self.var_decalage, width=50
         )
         entry_decalage.grid(row=0, column=2, padx=10, pady=5, sticky="e")
         label_decalage = ctk.CTkLabel(tab_photo, text="Décalage [°]:")
-        label_decalage.grid(row=0, column=2, padx=(10, 0), pady=5)
+        label_decalage.grid(row=0, column=2, padx=(10, 65), pady=5, sticky="e")
+
+        # checkbox facteur 1.5
+        checkbox_intensity_factor = ctk.CTkCheckBox(
+            tab_photo,
+            text="Facteur d'intensité 1.5",
+            variable=self.var_intensity_factor,
+        )
+        checkbox_intensity_factor.grid(row=1, column=2, padx=(45,10), pady=5, sticky="e")
+
+        # Bouton de traçage de graphique
+        button_trace_photo = ctk.CTkButton(
+            tab_photo, text="Tracer le graphique", command=self.trace_photo
+        )
+        button_trace_photo.grid(row=2, column=2, padx=10, pady=5, sticky="e")
 
         # == GRAPHIQUE PHOTOMÉTRIE ==
         self.frame_graph_photo = ctk.CTkFrame(tab_photo)
@@ -181,7 +192,7 @@ class Application(ctk.CTk):
         # == GRAPHIQUE Colorimétrie ==
         self.frame_graph_color = ctk.CTkFrame(tab_color)
         self.frame_graph_color.grid(
-            row=3, column=0, columnspan=3, padx=0, pady=0, sticky="nsew"
+            row=2, column=0, columnspan=3, padx=0, pady=0, sticky="nsew"
         )
 
         # figure matplotlib
