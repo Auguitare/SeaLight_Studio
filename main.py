@@ -29,6 +29,7 @@ class Application(ctk.CTk):
 
         self.file_choosen = None
         self.data = None
+        self.intensity_factor = None
 
         self.title("Analyse des données photométrique des feux de navigation")
         try:
@@ -104,7 +105,7 @@ class Application(ctk.CTk):
             tab_photo, text="Aucun fichier sélectionné"
         )
         self.label_fichier_photo.grid(
-            row=2, column=1, columnspan=2, padx=(10,10), pady=5, sticky="w"
+            row=2, column=1, columnspan=2, padx=(10, 10), pady=5, sticky="w"
         )
 
         # Entrée de decalage
@@ -120,9 +121,11 @@ class Application(ctk.CTk):
             tab_photo,
             text="Facteur d'intensité 1.5",
             variable=self.var_intensity_factor,
-            command=self.trace_intensity_factor
+            command=self.trace_intensity_factor,
         )
-        checkbox_intensity_factor.grid(row=1, column=2, padx=(45,10), pady=5, sticky="e")
+        checkbox_intensity_factor.grid(
+            row=1, column=2, padx=(45, 10), pady=5, sticky="e"
+        )
 
         # Bouton de traçage de graphique
         button_trace_photo = ctk.CTkButton(
@@ -255,12 +258,18 @@ class Application(ctk.CTk):
             self.canvas_color.draw()
 
     def trace_intensity_factor(self):
-        self.intensity_factor, = self.ax_photo.plot([1, 2, 3])
-        if not self.var_intensity_factor.get():
-            self.intensity_factor.remove()
+        if self.var_intensity_factor.get():
+            if self.intensity_factor is None:
+                (self.intensity_factor,) = self.ax_photo.plot(
+                    [1, 1, 3], label="Facteur 1.5", color='r'
+                )
+
+        else:
+            if self.intensity_factor is not None:
+                self.intensity_factor.remove()
+                self.intensity_factor = None
+
         self.canvas_photo.draw()
-
-
 
     def file(self):
         """
