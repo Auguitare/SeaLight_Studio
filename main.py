@@ -288,9 +288,14 @@ class Application(ctk.CTk):
         Ouvre une boîte de dialogue pour sélectionner
         un fichier et met à jour les labels d'information.
         """
-        self.file_choosen = f.choisir_fichier()
-        if not self.file_choosen:
+        path = f.choisir_fichier()
+        if not path:
+            self.file_choosen = None
+            self.label_fichier_photo.configure(text="Aucun fichier sélectionné")
+            self.label_fichier_color.configure(text="Aucun fichier sélectionné")
             return
+
+        self.file_choosen = path
         name = f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
         self.label_fichier_photo.configure(text=name)
         self.label_fichier_color.configure(text=name)
