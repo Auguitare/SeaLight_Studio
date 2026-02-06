@@ -12,3 +12,4 @@ __pycache__
 programme breizelec.zip
 .zencoder
 .zenflow
+.mypy_cache

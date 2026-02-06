@@ -1,0 +1,74 @@
+diff --git a/file_orga.py b/file_orga.py
+index 28b0d58..571fd9e 100644
+--- a/file_orga.py
++++ b/file_orga.py
+@@ -38,6 +38,7 @@ def read_file(fichier_selectionne):
+     Returns:
+         pd.DataFrame: DataFrame contenant les données, ou None en cas d'erreur.
+     """
++    # TODO: 2 passes du fichier, gourmand si le fichier est long
+     lignes_a_sauter = set()
+     with open(fichier_selectionne, "r", encoding="utf-8") as f:
+         lignes = f.readlines()
+diff --git a/main.py b/main.py
+index 4920ce3..5a0bc7d 100644
+--- a/main.py
++++ b/main.py
+@@ -18,6 +18,8 @@ class Application(ctk.CTk):
+     Classe principale de l'application d'analyse des données photométriques.
+     Gère l'interface utilisateur, le chargement des fichiers et l'affichage des graphiques.
+     """
++    # TODO: méthode trop longue, utilise d'autre methodes pour remplacer les
++    # commentaires dans celle-ci.
+     def __init__(self):
+         """
+         Initialise la fenêtre principale, les onglets et les éléments de l'UI.
+@@ -200,6 +202,7 @@ class Application(ctk.CTk):
+         Lit les données du fichier sélectionné et trace le graphique de photométrie.
+         Affiche un avertissement si aucun fichier n'est sélectionné.
+         """
++        # TODO: duplication de code
+         if not self.file_choosen:
+             tk.messagebox.showwarning(
+                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
+@@ -221,6 +224,7 @@ class Application(ctk.CTk):
+         Lit les données du fichier sélectionné et trace le graphique de colorimétrie.
+         Affiche un avertissement si aucun fichier n'est sélectionné.
+         """
++        # TODO: duplication de code
+         if not self.file_choosen:
+             tk.messagebox.showwarning(
+                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
+diff --git a/tab_colo.py b/tab_colo.py
+index fee28b6..370746f 100644
+--- a/tab_colo.py
++++ b/tab_colo.py
+@@ -27,6 +27,8 @@ def trace_limit(ax):
+     Args:
+         ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer les limites.
+     """
++    # TODO: Les zones sont toujours les même ? Sinon, pourquoi pas stocker dans
++    # une structure de donnée spécifique ces valeurs là. (i.e. fichier zone)
+     zone_white = {
+         "X": [0.525, 0.525, 0.452, 0.310, 0.31, 0.443, 0.525],
+         "Y": [0.382, 0.44, 0.44, 0.348, 0.283, 0.382, 0.382],
+diff --git a/zone.py b/zone.py
+index 60f6327..37e1add 100644
+--- a/zone.py
++++ b/zone.py
+@@ -34,6 +34,7 @@ def intensity_calc(light_range, inclinaison):
+         case 6:
+             max_power = 118
+         case _:
++            # TODO: return ici ?
+             tk.messagebox.showwarning("Avertissement", "choisir une portée.")
+ 
+     if inclinaison != 0:
+@@ -66,6 +67,7 @@ def intensity_calc(light_range, inclinaison):
+     }
+ 
+ 
++# TODO: (pour chipoter) refacto les fonctions hune, poupe, babord et tribords.
+ def hune(light_range, inclinaison):
+     """
+     Définit les coordonnées pour les zones de feu de hune.
