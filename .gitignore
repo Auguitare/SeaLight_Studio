@@ -10,3 +10,5 @@ fichier Breizelec
 __pycache__
 .venv
 programme breizelec.zip
+.zencoder
+.zenflow
