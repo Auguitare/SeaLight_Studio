@@ -15,7 +15,7 @@ def trace_graph(data, ax, decalage, previous_line=None):
     Args:
         data (pd.DataFrame): Données contenant les colonnes 'Angle °' et 'cd'.
         ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer.
-        decalage (tkinter.DoubleVar): Objet possédant une méthode get() pour obtenir le décalage.
+        decalage (tk.StringVar): Objet possédant une méthode get() pour obtenir le décalage.
     """
     if data is None:
         return
@@ -24,8 +24,12 @@ def trace_graph(data, ax, decalage, previous_line=None):
         previous_line.remove()
 
     # Appliquer le décalage
-    decalage = decalage.get()
-    data["Angle °"] = data["Angle °"].apply(lambda x: x + decalage)
+    try:
+        val_decalage = float(decalage.get())
+    except ValueError:
+        val_decalage = 0.0
+
+    data["Angle °"] = data["Angle °"].apply(lambda x: x + val_decalage)
 
     # Tracer les données
     (line,) = ax.plot(data["Angle °"], data["cd"], color="steelblue")

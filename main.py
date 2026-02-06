@@ -68,7 +68,7 @@ class Application(ctk.CTk):
         self.var_secteur = ctk.StringVar(value="Vide")
         self.var_range = ctk.StringVar(value="2")
         self.var_angle = ctk.IntVar(value=0)
-        self.var_decalage = tk.DoubleVar(value=0.0)
+        self.var_decalage = ctk.StringVar(value="0.0")
         self.var_intensity_factor = ctk.BooleanVar(value=False)
 
         # ===== Gestion des bouton/menu =====
