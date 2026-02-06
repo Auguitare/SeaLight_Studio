@@ -4,8 +4,8 @@ Gère le traçage de l'intensité lumineuse en fonction de l'angle, l'applicatio
 de décalages angulaires et la visualisation des zones de conformité pour différents secteurs.
 """
 
-import zone as z
 import tkinter as tk
+import zone as z
 
 
 def trace_graph(data, ax, decalage, previous_line=None):
@@ -91,6 +91,20 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
 
 
 def trace_factor(ax, data, secteur):
+    """
+    Calcule et trace le facteur d'intensité pour un secteur donné.
+
+    Le facteur est le ratio entre l'intensité maximale et minimale dans une zone
+    spécifique définie par le secteur.
+
+    Args:
+        ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer le point du facteur.
+        data (pd.DataFrame): Données contenant les colonnes 'Angle °' et 'cd'.
+        secteur (str): Nom du secteur ("Hune", "Poupe", "Babord" ou "Tribord").
+
+    Returns:
+        matplotlib.collections.PathCollection: L'objet scatter contenant le point tracé.
+    """
     factor = 0.0
     zone_interdite = {}
     if secteur == "Hune":
@@ -124,6 +138,6 @@ def trace_factor(ax, data, secteur):
         tk.messagebox.showwarning(
             "Avertissement", "Aucune valeur de courbe dans le secteur"
         )
-        factor_line = ax.scatter(x=0, y=0, c="w", label="pas de valeur dans la courbe")
+        factor_line = ax.scatter(x=0, y=0, c="w", label="pas dans le secteur")
 
     return factor_line
