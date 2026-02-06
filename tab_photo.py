@@ -5,6 +5,7 @@ de décalages angulaires et la visualisation des zones de conformité pour diff�
 """
 
 import zone as z
+import tkinter as tk
 
 
 def trace_graph(data, ax, decalage, previous_line=None):
@@ -85,6 +86,37 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
     return new_limits
 
 
-def trace_factor(ax):
-    (factor_line,) = ax.plot([1, 1, 3], label="Facteur 1.5", color="r")
+def trace_factor(ax, data, secteur):
+    zone_interdite = {}
+    if secteur == "Hune":
+        zone_interdite = z.hune()
+    elif secteur == "Poupe":
+        zone_interdite = z.poupe()
+    elif secteur == "Babord":
+        zone_interdite = z.babord()
+    elif secteur == "Tribord":
+        zone_interdite = z.tribord()
+    elif secteur == "Vide":
+        tk.message.showwarning(
+            "Avertissement",
+            "Veuillez d'abord choisir un secteur pour caculer le facteur d'intensité.",
+        )
+
+    x_factor_G = int(zone_interdite[2]["X"][3])
+    print(x_factor_G)
+    x_factor_D = int(zone_interdite[2]["X"][4])
+    print(x_factor_D)
+
+    filtered_data = data[
+        (data["Angle °"] >= x_factor_G) & (data["Angle °"] <= x_factor_D)
+    ]
+    print(filtered_data)
+    if not filtered_data.empty:
+        min_row = filtered_data.loc[filtered_data["cd"].idxmin()]
+        print(f"Minimum cd trouvé : {min_row['cd']} à l'angle {min_row['Angle °']}")
+
+    factor_line = ax.scatter(
+        x=min_row["Angle °"], y=min_row["cd"], c="r", label="One Point"
+    )
+
     return factor_line
