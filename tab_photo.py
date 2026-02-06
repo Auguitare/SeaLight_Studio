@@ -122,18 +122,31 @@ def trace_factor(ax, data, secteur):
     filtered_data = data[
         (data["Angle °"] >= x_factor_l) & (data["Angle °"] <= x_factor_r)
     ]
+
+    factor_graph = []
     if not filtered_data.empty:
         min_row = filtered_data.loc[filtered_data["cd"].idxmin()]
         max_row = filtered_data.loc[filtered_data["cd"].idxmax()]
         factor = round(max_row["cd"] / min_row["cd"], 2)
 
-        factor_line = ax.scatter(
+        factor_point = ax.scatter(
             x=min_row["Angle °"],
             y=min_row["cd"],
             c="r",
             label=f"facteur d'intensité: {factor}",
             s=5,
         )
+        factor_graph.append(factor_point)
+
+        factor_line = ax.axhline(
+            y=min_row["cd"] * 1.5,
+            color="r",
+            linestyle="--",
+            linewidth=1.5,
+            alpha=0.7,
+        )
+        factor_graph.append(factor_line)
+
     else:
         tk.messagebox.showwarning(
             "Avertissement", "Aucune valeur de courbe dans le secteur"
