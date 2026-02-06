@@ -80,4 +80,6 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
     ax.minorticks_on()
     ax.grid(which="major", alpha=0.7)
     ax.grid(which="minor", linestyle="--", linewidth=0.5, alpha=0.4)
+    ax.relim()
+    ax.autoscale_view()
     return new_limits

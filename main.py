@@ -279,6 +279,8 @@ class Application(ctk.CTk):
                 self.intensity_factor.remove()
                 self.intensity_factor = None
 
+        self.ax_photo.relim()
+        self.ax_photo.autoscale_view()
         self.canvas_photo.draw()
 
     def file(self):
@@ -306,7 +308,6 @@ class Application(ctk.CTk):
             self.trace_photo()
         elif current_tab == "Colorimétrie":
             self.trace_color()
-
 
 app = Application()
 app.mainloop()
