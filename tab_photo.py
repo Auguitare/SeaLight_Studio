@@ -91,6 +91,7 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
 
 
 def trace_factor(ax, data, secteur):
+    factor = 0.0
     zone_interdite = {}
     if secteur == "Hune":
         zone_interdite = z.hune()
@@ -106,17 +107,23 @@ def trace_factor(ax, data, secteur):
             "Veuillez d'abord choisir un secteur pour caculer le facteur d'intensité.",
         )
 
-    x_factor_G = int(zone_interdite[2]["X"][3])
-    x_factor_D = int(zone_interdite[2]["X"][4])
+    x_factor_L = int(zone_interdite[2]["X"][3])
+    x_factor_R = int(zone_interdite[2]["X"][4])
 
     filtered_data = data[
-        (data["Angle °"] >= x_factor_G) & (data["Angle °"] <= x_factor_D)
+        (data["Angle °"] >= x_factor_L) & (data["Angle °"] <= x_factor_R)
     ]
     if not filtered_data.empty:
         min_row = filtered_data.loc[filtered_data["cd"].idxmin()]
+        max_row = filtered_data.loc[filtered_data["cd"].idxmax()]
+        factor = round(max_row["cd"] / min_row["cd"], 2)
 
     factor_line = ax.scatter(
-        x=min_row["Angle °"], y=min_row["cd"], c="r", label="One Point", s=5,
+        x=min_row["Angle °"],
+        y=min_row["cd"],
+        c="r",
+        label=f"facteur d'intensité: {factor}",
+        s=5,
     )
 
     return factor_line
