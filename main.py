@@ -270,8 +270,8 @@ class Application(ctk.CTk):
         """
         if self.var_intensity_factor.get():
             if self.intensity_factor is None:
-                self.intensity_factor = p.trace_factor(self.ax_photo)
-                legend = self.ax_photo.legend()
+                self.intensity_factor = p.trace_factor(self.ax_photo, self.data, self.var_secteur.get())
+                self.ax_photo.legend()
 
         else:
             if self.intensity_factor is not None:
