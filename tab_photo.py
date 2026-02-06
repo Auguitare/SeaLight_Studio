@@ -101,17 +101,12 @@ def trace_factor(ax, data, secteur):
         zone_interdite = z.babord()
     elif secteur == "Tribord":
         zone_interdite = z.tribord()
-    elif secteur == "Vide":
-        tk.messagebox.showwarning(
-            "Avertissement",
-            "Veuillez d'abord choisir un secteur pour caculer le facteur d'intensité.",
-        )
 
-    x_factor_L = int(zone_interdite[2]["X"][3])
-    x_factor_R = int(zone_interdite[2]["X"][4])
+    x_factor_l = int(zone_interdite[2]["X"][3])
+    x_factor_r = int(zone_interdite[2]["X"][4])
 
     filtered_data = data[
-        (data["Angle °"] >= x_factor_L) & (data["Angle °"] <= x_factor_R)
+        (data["Angle °"] >= x_factor_l) & (data["Angle °"] <= x_factor_r)
     ]
     if not filtered_data.empty:
         min_row = filtered_data.loc[filtered_data["cd"].idxmin()]

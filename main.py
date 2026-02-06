@@ -275,12 +275,18 @@ class Application(ctk.CTk):
         """
         if self.current_photo_line:
             if self.var_intensity_factor.get():
-                if self.intensity_factor is None:
-                    self.intensity_factor = p.trace_factor(
-                        self.ax_photo, self.data, self.var_secteur.get()
+                if self.var_secteur.get() == "Vide":
+                    self.checkbox_intensity_factor.deselect()
+                    tk.messagebox.showwarning(
+                        "Avertissement",
+                        "Veuillez d'abord choisir un secteur pour caculer le facteur d'intensité.",
                     )
-                    self.ax_photo.legend()
-
+                else:
+                    if self.intensity_factor is None:
+                        self.intensity_factor = p.trace_factor(
+                            self.ax_photo, self.data, self.var_secteur.get()
+                        )
+                        self.ax_photo.legend()
             else:
                 if self.intensity_factor is not None:
                     self.intensity_factor.remove()
