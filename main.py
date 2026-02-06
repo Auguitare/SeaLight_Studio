@@ -246,7 +246,8 @@ class Application(ctk.CTk):
                 self.current_photo_limits,
             )
             if self.intensity_factor is not None:
-                self.intensity_factor.remove()
+                for artist in self.intensity_factor:
+                    artist.remove()
                 self.ax_photo.get_legend().remove()
                 self.intensity_factor = None
             self.trace_intensity_factor()
@@ -286,10 +287,11 @@ class Application(ctk.CTk):
                         self.intensity_factor = p.trace_factor(
                             self.ax_photo, self.data, self.var_secteur.get()
                         )
-                        self.ax_photo.legend()
+                        self.ax_photo.legend(loc="upper right")
             else:
                 if self.intensity_factor is not None:
-                    self.intensity_factor.remove()
+                    for artist in self.intensity_factor:
+                        artist.remove()
                     self.ax_photo.get_legend().remove()
                     self.intensity_factor = None
 
