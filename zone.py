@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Module de calcul des zones d'intensité et des coordonnées géométriques.
 Définit les limites d'intensité lumineuse et les secteurs angulaires pour les différents

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Module de gestion de l'affichage colorimétrique.
 Contient les fonctions permettant de tracer les données de chromaticité (X, Y)

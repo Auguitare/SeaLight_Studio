@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Script principal de l'application d'analyse des données photométriques et colorimétriques.
 Ce module initialise l'interface utilisateur avec customtkinter, gère les onglets de navigation,
@@ -6,13 +7,14 @@ le chargement des fichiers de données et coordonne l'affichage des graphiques.
 
 import platform
 import tkinter as tk
+
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
-import file_orga as f
-import tab_photo as p
-import tab_colo as c
+import file_orga as orga
+import tab_photo as photo_file
+import tab_colo as colo_file
 
 
 class Application(ctk.CTk):
@@ -27,7 +29,7 @@ class Application(ctk.CTk):
         """
         super().__init__()
 
-        self.file_choosen = None
+        self.file_chosen = None
         self.data = None
         self.intensity_factor = None
         self.current_photo_line = None
@@ -144,7 +146,7 @@ class Application(ctk.CTk):
         # figure matplotlib
         self.fig_photo = Figure(figsize=(8, 5))
         self.ax_photo = self.fig_photo.add_subplot(111)
-        self.current_photo_limits = p.trace_limit(
+        self.current_photo_limits = photo_file.trace_limit(
             self.ax_photo,
             self.var_secteur.get(),
             int(self.var_range.get()),
@@ -206,7 +208,7 @@ class Application(ctk.CTk):
         self.fig_color = Figure(figsize=(8, 5))
 
         self.ax_color = self.fig_color.add_subplot(111)
-        c.trace_limit(self.ax_color)
+        colo_file.trace_limit(self.ax_color)
 
         # Intégration
         self.canvas_color = FigureCanvasTkAgg(
@@ -228,17 +230,17 @@ class Application(ctk.CTk):
         Lit les données du fichier sélectionné et trace le graphique de photométrie.
         Affiche un avertissement si aucun fichier n'est sélectionné.
         """
-        if not self.file_choosen:
+        if not self.file_chosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
             )
 
         else:
-            self.data = f.read_file(self.file_choosen)
-            self.current_photo_line = p.trace_graph(
+            self.data = orga.read_file(self.file_chosen)
+            self.current_photo_line = photo_file.trace_graph(
                 self.data, self.ax_photo, self.var_decalage, self.current_photo_line
             )
-            self.current_photo_limits = p.trace_limit(
+            self.current_photo_limits = photo_file.trace_limit(
                 self.ax_photo,
                 self.var_secteur.get(),
                 int(self.var_range.get()),
@@ -258,15 +260,15 @@ class Application(ctk.CTk):
         Lit les données du fichier sélectionné et trace le graphique de colorimétrie.
         Affiche un avertissement si aucun fichier n'est sélectionné.
         """
-        if not self.file_choosen:
+        if not self.file_chosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
             )
 
         else:
-            self.data = f.read_file(self.file_choosen)
-            c.trace_graph(self.data, self.ax_color)
-            c.trace_limit(self.ax_color)
+            self.data = orga.read_file(self.file_chosen)
+            colo_file.trace_graph(self.data, self.ax_color)
+            colo_file.trace_limit(self.ax_color)
             self.canvas_color.draw()
 
     def trace_intensity_factor(self):
@@ -284,7 +286,7 @@ class Application(ctk.CTk):
                     )
                 else:
                     if self.intensity_factor is None:
-                        self.intensity_factor = p.trace_factor(
+                        self.intensity_factor = photo_file.trace_factor(
                             self.ax_photo, self.data, self.var_secteur.get()
                         )
                         self.ax_photo.legend(loc="upper right")
@@ -311,15 +313,15 @@ class Application(ctk.CTk):
         Ouvre une boîte de dialogue pour sélectionner
         un fichier et met à jour les labels d'information.
         """
-        path = f.choisir_fichier()
+        path = orga.choisir_fichier()
         if not path:
-            self.file_choosen = None
+            self.file_chosen = None
             self.label_fichier_photo.configure(text="Aucun fichier sélectionné")
             self.label_fichier_color.configure(text="Aucun fichier sélectionné")
             return
 
-        self.file_choosen = path
-        name = f"Fichier sélectionné : {'/'.join(self.file_choosen.split('/')[-3:])}"
+        self.file_chosen = path
+        name = f"Fichier sélectionné : {'/'.join(self.file_chosen.split('/')[-3:])}"
         self.label_fichier_photo.configure(text=name)
         self.label_fichier_color.configure(text=name)
 

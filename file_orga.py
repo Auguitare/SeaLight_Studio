@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Module de gestion des fichiers
 Gère l'import des fichiers et la la transmormation en donnée

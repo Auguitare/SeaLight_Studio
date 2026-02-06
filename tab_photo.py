@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Module de gestion de l'affichage photométrique.
 Gère le traçage de l'intensité lumineuse en fonction de l'angle, l'application
@@ -10,12 +11,16 @@ import zone as z
 
 def trace_graph(data, ax, decalage, previous_line=None):
     """
-    Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire si necessaire.
+    Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire.
 
     Args:
         data (pd.DataFrame): Données contenant les colonnes 'Angle °' et 'cd'.
         ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer.
         decalage (tk.StringVar): Objet possédant une méthode get() pour obtenir le décalage.
+        previous_line (matplotlib.lines.Line2D, optional): Ligne précédemment tracée à supprimer.
+
+    Returns:
+        matplotlib.lines.Line2D: L'objet ligne créé sur le graphique.
     """
     if data is None:
         return
@@ -46,6 +51,9 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
         range_val (float): Valeur de la portée.
         inclinaison (float): Valeur de l'inclinaison.
         previous_limits (list, optional): Liste des artistes précédemment tracés à supprimer.
+
+    Returns:
+        list: Liste des artistes matplotlib (lignes et remplissages) créés.
     """
     if previous_limits is not None:
         for artist in previous_limits:
@@ -103,7 +111,7 @@ def trace_factor(ax, data, secteur):
         secteur (str): Nom du secteur ("Hune", "Poupe", "Babord" ou "Tribord").
 
     Returns:
-        matplotlib.collections.PathCollection: L'objet scatter contenant le point tracé.
+        list: Liste des artistes matplotlib (point de dispersion et ligne horizontale) créés.
     """
     factor = 0.0
     zone_interdite = {}
