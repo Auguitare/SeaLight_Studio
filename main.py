@@ -270,13 +270,13 @@ class Application(ctk.CTk):
         """
         if self.var_intensity_factor.get():
             if self.intensity_factor is None:
-                (self.intensity_factor,) = self.ax_photo.plot(
-                    [1, 1, 3], label="Facteur 1.5", color="r"
-                )
+                self.intensity_factor = p.trace_factor(self.ax_photo)
+                legend = self.ax_photo.legend()
 
         else:
             if self.intensity_factor is not None:
                 self.intensity_factor.remove()
+                self.ax_photo.get_legend().remove()
                 self.intensity_factor = None
 
         self.ax_photo.relim()

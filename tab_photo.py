@@ -83,3 +83,8 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
     ax.relim()
     ax.autoscale_view()
     return new_limits
+
+
+def trace_factor(ax):
+    (factor_line,) = ax.plot([1, 1, 3], label="Facteur 1.5", color="r")
+    return factor_line
