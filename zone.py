@@ -66,7 +66,7 @@ def intensity_calc(light_range, inclinaison):
     }
 
 
-def hune(light_range, inclinaison):
+def hune(light_range = 1, inclinaison = 0):
     """
     Définit les coordonnées pour les zones de feu de hune.
 
@@ -86,7 +86,7 @@ def hune(light_range, inclinaison):
     return zone
 
 
-def poupe(light_range, inclinaison):
+def poupe(light_range = 1, inclinaison = 0):
     """
     Définit les coordonnées pour les zones de feu de poupe.
 
@@ -106,7 +106,7 @@ def poupe(light_range, inclinaison):
     return zone
 
 
-def babord(light_range, inclinaison):
+def babord(light_range = 1, inclinaison = 0):
     """
     Définit les coordonnées pour les zones de feu de bâbord.
 
@@ -126,7 +126,7 @@ def babord(light_range, inclinaison):
     return zone
 
 
-def tribord(light_range, inclinaison):
+def tribord(light_range = 1, inclinaison = 0):
     """
     Définit les coordonnées pour les zones de feu de tribord.
 
