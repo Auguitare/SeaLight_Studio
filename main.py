@@ -119,13 +119,13 @@ class Application(ctk.CTk):
         label_decalage.grid(row=0, column=2, padx=(10, 65), pady=5, sticky="e")
 
         # checkbox facteur 1.5
-        checkbox_intensity_factor = ctk.CTkCheckBox(
+        self.checkbox_intensity_factor = ctk.CTkCheckBox(
             tab_photo,
             text="Facteur d'intensité 1.5",
             variable=self.var_intensity_factor,
             command=self.trace_intensity_factor,
         )
-        checkbox_intensity_factor.grid(
+        self.checkbox_intensity_factor.grid(
             row=1, column=2, padx=(45, 10), pady=5, sticky="e"
         )
 
@@ -245,6 +245,11 @@ class Application(ctk.CTk):
                 self.var_angle.get(),
                 self.current_photo_limits,
             )
+            if self.intensity_factor is not None:
+                self.intensity_factor.remove()
+                self.ax_photo.get_legend().remove()
+                self.intensity_factor = None
+            self.trace_intensity_factor()
             self.canvas_photo.draw()
 
     def trace_color(self):
@@ -268,20 +273,30 @@ class Application(ctk.CTk):
         Affiche ou masque la ligne du facteur d'intensité sur le graphique de photométrie
         en fonction de l'état de la variable de contrôle.
         """
-        if self.var_intensity_factor.get():
-            if self.intensity_factor is None:
-                self.intensity_factor = p.trace_factor(self.ax_photo, self.data, self.var_secteur.get())
-                self.ax_photo.legend()
+        if self.current_photo_line:
+            if self.var_intensity_factor.get():
+                if self.intensity_factor is None:
+                    self.intensity_factor = p.trace_factor(
+                        self.ax_photo, self.data, self.var_secteur.get()
+                    )
+                    self.ax_photo.legend()
+
+            else:
+                if self.intensity_factor is not None:
+                    self.intensity_factor.remove()
+                    self.ax_photo.get_legend().remove()
+                    self.intensity_factor = None
+
+            self.ax_photo.relim()
+            self.ax_photo.autoscale_view()
+            self.canvas_photo.draw()
 
         else:
-            if self.intensity_factor is not None:
-                self.intensity_factor.remove()
-                self.ax_photo.get_legend().remove()
-                self.intensity_factor = None
-
-        self.ax_photo.relim()
-        self.ax_photo.autoscale_view()
-        self.canvas_photo.draw()
+            self.checkbox_intensity_factor.deselect()
+            tk.messagebox.showwarning(
+                "Avertissement",
+                "Veuillez d'abord tracer un graphe.",
+            )
 
     def file(self):
         """
@@ -313,6 +328,7 @@ class Application(ctk.CTk):
             self.trace_photo()
         elif current_tab == "Colorimétrie":
             self.trace_color()
+
 
 app = Application()
 app.mainloop()
