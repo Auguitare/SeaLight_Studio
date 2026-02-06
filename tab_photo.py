@@ -151,6 +151,7 @@ def trace_factor(ax, data, secteur):
         tk.messagebox.showwarning(
             "Avertissement", "Aucune valeur de courbe dans le secteur"
         )
-        factor_line = ax.scatter(x=0, y=0, c="w", label="pas dans le secteur")
+        factor_point = ax.scatter(x=0, y=0, c="w", label="pas dans le secteur")
+        factor_graph.append(factor_point)
 
-    return factor_line
+    return factor_graph
