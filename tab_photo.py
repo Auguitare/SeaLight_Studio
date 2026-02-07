@@ -139,21 +139,35 @@ def trace_factor(ax, data, secteur):
         max_row = filtered_data.loc[filtered_data["cd"].idxmax()]
         factor = round(max_row["cd"] / min_row["cd"], 2)
 
-        factor_point = ax.scatter(
+        factor_point_min = ax.scatter(
             x=min_row["Angle °"],
             y=min_row["cd"],
             c="r",
             label=f"facteur d'intensité: {factor}",
-            s=5,
+            s=10,
+            zorder=3,
+            edgecolors="darkred",
+            linewidths=1.5,
         )
-        factor_graph.append(factor_point)
+        factor_graph.append(factor_point_min)
+
+        factor_point_max = ax.scatter(
+            x=max_row["Angle °"],
+            y=max_row["cd"],
+            c="r",
+            s=10,
+            zorder=3,
+            edgecolors="darkred",
+            linewidths=1.5,
+        )
+        factor_graph.append(factor_point_max)
 
         factor_line = ax.axhline(
             y=min_row["cd"] * 1.5,
             color="r",
-            linestyle="--",
+            linestyle="-.",
             linewidth=1.5,
-            alpha=0.7,
+            zorder=2,
         )
         factor_graph.append(factor_line)
 

@@ -313,7 +313,7 @@ class Application(ctk.CTk):
                         self.intensity_factor = photo_file.trace_factor(
                             self.ax_photo, self.data, self.var_secteur.get()
                         )
-                        self.ax_photo.legend(loc="upper right")
+                        self.ax_photo.legend(loc="lower center")
             else:
                 if self.intensity_factor is not None:
                     for artist in self.intensity_factor:
@@ -332,10 +332,13 @@ class Application(ctk.CTk):
                 "Veuillez d'abord tracer un graphe.",
             )
 
-    def file(self, _):
+    def file(self, _ = None):
         """
         Ouvre une boîte de dialogue pour sélectionner
         un fichier et met à jour les labels d'information.
+
+        Args:
+            event: L'événement tkinter capturé.
         """
         path = orga.choisir_fichier()
         if not path:
