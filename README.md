@@ -38,7 +38,7 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
 - ✅ Application de décalages angulaires
 - ✅ Visualisation des zones de conformité selon le secteur
 - ✅ Calcul du facteur d'intensité (ratio max/min × 1.5)
-- ✅ Support des inclinaisons (0° et ±25°)
+- ✅ Support des inclinaisons 0° et ±25° (±5° assimilé à 0°)
 - ✅ Portées de 1 à 6 miles nautiques
 
 ### Analyse colorimétrique
@@ -83,7 +83,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-4. Installez les dépendances sont installées :
+4. Installez les dépendances :
 ```bash
 pip install -r requirements.txt
 ```
@@ -110,7 +110,7 @@ python main.py
     - Cliquez sur "Choisir un fichier"
     - Sélectionnez votre fichier CSV ou TXT
 
-3. **Configurez les paramètres** (onglet Photométrie) :
+3. **Configurez les paramètres** (uniquement onglet Photométrie) :
     - Secteur : Hune, Poupe, Bâbord, Tribord ou Vide
     - Portée : 1 à 6 miles nautiques
     - Inclinaison du test  : 0° ou ±25° (±5° ayant les même contrainte qu'à 0)
@@ -129,7 +129,7 @@ python main.py
 
 ### Guide détaillé
 
-#### Onglet Photométrie
+#### <u>Onglet Photométrie</u>
 
 **Paramètres disponibles :**
 
@@ -147,7 +147,7 @@ python main.py
 - **Point rouge** (si facteur activé) : Intensité minimale dans la zone
 - **Ligne rouge pointillée** : Seuil du facteur 1.5
 
-#### Onglet Colorimétrie
+#### <u> Onglet Colorimétrie</u>
 
 Affiche le diagramme chromatique avec :
 - **Points noirs** : Mesures de votre feu
@@ -238,7 +238,7 @@ Angle °;cd;lux;X;Y
 **Format du fichier :**
 - Séparateur : point-virgule (`;`)
 - Encodage : UTF-8
-- Les deux dernières lignes sont ignorées (généralement métadonnées)
+- Les deux dernières lignes sont ignorées
 
 ### Exemple de fichier
 
@@ -259,9 +259,13 @@ Fin du fichier
 ## Normes et références
 
 ### Normes appliquées
+<img src="image_README/USCG.png" width="400">
+<img src="image_README/ABYC.png" width="400">
+<img src="image_README/wheelmark.png" width="400">
 
-- **USCG (United States Coast Guard)**
-- **ABYC-C5** : American Boat & Yacht Council - Standard C5
+- **USCG (United States Coast Guard) ABYC-C5** : American Boat & Yacht Council - Standard C5
+- **Wheelmark** : Certification européen pour les équipements maritimes
+- **EN 14744** : Norme technique européenne pour les feux de navigation
 
 ### Portées et intensités
 
@@ -325,8 +329,7 @@ pip install customtkinter
 **Problème** : Warning "Impossible de charger l'icône"
 
 **Solution** :
-- Sur Windows : Placez `icon.ico` dans le même dossier que `main.py`
-- Sur Linux/Mac : Placez `icon.png` dans le même dossier que `main.py`
+- Placez `icon.ico` (pour windows) et `icon.png` (pour les OS UNIX) dans un dossier `icon/`
 - Ce warning n'empêche pas l'application de fonctionner
 
 ### Les zones ne s'affichent pas correctement
