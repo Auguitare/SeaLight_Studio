@@ -238,51 +238,59 @@ class Application(ctk.CTk):
         self.bind("<Return>", self.input_handle)
         self.bind("<KP_Enter>", self.input_handle)
 
-    def trace_photo(self):
+    def _file_loaded(self):
         """
-        Lit les données du fichier sélectionné et trace le graphique de photométrie.
-        Affiche un avertissement si aucun fichier n'est sélectionné.
+        Vérifie qu'un fichier est sélectionné.
+
+        Returns:
+            bool: True si un fichier est chargé, False sinon (affiche un warning)
         """
         if not self.file_chosen:
             tk.messagebox.showwarning(
                 "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
             )
+            return False
+        return True
 
-        else:
-            self.data = orga.read_file(self.file_chosen)
-            self.current_photo_line = photo_file.trace_graph(
-                self.data, self.ax_photo, self.var_decalage, self.current_photo_line
-            )
-            self.current_photo_limits = photo_file.trace_limit(
-                self.ax_photo,
-                self.var_secteur.get(),
-                int(self.var_range.get()),
-                self.var_angle.get(),
-                self.current_photo_limits,
-            )
-            if self.intensity_factor is not None:
-                for artist in self.intensity_factor:
-                    artist.remove()
-                self.ax_photo.get_legend().remove()
-                self.intensity_factor = None
-            self.trace_intensity_factor()
-            self.canvas_photo.draw()
+    def trace_photo(self):
+        """
+        Lit les données du fichier sélectionné et trace le graphique de photométrie.
+        Affiche un avertissement si aucun fichier n'est sélectionné.
+        """
+        if not self._file_loaded():
+            return
+
+        self.data = orga.read_file(self.file_chosen)
+        self.current_photo_line = photo_file.trace_graph(
+            self.data, self.ax_photo, self.var_decalage, self.current_photo_line
+        )
+        self.current_photo_limits = photo_file.trace_limit(
+            self.ax_photo,
+            self.var_secteur.get(),
+            int(self.var_range.get()),
+            self.var_angle.get(),
+            self.current_photo_limits,
+        )
+        if self.intensity_factor is not None:
+            for artist in self.intensity_factor:
+                artist.remove()
+            self.ax_photo.get_legend().remove()
+            self.intensity_factor = None
+        self.trace_intensity_factor()
+        self.canvas_photo.draw()
 
     def trace_color(self):
         """
         Lit les données du fichier sélectionné et trace le graphique de colorimétrie.
         Affiche un avertissement si aucun fichier n'est sélectionné.
         """
-        if not self.file_chosen:
-            tk.messagebox.showwarning(
-                "Avertissement", "Veuillez d'abord choisir un fichier à ouvrir."
-            )
+        if not self._file_loaded():
+            return
 
-        else:
-            self.data = orga.read_file(self.file_chosen)
-            colo_file.trace_graph(self.data, self.ax_color)
-            colo_file.trace_limit(self.ax_color)
-            self.canvas_color.draw()
+        self.data = orga.read_file(self.file_chosen)
+        colo_file.trace_graph(self.data, self.ax_color)
+        colo_file.trace_limit(self.ax_color)
+        self.canvas_color.draw()
 
     def trace_intensity_factor(self):
         """
