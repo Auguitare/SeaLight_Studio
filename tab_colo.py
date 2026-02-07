@@ -19,8 +19,10 @@ def trace_graph(data, ax):
 
     ax.clear()
 
+    filtered_data = data[(data["cd"] >= 10)]
+
     # Tracer les données
-    ax.scatter(data["X"], data["Y"], c="black", s=5, alpha=0.6)
+    ax.scatter(filtered_data["X"], filtered_data["Y"], c="black", s=5, alpha=0.6)
 
 
 def trace_limit(ax):
