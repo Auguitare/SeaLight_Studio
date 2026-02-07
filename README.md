@@ -69,7 +69,7 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
 1. Clonez ou téléchargez le projet :
 ```bash
 git clone https://github.com/Auguitare/SeaLight_Studio.git
-cd analyseur-feux-navigation
+cd SeaLight_Studio
 ```
 
 2. Installez les bibliothèques nécessaires :
@@ -124,8 +124,8 @@ python main.py
 6. **Ajustez le visuel**
     - Ajustez si besoin le zoom et la position du graphique avec la toolbar en dessous 
 
-7. **Sauvegarder**
-    - Sauvegardez votre graphique en png avec la dernière icone de la toolbar
+7. **Sauvegardez**
+    - Sauvegardez votre graphique en PNG avec la dernière icone de la toolbar
 
 ### Guide détaillé
 
@@ -163,7 +163,7 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 ## 📁 Structure du projet
 
 ```
-analyseur-feux-navigation/
+SeaLight_Studio/
 │
 ├── main.py              # Application principale
 ├── tab_photo.py         # Gestion de l'affichage photométrique
