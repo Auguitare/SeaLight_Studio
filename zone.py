@@ -14,7 +14,7 @@ def intensity_calc(light_range, inclinaison):
 
     Args:
         light_range (int): La portée de la lumière (1-6).
-        inclinaison (float/int): L'angle d'inclinaison. Si non nul, la puissance est divisée par deux.
+        inclinaison (float/int): L'angle d'inclinaison. Si non nul, puissance est divisée par deux.
 
     Returns:
         dict: Un dictionnaire contenant les données
@@ -152,7 +152,7 @@ def only_value():
     Retourne un dictionnaire de zone avec des coordonnées initialisées à zéro.
 
     Returns:
-        dict: Une structure de dictionnaire pour trois zones avec des valeurs X et Y vides ou nulles.
+        dict: Une structure de dictionnaire pour trois zones avec des valeurs X et Y vides ou nulles
     """
     zone = {}
     zone[1] = {"X": [], "Y": []}

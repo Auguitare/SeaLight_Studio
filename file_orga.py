@@ -72,6 +72,6 @@ def read_file(fichier_selectionne):
     except ValueError as e:
         tk.messagebox.showerror(
             "Colone manquante",
-            f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}",
+            f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}"
         )
         return None
