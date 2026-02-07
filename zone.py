@@ -84,6 +84,7 @@ def hune(light_range=1, inclinaison=0):
     """
     zone = intensity_calc(light_range, inclinaison)
 
+    # angle hune donné par USCG/ABYC-C5
     zone[1]["X"] = [-132.5, -132.5, -117.5, -117.5, -132.5]
     zone[2]["X"] = [-112.5, -112.5, -107.5, -107.5, 107.5, 107.5, 112.5, 112.5, -112.5]
     zone[3]["X"] = [132.5, 132.5, 117.5, 117.5, 132.5]
@@ -104,6 +105,7 @@ def poupe(light_range=1, inclinaison=0):
     """
     zone = intensity_calc(light_range, inclinaison)
 
+    # angle poupe donné par USCG/ABYC-C5
     zone[1]["X"] = [85, 85, 107.5, 107.5, 85]
     zone[2]["X"] = [112.5, 112.5, 117.5, 117.5, 242.5, 242.5, 247.5, 247.5, 112.5]
     zone[3]["X"] = [267.5, 267.5, 252.5, 252.5, 267.5]
@@ -124,6 +126,7 @@ def babord(light_range=1, inclinaison=0):
     """
     zone = intensity_calc(light_range, inclinaison)
 
+    # angle babord donné par USCG/ABYC-C5
     zone[1]["X"] = [-30, -30, -3, -3, -30]
     zone[2]["X"] = [0, 0, 0, 0, 107.5, 107.5, 112.5, 112.5, 0]
     zone[3]["X"] = [142.5, 142.5, 117.5, 117.5, 142.5]
@@ -144,6 +147,7 @@ def tribord(light_range=1, inclinaison=0):
     """
     zone = intensity_calc(light_range, inclinaison)
 
+    # angle tribord donné par USCG/ABYC-C5
     zone[1]["X"] = [-142.5, -142.5, -117.5, -117.5, -142.5]
     zone[2]["X"] = [-112.5, -112.5, -107.5, -107.5, 0, 0, 0, 0, -112.5]
     zone[3]["X"] = [30, 30, 3, 3, 30]
