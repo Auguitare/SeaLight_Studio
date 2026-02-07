@@ -1,4 +1,4 @@
-# Analyseur de Feux de Navigation
+# Analyseur de Feux de Navigation - SeaLight_Studio
 
 Application d'analyse des données photométriques et colorimétriques pour les feux de navigation maritime conformes aux normes Wheelmark et USCG/ABYC-C5.
 
