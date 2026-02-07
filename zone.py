@@ -4,6 +4,7 @@ Module de calcul des zones d'intensité et des coordonnées géométriques.
 Définit les limites d'intensité lumineuse et les secteurs angulaires pour les différents
 types de feux de navigation (Hune, Poupe, Babord, Tribord) selon les normes.
 """
+
 import tkinter as tk
 
 
@@ -22,6 +23,7 @@ def intensity_calc(light_range, inclinaison):
     """
     max_power = 0
     match light_range:
+        # Valeur tirée de la norme USCG/ABYC-C5
         case 1:
             max_power = 1.1
         case 2:
@@ -39,11 +41,12 @@ def intensity_calc(light_range, inclinaison):
             return
 
     if inclinaison != 0:
-        max_power *= 0.5
+        max_power *= 0.5  # if not 0°, divide power riquiered by 2
 
     return {
+        # define 3 no-go zone
         1: {
-            "Y": [
+            "Y": [  # have to go under 10% of the max power
                 0.1 * max_power,
                 max_power,
                 max_power,
@@ -52,7 +55,7 @@ def intensity_calc(light_range, inclinaison):
             ]
         },
         2: {
-            "Y": [
+            "Y": [  # may have 5 degrees of half power (e.g. masthead or stern)
                 0,
                 0.5 * max_power,
                 0.5 * max_power,
@@ -68,7 +71,7 @@ def intensity_calc(light_range, inclinaison):
     }
 
 
-def hune(light_range = 1, inclinaison = 0):
+def hune(light_range=1, inclinaison=0):
     """
     Définit les coordonnées pour les zones de feu de hune.
 
@@ -88,7 +91,7 @@ def hune(light_range = 1, inclinaison = 0):
     return zone
 
 
-def poupe(light_range = 1, inclinaison = 0):
+def poupe(light_range=1, inclinaison=0):
     """
     Définit les coordonnées pour les zones de feu de poupe.
 
@@ -108,7 +111,7 @@ def poupe(light_range = 1, inclinaison = 0):
     return zone
 
 
-def babord(light_range = 1, inclinaison = 0):
+def babord(light_range=1, inclinaison=0):
     """
     Définit les coordonnées pour les zones de feu de bâbord.
 
@@ -128,7 +131,7 @@ def babord(light_range = 1, inclinaison = 0):
     return zone
 
 
-def tribord(light_range = 1, inclinaison = 0):
+def tribord(light_range=1, inclinaison=0):
     """
     Définit les coordonnées pour les zones de feu de tribord.
 
