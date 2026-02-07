@@ -4,7 +4,7 @@ Application d'analyse des données photométriques et colorimétriques pour les 
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![iso](https://img.shields.io/badge/LA-RACHE-blue.svg)
+[![iso](https://img.shields.io/badge/LA-RACHE-blue.svg "ISO 1664")](https://www.la-rache.com/presentation.html)
 
 
 ## Table des matières
@@ -26,10 +26,10 @@ Cette application permet d'analyser et de valider la conformité des feux de nav
 - **Diagrammes colorimétriques** : Coordonnées chromatiques (X, Y) sur le diagramme CIE
 
 L'outil aide à la vérification de la conformité avec les zones réglementaires pour différents types de feux :
-- Feu de hune (masthead light)
-- Feu de poupe (stern light)
-- Feu de bâbord (port light)
-- Feu de tribord (starboard light)
+- Feu de hune (masthead)
+- Feu de poupe (stern)
+- Feu de bâbord (port)
+- Feu de tribord (starboard)
 
 ## ✨ Fonctionnalités
 
@@ -48,14 +48,6 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
   - Vert (green)
   - Rouge (red)
   - Jaune (yellow)
-
-### Interface utilisateur
-- Interface graphique moderne avec CustomTkinter
-- Graphiques interactifs avec Matplotlib
-- Zoom et navigation dans les graphiques
-- Raccourcis clavier (Entrée pour tracer)
-- Import de fichiers CSV/TXT
-- Création une application portable
 
 ## 🔧 Installation
 
@@ -92,6 +84,7 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+
 6. Creez une application portable
     - consultez le fichier `instruction.md`
 
@@ -164,22 +157,22 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 
 ```
 SeaLight_Studio/
-│
+├
 ├── main.py              # Application principale
 ├── tab_photo.py         # Gestion de l'affichage photométrique
 ├── tab_colo.py          # Gestion de l'affichage colorimétrique
 ├── zone.py              # Calculs des zones de conformité
 ├── file_orga.py         # Gestion des fichiers
-│
+├
 ├──icon/
     ├── icon.ico         # Icône Windows (optionnel)
     ├── icon.png         # Icône UNIX (optionnel)
-│
+├
 ├──rapid_test_file       # fichier pour tester et debug
     ├── hune-137.txt
     ├── test 5_modified.txt
     ├── test 5.txt
-|
+├
 ├── README.md            # Ce fichier
 ├── instruction.md       # Instruction PyInstaller
 ├── LICENCE              # Licence MIT
@@ -343,21 +336,16 @@ pip install customtkinter
 
 ## 🤝 Contribuer
 
-Les contributions sont les bienvenues ! Voici comment participer :
-
-1. Fork le projet
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+Les contributions sont les bienvenues !
 
 ### Axes d'amélioration
 
+- [ ] Géré  les feux non normé (360° et 180°)
+- [x] ajouter d'autres raccourcis
 - [ ] Export des résultats en PDF
-- [ ] Génération de rapports de conformité
-- [ ] Base de données de mesures
-- [ ] Comparaison entre plusieurs feux
 - [ ] Mode batch pour analyser plusieurs fichiers
+- [ ] Comparaison entre plusieurs feux
+- [ ] Génération de rapports de conformité
 
 ## 📄 Licence
 
@@ -365,13 +353,13 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## Auteur
 
-Développé avec ❤️ pour l'analyse de conformité des feux de navigation maritime.
+Développé avec ❤️ (et python) pour l'analyse de conformité des feux de navigation maritime.
 
 ## Support
 
 Pour toute question ou problème :
 - Ouvrez une issue sur GitHub
-- Consultez la documentation des normes USCG/ABYC-C5
+- Consultez la documentation des normes USCG/ABYC-C5 ou wheelmark
 
 ---
 
