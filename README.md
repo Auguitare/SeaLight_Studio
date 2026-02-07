@@ -76,6 +76,7 @@ source .venv/bin/activate
 ```
 
 4. Installez les dépendances :
+un fichier [requierment.txt](/requirements.txt) est disponible
 ```bash
 pip install -r requirements.txt
 ```
@@ -86,7 +87,7 @@ python main.py
 ```
 
 6. Creez une application portable
-    - consultez le fichier `instruction.md`
+    - consultez le fichier [instruction.md](/instruction.md)
 
 ## Utilisation
 
@@ -169,9 +170,13 @@ SeaLight_Studio/
     ├── icon.png         # Icône UNIX (optionnel)
 ├
 ├──rapid_test_file       # fichier pour tester et debug
-    ├── hune-137.txt
-    ├── test 5_modified.txt
-    ├── test 5.txt
+    ├── babord_limit_boundaries.txt
+    ├── hune_valide.txt
+    ├── poupe.txt
+    ├── test_colo.txt
+    ├── test.txt
+    ├── tribord_180.txt
+    ├── unvalid_test.txt
 ├
 ├── README.md            # Ce fichier
 ├── instruction.md       # Instruction PyInstaller
@@ -179,7 +184,7 @@ SeaLight_Studio/
 └── requirements.txt     # Liste des dépendances
 ```
 
-### Description des modules
+### Description des fichiers
 
 #### `main.py`
 Point d'entrée de l'application. Gère :
@@ -341,7 +346,8 @@ Les contributions sont les bienvenues !
 ### Axes d'amélioration
 
 - [ ] Géré  les feux non normé (360° et 180°)
-- [x] ajouter d'autres raccourcis
+- [ ] Modifier les couleurs/visuel de l'app
+- [ ] ajouter d'autres raccourcis
 - [ ] Export des résultats en PDF
 - [ ] Mode batch pour analyser plusieurs fichiers
 - [ ] Comparaison entre plusieurs feux
