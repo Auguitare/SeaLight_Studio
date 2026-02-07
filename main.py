@@ -93,12 +93,15 @@ class Application(ctk.CTk):
         secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
         # Puissance du feux
+        range_label = ctk.CTkLabel(tab_photo, text="Range [NM] :")
+        range_label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
         range_menu = ctk.CTkOptionMenu(
             tab_photo,
             values=["1", "2", "3", "4", "5", "6"],
             variable=self.var_range,
+            width=50,
         )
-        range_menu.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        range_menu.grid(row=1, column=0, padx=100, pady=5, sticky="w")
 
         # Radio bouton d'angle
         rb_0 = ctk.CTkRadioButton(
