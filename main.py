@@ -237,6 +237,7 @@ class Application(ctk.CTk):
         """Configure les raccourcis clavier"""
         self.bind("<Return>", self.input_handle)
         self.bind("<KP_Enter>", self.input_handle)
+        self.bind("<Control-o>",self.file)
 
     def _file_loaded(self):
         """
@@ -329,7 +330,7 @@ class Application(ctk.CTk):
                 "Veuillez d'abord tracer un graphe.",
             )
 
-    def file(self):
+    def file(self, _):
         """
         Ouvre une boîte de dialogue pour sélectionner
         un fichier et met à jour les labels d'information.
