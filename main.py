@@ -48,9 +48,9 @@ class Application(ctk.CTk):
         self.title("Analyse des données photométrique des feux de navigation")
         try:
             if platform.system() == "Windows":
-                self.iconbitmap("icon.ico")
+                self.iconbitmap("icon/icon.ico")
             else:
-                icon = tk.PhotoImage(file="icon.png")
+                icon = tk.PhotoImage(file="icon/icon.png")
                 self.iconphoto(False, icon)
         except tk.TclError as e:
             print(f"Impossible de charger l'icône: {e}")
@@ -239,7 +239,7 @@ class Application(ctk.CTk):
         """Configure les raccourcis clavier"""
         self.bind("<Return>", self.input_handle)
         self.bind("<KP_Enter>", self.input_handle)
-        self.bind("<Control-o>",self.file)
+        self.bind("<Control-o>", self.file)
 
     def _file_loaded(self):
         """
@@ -332,7 +332,7 @@ class Application(ctk.CTk):
                 "Veuillez d'abord tracer un graphe.",
             )
 
-    def file(self, _ = None):
+    def file(self, _=None):
         """
         Ouvre une boîte de dialogue pour sélectionner
         un fichier et met à jour les labels d'information.
