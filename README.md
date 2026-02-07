@@ -348,7 +348,9 @@ Les contributions sont les bienvenues !
 
 - [ ] Géré  les feux non normé (360° et 180°)
 - [ ] Modifier les couleurs/visuel de l'app
-- [ ] ajouter d'autres raccourcis
+- [ ] ajouter raccourcis
+  - [x] Ajouter Tab pour changer d'onglet
+  - [ ] Ajouter +/- pour augmenter le décalage  
 - [ ] Export des résultats en PDF
 - [ ] Mode batch pour analyser plusieurs fichiers
 - [ ] Comparaison entre plusieurs feux
