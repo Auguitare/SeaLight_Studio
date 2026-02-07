@@ -36,6 +36,7 @@ def intensity_calc(light_range, inclinaison):
             max_power = 118
         case _:
             tk.messagebox.showwarning("Avertissement", "choisir une portée.")
+            return
 
     if inclinaison != 0:
         max_power *= 0.5
