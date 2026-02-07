@@ -68,7 +68,7 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
 
 1. Clonez ou téléchargez le projet :
 ```bash
-git clone <url-du-repo>
+git clone https://github.com/Auguitare/SeaLight_Studio.git
 cd analyseur-feux-navigation
 ```
 
