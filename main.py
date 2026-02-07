@@ -75,7 +75,6 @@ class Application(ctk.CTk):
         tab_photo.grid_columnconfigure(0, weight=0)
         tab_photo.grid_columnconfigure(1, weight=1)
         tab_photo.grid_columnconfigure(2, weight=0)
-        # tab_photo.grid_columnconfigure(3, weight=5)
 
         # Variable de la page
         self.var_secteur = ctk.StringVar(value="Vide")
@@ -237,9 +236,10 @@ class Application(ctk.CTk):
 
     def _setup_keybindings(self):
         """Configure les raccourcis clavier"""
-        self.bind("<Return>", self.input_handle)
-        self.bind("<KP_Enter>", self.input_handle)
+        self.bind("<Return>", self.enter_handel)
+        self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
+        self.bind("<Control-Tab>", self.switch_tab)
 
     def _file_loaded(self):
         """
@@ -352,7 +352,7 @@ class Application(ctk.CTk):
         self.label_fichier_photo.configure(text=name)
         self.label_fichier_color.configure(text=name)
 
-    def input_handle(self, _):
+    def enter_handel(self, _):
         """
         Gère l'événement de pression sur la touche Entrée pour lancer le traçage
         du graphique correspondant à l'onglet actif.
@@ -365,6 +365,18 @@ class Application(ctk.CTk):
             self.trace_photo()
         elif current_tab == "Colorimétrie":
             self.trace_color()
+
+    def switch_tab(self, _):
+        """
+        Gère l'événement de pression sur la touche Tab pour changer d'onglet de visualisation.
+
+        Args:
+            event: L'événement tkinter capturé.
+        """
+        if self.tabview.get() == "Photométrie":
+            self.tabview.set("Colorimétrie")
+        elif self.tabview.get() == "Colorimétrie":
+            self.tabview.set("Photométrie")
 
 
 app = Application()

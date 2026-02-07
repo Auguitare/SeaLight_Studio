@@ -151,8 +151,9 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 
 ### Raccourcis clavier
 
-- `Entrée` : Tracer le graphique de l'onglet actif (marche aussi avec le Keyboard)
-- `Ctrl+O` : Ouvrir un fichier
+- `Entrée`  : Tracer le graphique de l'onglet actif (marche aussi avec le Keyboard)
+- `Ctrl+O`  : Ouvrir un fichier
+- `Ctrl+Tab`: Changer d'onglet 
 
 ## 📁 Structure du projet
 
