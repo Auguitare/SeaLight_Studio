@@ -3,6 +3,7 @@
 Module de gestion des fichiers
 Gère l'import des fichiers et la la transmormation en donnée
 """
+
 import tkinter as tk
 import pandas as pd
 
@@ -39,19 +40,18 @@ def read_file(fichier_selectionne):
     Returns:
         pd.DataFrame: DataFrame contenant les données, ou None en cas d'erreur.
     """
-    lignes_a_sauter = set()
-    with open(fichier_selectionne, "r", encoding="utf-8") as f:
-        lignes = f.readlines()
-        for i, ligne in enumerate(lignes):
-            if "Angle" in ligne:
-                lignes_a_sauter.update(range(0, i))
-                break
-
     try:
+        ligne_header = 0
+        with open(fichier_selectionne, "r", encoding="utf-8") as f:
+            for i, ligne in enumerate(f):
+                if "Angle" in ligne:
+                    ligne_header = i
+                    break
+
         data_file = pd.read_csv(
             fichier_selectionne,
             sep=";",
-            skiprows=lambda x: x in lignes_a_sauter,
+            skiprows= ligne_header,
             skipfooter=2,
             engine="python",
             usecols=[
