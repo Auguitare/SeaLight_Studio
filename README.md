@@ -171,10 +171,18 @@ SeaLight_Studio/
 ├── zone.py              # Calculs des zones de conformité
 ├── file_orga.py         # Gestion des fichiers
 │
-├── icon.ico             # Icône Windows (optionnel)
-├── icon.png             # Icône Linux/Mac (optionnel)
+├──icon/
+    ├── icon.ico         # Icône Windows (optionnel)
+    ├── icon.png         # Icône UNIX (optionnel)
 │
+├──rapid_test_file       # fichier pour tester et debug
+    ├── hune-137.txt
+    ├── test 5_modified.txt
+    ├── test 5.txt
+|
 ├── README.md            # Ce fichier
+├── instruction.md       # Instruction PyInstaller
+├── LICENCE              # Licence MIT
 └── requirements.txt     # Liste des dépendances
 ```
 
