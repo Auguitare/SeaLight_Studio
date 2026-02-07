@@ -35,6 +35,14 @@ class Application(ctk.CTk):
         self.current_photo_line = None
         self.current_photo_limits = []
 
+        self._setup_window()
+        self._setup_tabs()
+        self._setup_photometry_tab()
+        self._setup_colorimetry_tab()
+        self._setup_keybindings()
+
+    def _setup_window(self):
+        """Configure la fenêtre principale"""
         self.title("Analyse des données photométrique des feux de navigation")
         try:
             if platform.system() == "Windows":
@@ -45,17 +53,18 @@ class Application(ctk.CTk):
         except tk.TclError as e:
             print(f"Impossible de charger l'icône: {e}")
 
-        # onglets
+    def _setup_tabs(self):
+        """Crée les onglets"""
         self.tabview = ctk.CTkTabview(self)
         self.tabview.pack(padx=0, pady=0, fill="both", expand=True)
         self.tabview.add("Photométrie")
         self.tabview.add("Colorimétrie")
         self.tabview.set("Photométrie")
 
+    def _setup_photometry_tab(self):
+        """Configure l'onglet photométrie"""
         tab_photo = self.tabview.tab("Photométrie")
-        tab_color = self.tabview.tab("Colorimétrie")
 
-        # ========== UI Photometrie ==========
         # Configuration de la grille
         tab_photo.grid_rowconfigure(0, weight=0)
         tab_photo.grid_rowconfigure(1, weight=0)
@@ -165,7 +174,10 @@ class Application(ctk.CTk):
         toolbar.update()
         toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
-        # ========== UI Colorimetrie ==========
+    def _setup_colorimetry_tab(self):
+        """Configure l'onglet colorimétrie"""
+        tab_color = self.tabview.tab("Colorimétrie")
+
         # Configuration de la grille
         tab_color.grid_rowconfigure(0, weight=0)
         tab_color.grid_rowconfigure(1, weight=0)
@@ -221,7 +233,8 @@ class Application(ctk.CTk):
         toolbar.update()
         toolbar.pack(side=tk.BOTTOM, fill=tk.X)
 
-        # déclaration des key bindings
+    def _setup_keybindings(self):
+        """Configure les raccourcis clavier"""
         self.bind("<Return>", self.input_handle)
         self.bind("<KP_Enter>", self.input_handle)
 
