@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2025 OrionOfCreation
+# Licensed under the MIT License - see LICENSE file for details
 """
 Module de gestion de l'affichage photométrique.
 Gère le traçage de l'intensité lumineuse en fonction de l'angle, l'application

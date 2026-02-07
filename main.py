@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2025 OrionOfCreation
+# Licensed under the MIT License - see LICENSE file for details
 """
 Script principal de l'application d'analyse des données photométriques et colorimétriques.
 Ce module initialise l'interface utilisateur avec customtkinter, gère les onglets de navigation,

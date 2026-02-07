@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2025 OrionOfCreation
+# Licensed under the MIT License - see LICENSE file for details
 """
 Module de gestion des fichiers
 Gère l'import des fichiers et la la transmormation en donnée

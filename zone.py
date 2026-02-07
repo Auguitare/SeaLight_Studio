@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2025 OrionOfCreation
+# Licensed under the MIT License - see LICENSE file for details
 """
 Module de calcul des zones d'intensité et des coordonnées géométriques.
 Définit les limites d'intensité lumineuse et les secteurs angulaires pour les différents
