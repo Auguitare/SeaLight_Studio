@@ -87,7 +87,7 @@ class Application(ctk.CTk):
         # position du feux
         secteur_menu = ctk.CTkOptionMenu(
             tab_photo,
-            values=["Vide", "Hune", "Poupe", "Babord", "Tribord"],
+            values=["Vide", "Hune", "Poupe", "Babord", "Tribord", "180 Tribord", "180 Babord", "360"],
             variable=self.var_secteur,
         )
         secteur_menu.grid(row=0, column=0, padx=10, pady=5, sticky="w")
