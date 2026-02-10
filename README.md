@@ -105,9 +105,9 @@ python main.py
     - Sélectionnez votre fichier CSV ou TXT
 
 3. **Configurez les paramètres** (uniquement onglet Photométrie) :
-    - Secteur : Hune, Poupe, Bâbord, Tribord ou Vide
+    - Secteur : Hune, Poupe, Bâbord, Tribord ou Vide (sans zone limite tracée)
     - Portée : 1 à 6 miles nautiques
-    - Inclinaison du test  : 0° ou ±25° (±5° ayant les même contrainte qu'à 0)
+    - Inclinaison du test  : 0° ou ±25° (±5° ayant les même contrainte qu'à 0°)
 
 4. **Tracez le graphique** :
     - Cliquez sur "Tracer le graphique" ou appuyez sur Entrée
@@ -129,7 +129,7 @@ python main.py
 
 | Paramètre | Description | Valeurs |
 |-----------|-------------|---------|
-| Secteur | Type de feu à analyser | Hune, Poupe, Bâbord, Tribord, Vide |
+| Secteur | Type de feu à analyser | Hune, Poupe, Bâbord, Tribord, Vide, 360°, 180° babord et tribord |
 | Portée | Distance en miles nautiques | 1, 2, 3, 4, 5, 6 |
 | Inclinaison | Angle d'inclinaison du test | 0°, ±25° |
 | Décalage | Correction angulaire (en degrés) | Valeur décimale |
@@ -284,7 +284,10 @@ Fin du fichier
 | Hune        | 225° (112.5° B/T) vers l'avant |
 | Poupe       | 135° (67.5° B/T) vers l'arrière  |
 | Bâbord      | 112.5° (vers B)   |
+| 180 Babord  | 180°   (vers B)   |
 | Tribord     | 112.5° (vers T)   |
+| 180 Tribord | 180°   (vers T)   |
+| 360         | 360°              |
 
 ### Couleurs réglementaires (coordonnées CIE)
 
@@ -346,7 +349,7 @@ Les contributions sont les bienvenues !
 
 ### Axes d'amélioration
 
-- [ ] Géré  les feux non normé (360° et 180°)
+- [x] Géré  les feux non normé (360° et 180°)
 - [ ] Modifier les couleurs/visuel de l'app
 - [ ] ajouter raccourcis
   - [x] Ajouter Tab pour changer d'onglet
