@@ -396,14 +396,15 @@ class Application(ctk.CTk):
 
     def decal_up(self, key):
 
-        try:
-            val_decalage = float(self.var_decalage.get())
-        except ValueError:
-            val_decalage = 0.0
 
         if key.char == "+":
+            val_decalage = float(self.var_decalage.get())
             val_decalage += 0.2
         if key.char == "-":
+            try:
+                val_decalage = float(self.var_decalage.get())
+            except ValueError:
+                val_decalage = 0.0
             val_decalage -= 0.2
 
         self.var_decalage.set(f"{val_decalage:0.1f}")
