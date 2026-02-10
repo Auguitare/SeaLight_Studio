@@ -279,15 +279,15 @@ Fin du fichier
 
 ### Secteurs angulaires
 
-| Type de feu | Secteur horizontal |
-|-------------|-------------------|
-| Hune        | 225° (112.5° B/T) vers l'avant |
-| Poupe       | 135° (67.5° B/T) vers l'arrière  |
-| Bâbord      | 112.5° (vers B)   |
-| 180 Babord  | 180°   (vers B)   |
-| Tribord     | 112.5° (vers T)   |
-| 180 Tribord | 180°   (vers T)   |
-| 360         | 360°              |
+| Type de feu | Secteur horizontal
+|-------------| -----
+| Hune        | 225° (112.5° B/T) vers l'avant
+| Poupe       | 135° (67.5° B/T) vers l'arrière
+| Bâbord      | 112.5° (vers B)
+| 180 Babord  | 180°   (vers B)
+| Tribord     | 112.5° (vers T)
+| 180 Tribord | 180°   (vers T)
+| 360         | 360°
 
 ### Couleurs réglementaires (coordonnées CIE)
 
