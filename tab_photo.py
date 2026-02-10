@@ -108,7 +108,7 @@ def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):
 
 def trace_factor(ax, data, secteur):
     """
-    Calcule et trace le facteur d'intensité pour un secteur donné.
+    Calcule et trace le facteur d'intensité sur le secteur central.
 
     Le facteur est le ratio entre l'intensité maximale et minimale dans une zone
     spécifique définie par le secteur.
