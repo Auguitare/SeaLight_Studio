@@ -75,7 +75,7 @@ def intensity_calc(light_range, inclinaison):
 
 def hune(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de hune.
+    Définit les coordonnées pour les zones interdites d'un feux de hune.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -96,7 +96,7 @@ def hune(light_range=1, inclinaison=0):
 
 def poupe(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de poupe.
+    Définit les coordonnées pour les zones interdite d'un feu de poupe.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -117,7 +117,7 @@ def poupe(light_range=1, inclinaison=0):
 
 def babord(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de bâbord.
+    Définit les coordonnées pour les zones interdite d'un feu bâbord.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -138,7 +138,7 @@ def babord(light_range=1, inclinaison=0):
 
 def tribord(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de tribord.
+    Définit les coordonnées pour les zones interdite d'un feu tribord.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -159,7 +159,7 @@ def tribord(light_range=1, inclinaison=0):
 
 def all_round(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de tribord.
+    Définit les coordonnées pour les zones interdite d'un feu de 360°.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -179,7 +179,7 @@ def all_round(light_range=1, inclinaison=0):
 
 def half_round_tribord(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de tribord.
+    Définit les coordonnées pour les zones interdite feu de 180° à tribord.
 
     Args:
         light_range (int): La portée de la lumière.
@@ -199,7 +199,7 @@ def half_round_tribord(light_range=1, inclinaison=0):
 
 def half_round_babord(light_range=1, inclinaison=0):
     """
-    Définit les coordonnées pour les zones de feu de tribord.
+    Définit les coordonnées pour les zones interdite d'un feu de 180° à tribord.
 
     Args:
         light_range (int): La portée de la lumière.
