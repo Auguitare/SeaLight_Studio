@@ -170,7 +170,7 @@ def all_round(light_range=1, inclinaison=0):
     """
     zone = intensity_calc(light_range, inclinaison)
 
-    # angle tribord donné par USCG/ABYC-C5
+    # rectangle de 0 à 360
     zone[1]["X"] = [0, 0, 0, 0, 0]
     zone[2]["X"] = [0, 0, 0, 0, 360, 360, 360, 360, 0]
     zone[3]["X"] = [360, 360, 360, 360, 360]
@@ -191,8 +191,8 @@ def half_round_tribord(light_range=1, inclinaison=0):
     zone = intensity_calc(light_range, inclinaison)
 
     # angle tribord donné par USCG/ABYC-C5
-    zone[1]["X"] = [-142.5, -142.5, -117.5, -117.5, -142.5]
-    zone[2]["X"] = [-112.5, -112.5, -107.5, -107.5, 0, 0, 0, 0, -112.5]
+    zone[1]["X"] = [-185, -185, -210, -210, -185]
+    zone[2]["X"] = [-180, -180, -175, -175, 0, 0, 0, 0, -180]
     zone[3]["X"] = [30, 30, 3, 3, 30]
 
     return zone
@@ -211,9 +211,9 @@ def half_round_babord(light_range=1, inclinaison=0):
     zone = intensity_calc(light_range, inclinaison)
 
     # angle tribord donné par USCG/ABYC-C5
-    zone[1]["X"] = [-142.5, -142.5, -117.5, -117.5, -142.5]
-    zone[2]["X"] = [-112.5, -112.5, -107.5, -107.5, 0, 0, 0, 0, -112.5]
-    zone[3]["X"] = [30, 30, 3, 3, 30]
+    zone[1]["X"] = [-30, -30, -3, -3, -30]
+    zone[2]["X"] = [0, 0, 0, 0, 175, 175,180, 180, 0]
+    zone[3]["X"] = [185, 185, 210, 210, 185]
 
     return zone
 
