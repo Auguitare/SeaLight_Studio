@@ -252,6 +252,10 @@ class Application(ctk.CTk):
         self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
         self.bind("<Control-Tab>", self.switch_tab)
+        self.bind("<Left>", self.decal)
+        self.bind("<Right>", self.decal)
+        self.bind("<Up>", self.decal)
+        self.bind("<Down>", self.decal)
 
     def _file_loaded(self):
         """
@@ -389,6 +393,23 @@ class Application(ctk.CTk):
             self.tabview.set("Colorimétrie")
         elif self.tabview.get() == "Colorimétrie":
             self.tabview.set("Photométrie")
+
+    def decal(self, key):
+
+        if key.keysym == "Left":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage -= 0.2
+        elif key.keysym == "Right":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage += 0.2
+        elif key.keysym == "Up":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage += 1
+        elif key.keysym == "Down":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage -= 1
+
+        self.var_decalage.set(f"{val_decalage:0.1f}")
 
 
 app = Application()
