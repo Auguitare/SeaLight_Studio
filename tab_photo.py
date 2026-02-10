@@ -131,6 +131,14 @@ def trace_factor(ax, data, secteur):
         zone_interdite = z.babord()
     elif secteur == "Tribord":
         zone_interdite = z.tribord()
+    elif secteur == "180 Tribord":
+        zone_interdite = z.half_round_tribord()
+    elif secteur == "180 Babord":
+        zone_interdite = z.half_round_babord()
+    elif secteur == "360":
+        zone_interdite = z.all_round()
+    elif secteur == "Vide":
+        zone_interdite = z.only_value()
 
     x_factor_l = int(zone_interdite[2]["X"][3])
     x_factor_r = int(zone_interdite[2]["X"][4])
