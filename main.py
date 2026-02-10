@@ -252,8 +252,8 @@ class Application(ctk.CTk):
         self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
         self.bind("<Control-Tab>", self.switch_tab)
-        self.bind("<minus>", self.decal_down)
-        self.bind("<KP_Subtract>", self.decal_down)
+        self.bind("<minus>", self.decal_up)
+        self.bind("<KP_Subtract>", self.decal_up)
         self.bind("<plus>", self.decal_up)
         self.bind("<KP_Add>", self.decal_up)
 
@@ -394,11 +394,11 @@ class Application(ctk.CTk):
         elif self.tabview.get() == "Colorimétrie":
             self.tabview.set("Photométrie")
 
-    def decal_up(self, _):
-        print("plus")
-
-    def decal_down(self, _):
-        print("minus")
+    def decal_up(self, key):
+        if key.char == "+":
+            print("plus")
+        if key.char == "-":
+            print("minus")
 
 
 app = Application()
