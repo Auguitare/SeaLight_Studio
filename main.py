@@ -395,10 +395,18 @@ class Application(ctk.CTk):
             self.tabview.set("Photométrie")
 
     def decal_up(self, key):
+
+        try:
+            val_decalage = float(self.var_decalage.get())
+        except ValueError:
+            val_decalage = 0.0
+
         if key.char == "+":
-            print("plus")
+            val_decalage += 0.2
         if key.char == "-":
-            print("minus")
+            val_decalage -= 0.2
+
+        self.var_decalage.set(f"{val_decalage:0.1f}")
 
 
 app = Application()
