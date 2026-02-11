@@ -251,6 +251,7 @@ class Application(ctk.CTk):
         self.bind("<Return>", self.enter_handel)
         self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
+        self.bind("<Control-f>", self.checkbox_intensity_factor.toggle)
         self.bind("<Control-Tab>", self.switch_tab)
         self.bind("<Left>", self.decal_handle)
         self.bind("<Right>", self.decal_handle)
