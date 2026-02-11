@@ -153,7 +153,9 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 
 - `Entrée`  : Tracer le graphique de l'onglet actif (marche aussi avec le Keyboard)
 - `Ctrl+O`  : Ouvrir un fichier
-- `Ctrl+Tab`: Changer d'onglet 
+- `Ctrl+Tab`: Changer d'onglet
+- `Flèche direction Gauche\Droite` : +/- 0.2 au décalage
+- `Flèche direction Haut\Bas` : +/- 1 au décalage
 
 ## 📁 Structure du projet
 
@@ -353,7 +355,7 @@ Les contributions sont les bienvenues !
 - [ ] Modifier les couleurs/visuel de l'app
 - [ ] ajouter raccourcis
   - [x] Ajouter Tab pour changer d'onglet
-  - [ ] Ajouter +/- pour augmenter le décalage  
+  - [x] Ajouter flèche de direction pour augmenter le décalage  
 - [ ] Export des résultats en PDF
 - [ ] Mode batch pour analyser plusieurs fichiers
 - [ ] Comparaison entre plusieurs feux
