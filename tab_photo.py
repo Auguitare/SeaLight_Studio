@@ -34,13 +34,13 @@ def trace_graph(data, ax, decalage, previous_line=None):
     try:
         val_decalage = float(decalage.get())
     except ValueError:
-        val_decalage = 0.0
+        val_decalage = eval(decalage.get())
 
     data["Angle °"] = data["Angle °"].apply(lambda x: x + val_decalage)
 
     # Tracer les données
     (line,) = ax.plot(data["Angle °"], data["cd"], color="steelblue")
-    return line
+    return line, val_decalage
 
 
 def trace_limit(ax, secteur, range_val, inclinaison, previous_limits=None):

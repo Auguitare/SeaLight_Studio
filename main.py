@@ -281,9 +281,10 @@ class Application(ctk.CTk):
             return
 
         self.data = orga.read_file(self.file_chosen)
-        self.current_photo_line = photo_file.trace_graph(
+        self.current_photo_line, decal_update= photo_file.trace_graph(
             self.data, self.ax_photo, self.var_decalage, self.current_photo_line
         )
+        self.var_decalage.set(decal_update)
         self.current_photo_limits = photo_file.trace_limit(
             self.ax_photo,
             self.var_secteur.get(),
