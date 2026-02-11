@@ -30,11 +30,20 @@ def trace_graph(data, ax, decalage, previous_line=None):
     if previous_line is not None:
         previous_line.remove()
 
-    # Appliquer le décalage
     try:
-        val_decalage = float(decalage.get())
-    except ValueError:
         val_decalage = eval(decalage.get())
+    except NameError:
+        tk.messagebox.showwarning(
+            "Avertissement", "Le décalage DOIT être une valeur chiffrée"
+        )
+        val_decalage = 0
+    except SyntaxError:
+        tk.messagebox.showwarning(
+            "Avertissement",
+            """Le décalage DOIT être une valeur chiffrée\n
+ Vérifier si un caractère ne s'y est pas glissé""",
+        )
+        val_decalage = 0
 
     data["Angle °"] = data["Angle °"].apply(lambda x: x + val_decalage)
 
