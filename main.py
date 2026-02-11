@@ -252,10 +252,10 @@ class Application(ctk.CTk):
         self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
         self.bind("<Control-Tab>", self.switch_tab)
-        self.bind("<Left>", self.decal)
-        self.bind("<Right>", self.decal)
-        self.bind("<Up>", self.decal)
-        self.bind("<Down>", self.decal)
+        self.bind("<Left>", self.decal_handle)
+        self.bind("<Right>", self.decal_handle)
+        self.bind("<Up>", self.decal_handle)
+        self.bind("<Down>", self.decal_handle)
 
     def _file_loaded(self):
         """
@@ -394,7 +394,15 @@ class Application(ctk.CTk):
         elif self.tabview.get() == "Colorimétrie":
             self.tabview.set("Photométrie")
 
-    def decal(self, key):
+    def decal_handle(self, key):
+        """
+        Gère l'événement de pression sur les touches de direction
+        pour augmenter ou diminer le décalage du graphe.
+
+        Args:
+            key: L'événement tkinter capturé.
+
+        """
 
         if key.keysym == "Left":
             val_decalage = float(self.var_decalage.get())
