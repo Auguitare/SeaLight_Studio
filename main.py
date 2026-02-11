@@ -403,12 +403,20 @@ class Application(ctk.CTk):
 
         Args:
             key: L'événement tkinter capturé.
-
         """
         try:
-            val_decalage = float(self.var_decalage.get())
-        except ValueError:
+            # val_decalage = float(self.var_decalage.get())
             val_decalage = eval(self.var_decalage.get())
+        except NameError:
+            tk.messagebox.showwarning("Avertissement", "Le décalade doit être une valeur chiffrée")
+            val_decalage = 0
+        except SyntaxError:
+            tk.messagebox.showwarning(
+                "Avertissement",
+                """Le décalage DOIT être une valeur chiffrée\n
+ Vérifier si un caractère ne s'y est pas glissé""",
+            )
+            val_decalage = 0
 
         if key.keysym == "Left":
             val_decalage -= 0.2
