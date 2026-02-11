@@ -397,26 +397,19 @@ class Application(ctk.CTk):
     def decal(self, key):
 
         if key.keysym == "Left":
-            print("left")
-        if key.keysym == "Right":
-            print("right")
-        if key.keysym == "Up":
-            print("up")
-        if key.keysym == "Down":
-            print("down")
+            val_decalage = float(self.var_decalage.get())
+            val_decalage -= 0.2
+        elif key.keysym == "Right":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage += 0.2
+        elif key.keysym == "Up":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage += 1
+        elif key.keysym == "Down":
+            val_decalage = float(self.var_decalage.get())
+            val_decalage -= 1
 
-
-        # if key.keysym == "+":
-        #     val_decalage = float(self.var_decalage.get())
-        #     val_decalage += 0.2
-        # if key.keysym == "-":
-        #     try:
-        #         val_decalage = float(self.var_decalage.get())
-        #     except ValueError:
-        #         val_decalage = 0.0
-        #     val_decalage -= 0.2
-
-        # self.var_decalage.set(f"{val_decalage:0.1f}")
+        self.var_decalage.set(f"{val_decalage:0.1f}")
 
 
 app = Application()
