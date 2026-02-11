@@ -404,18 +404,18 @@ class Application(ctk.CTk):
             key: L'événement tkinter capturé.
 
         """
+        try:
+            val_decalage = float(self.var_decalage.get())
+        except ValueError:
+            val_decalage = eval(self.var_decalage.get())
 
         if key.keysym == "Left":
-            val_decalage = float(self.var_decalage.get())
             val_decalage -= 0.2
         elif key.keysym == "Right":
-            val_decalage = float(self.var_decalage.get())
             val_decalage += 0.2
         elif key.keysym == "Up":
-            val_decalage = float(self.var_decalage.get())
             val_decalage += 1
         elif key.keysym == "Down":
-            val_decalage = float(self.var_decalage.get())
             val_decalage -= 1
 
         self.var_decalage.set(f"{val_decalage:0.1f}")
