@@ -252,10 +252,10 @@ class Application(ctk.CTk):
         self.bind("<KP_Enter>", self.enter_handel)
         self.bind("<Control-o>", self.file)
         self.bind("<Control-Tab>", self.switch_tab)
-        self.bind("<minus>", self.decal_up)
-        self.bind("<KP_Subtract>", self.decal_up)
-        self.bind("<plus>", self.decal_up)
-        self.bind("<KP_Add>", self.decal_up)
+        self.bind("<Left>", self.decal)
+        self.bind("<Right>", self.decal)
+        self.bind("<Up>", self.decal)
+        self.bind("<Down>", self.decal)
 
     def _file_loaded(self):
         """
@@ -394,20 +394,29 @@ class Application(ctk.CTk):
         elif self.tabview.get() == "Colorimétrie":
             self.tabview.set("Photométrie")
 
-    def decal_up(self, key):
+    def decal(self, key):
+
+        if key.keysym == "Left":
+            print("left")
+        if key.keysym == "Right":
+            print("right")
+        if key.keysym == "Up":
+            print("up")
+        if key.keysym == "Down":
+            print("down")
 
 
-        if key.char == "+":
-            val_decalage = float(self.var_decalage.get())
-            val_decalage += 0.2
-        if key.char == "-":
-            try:
-                val_decalage = float(self.var_decalage.get())
-            except ValueError:
-                val_decalage = 0.0
-            val_decalage -= 0.2
+        # if key.keysym == "+":
+        #     val_decalage = float(self.var_decalage.get())
+        #     val_decalage += 0.2
+        # if key.keysym == "-":
+        #     try:
+        #         val_decalage = float(self.var_decalage.get())
+        #     except ValueError:
+        #         val_decalage = 0.0
+        #     val_decalage -= 0.2
 
-        self.var_decalage.set(f"{val_decalage:0.1f}")
+        # self.var_decalage.set(f"{val_decalage:0.1f}")
 
 
 app = Application()
