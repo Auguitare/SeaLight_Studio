@@ -31,25 +31,25 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
 - Feu de bâbord (port)
 - Feu de tribord (starboard)
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 ### Analyse photométrique
-- ✅ Tracé de l'intensité lumineuse en fonction de l'angle
-- ✅ Application de décalages angulaires
-- ✅ Visualisation des zones de conformité selon le secteur
-- ✅ Calcul du facteur d'intensité (ratio max/min × 1.5)
-- ✅ Support des inclinaisons 0° et ±25° (±5° assimilé à 0°)
-- ✅ Portées de 1 à 6 miles nautiques
+- Tracé de l'intensité lumineuse en fonction de l'angle
+- Application de décalages angulaires
+- Visualisation des zones de conformité selon le secteur
+- Calcul du facteur d'intensité (ratio max/min × 1.5)
+- Support des inclinaisons 0° et ±25° (±5° assimilé à 0°)
+- Portées de 1 à 6 miles nautiques
 
 ### Analyse colorimétrique
-- ✅ Diagramme de chromaticité CIE (X, Y)
-- ✅ Zones réglementaires pour :
+- Diagramme de chromaticité CIE (X, Y)
+- Zones réglementaires pour :
   - Blanc (white)
   - Vert (green)
   - Rouge (red)
   - Jaune (yellow)
 
-## 🔧 Installation
+## Installation
 
 ### Prérequis
 
@@ -157,7 +157,7 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 - `Flèche direction Gauche\Droite` : +/- 0.2 au décalage
 - `Flèche direction Haut\Bas` : +/- 1 au décalage
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 SeaLight_Studio/
@@ -216,7 +216,7 @@ Gestion des fichiers. Fonctions :
 - `choisir_fichier()` : Dialogue de sélection de fichier
 - `read_file()` : Lecture et parsing des données
 
-## 📊 Format des données
+## Format des données
 
 ### Format CSV/TXT attendu
 
@@ -345,7 +345,7 @@ pip install customtkinter
 - Vérifiez que la portée est configurée (1-6)
 - Relancez le tracé avec "Tracer le graphique"
 
-## 🤝 Contribuer
+## Contribuer
 
 Les contributions sont les bienvenues !
 
@@ -361,7 +361,7 @@ Les contributions sont les bienvenues !
 - [ ] Comparaison entre plusieurs feux
 - [ ] Génération de rapports de conformité
 
-## 📄 Licence
+## Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
