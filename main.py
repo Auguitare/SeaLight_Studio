@@ -281,7 +281,7 @@ class Application(ctk.CTk):
             return
 
         self.data = orga.read_file(self.file_chosen)
-        self.current_photo_line, decal_update= photo_file.trace_graph(
+        self.current_photo_line, decal_update = photo_file.trace_graph(
             self.data, self.ax_photo, self.var_decalage, self.current_photo_line
         )
         self.var_decalage.set(decal_update)
@@ -408,13 +408,14 @@ class Application(ctk.CTk):
             # val_decalage = float(self.var_decalage.get())
             val_decalage = eval(self.var_decalage.get())
         except NameError:
-            tk.messagebox.showwarning("Avertissement", "Le décalade doit être une valeur chiffrée")
+            tk.messagebox.showwarning(
+                "Avertissement", "Le décalade doit être une valeur chiffrée"
+            )
             val_decalage = 0
         except SyntaxError:
             tk.messagebox.showwarning(
                 "Avertissement",
-                """Le décalage DOIT être une valeur chiffrée\n
- Vérifier si un caractère ne s'y est pas glissé""",
+                """Le décalage DOIT être une valeur chiffrée.Vérifier si un caractère ne s'y est pas glissé""",
             )
             val_decalage = 0
 
