@@ -30,24 +30,24 @@ jobs:
           python -OO -m PyInstaller src/main.py  --optimize 2 --clean --onefile --noconsole --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os == 'Windows'
 
-      - name: Win upload artifacts
-        uses: actions/upload-artifact@v6
-        with:
-          name: SeaLight_Studio_win
-          path: dist/*.exe
-          if: runner.os == 'Windows'
+      # - name: Win upload artifacts
+      #   uses: actions/upload-artifact@v6
+      #   with:
+      #     name: SeaLight_Studio_win
+      #     path: dist/*.exe
+      #     if: runner.os == 'Windows'
 
       - name: Linux build with PyInstaller # for Linux
         run: |
           python3 -OO -m PyInstaller src/main.py --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os != 'Windows'
 
-      - name: Linux upload artifacts
+      - name: upload artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ runner.os }}-SeaLight_Studio_UNIX
+          name: ${{ runner.os }}-SeaLight_Studio
           path: dist/*
-          if: runner.os != 'Windows'
+          # if: runner.os != 'Windows'
 
   # release:
   #   needs: build
