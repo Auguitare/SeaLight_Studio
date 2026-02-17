@@ -25,16 +25,9 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build with PyInstaller
+      - name: Build with PyInstaller #build for windows
         run: |
-          python -OO -m PyInstaller src/main.py 
-          --optimize 2
-          --clean
-          --onefile
-          --noconsole
-          --name SeaLight_Studio
-          --icon icon.ico
-          --add-data icon.ico:image/.
+          python -OO -m PyInstaller src/main.py  --optimize 2 --clean --onefile --noconsole --name SeaLight_Studio --icon icon.ico
         if: runner.os == 'Windows'
 
       - name: Build with PyInstaller
