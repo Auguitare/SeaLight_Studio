@@ -25,30 +25,29 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build with PyInstaller #build for Windows
+      - name: Win build with PyInstaller # for Windows
         run: |
           python -OO -m PyInstaller src/main.py  --optimize 2 --clean --onefile --noconsole --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os == 'Windows'
 
-      - name: Build with PyInstaller #build for Linux
+      - name: Win upload artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: SeaLight_Studio_win
+          path: dist/*.exe
+          if: runner.os == 'Windows'
+
+      - name: Linux build with PyInstaller # for Linux
         run: |
           python3 -OO -m PyInstaller src/main.py --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os != 'Windows'
 
-      - name: Upload artifacts
+      - name: Linux upload artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ runner.os }}-SeaLight_Studio
-          path: dist/*.exe
-          if: runner.os == 'Windows'
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v6
-        with:
-          name: ${{ runner.os }}-SeaLight_Studio
+          name: ${{ runner.os }}-SeaLight_Studio_UNIX
           path: dist/*
           if: runner.os != 'Windows'
-
 
   # release:
   #   needs: build
