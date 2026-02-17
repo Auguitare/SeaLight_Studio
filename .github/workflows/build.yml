@@ -27,7 +27,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          PyInstaller src/main.py 
+          python -OO -m PyInstaller src/main.py 
           --optimize 2
           --clean
           --onefile
@@ -39,7 +39,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          PyInstaller src/main.py
+          python3 -OO -m PyInstaller src/main.py
           --strip
           --optimize 2
           --clean -F
