@@ -30,69 +30,61 @@ jobs:
           python -OO -m PyInstaller src/main.py  --optimize 2 --clean --onefile --noconsole --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os == 'Windows'
 
-      # - name: Win upload artifacts
-      #   uses: actions/upload-artifact@v6
-      #   with:
-      #     name: SeaLight_Studio_win
-      #     path: dist/*.exe
-      #     if: runner.os == 'Windows'
-
       - name: Linux build with PyInstaller # for Linux
         run: |
           python3 -OO -m PyInstaller src/main.py --strip --optimize 2 --clean -F --noconsole --hidden-import='PIL._tkinter_finder' --name SeaLight_Studio --icon icon/icon.ico
         if: runner.os != 'Windows'
 
-      - name: upload artifacts
+      - name: upload artifacts # upload des artifact
         uses: actions/upload-artifact@v6
         with:
           name: ${{ runner.os }}-SeaLight_Studio
           path: dist/*
-          # if: runner.os != 'Windows'
 
-  # release:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
 
-  #   steps:
-  #     - uses: actions/checkout@v6
+    steps:
+      - uses: actions/checkout@v6
 
-  #     - name: Download all artifacts
-  #       uses: actions/download-artifact@v7
-  #       with:
-  #         path: artifacts
+      - name: Download all artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: artifacts
 
-  #     - name: Create Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         tag_name: ${{ github.ref_name }}
-  #         release_name: Release ${{ github.ref_name }}
-  #         body: |
-  #           Voici les exécutables pour SeaLight_Studio ${{ github.ref_name }}.
-  #           - Windows : `SeaLight_Studio.exe`
-  #           - Linux : `SeaLight_Studio`
-  #         draft: false
-  #         prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            Voici les exécutables pour SeaLight_Studio ${{ github.ref_name }}.
+            - Windows : `SeaLight_Studio.exe`
+            - Linux : `SeaLight_Studio`
+          draft: false
+          prerelease: false
 
-  #     - name: Upload Linux binary
-  #       uses: actions/upload-release-asset@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #         asset_path: artifacts/ubuntu-latest-SeaLight_Studio/SeaLight_Studio
-  #         asset_name: SeaLight_Studio_Linux
-  #         asset_content_type: application/octet-stream
+      - name: Upload Linux binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/ubuntu-latest-SeaLight_Studio/SeaLight_Studio
+          asset_name: SeaLight_Studio_Linux
+          asset_content_type: application/octet-stream
 
-  #     - name: Upload Windows binary
-  #       uses: actions/upload-release-asset@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #         asset_path: artifacts/windows-latest-SeaLight_Studio/SeaLight_Studio.exe
-  #         asset_name: SeaLight_Studio_Windows.exe
-  #         asset_content_type: application/octet-stream
+      - name: Upload Windows binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/windows-latest-SeaLight_Studio/SeaLight_Studio.exe
+          asset_name: SeaLight_Studio_Windows.exe
+          asset_content_type: application/octet-stream
