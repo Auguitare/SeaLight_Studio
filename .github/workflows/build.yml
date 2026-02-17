@@ -2,7 +2,7 @@ name: Build & Release SeaLight_Studio
 
 on:
   push:
-    tags: ["ver*"]
+    tags: ["v*"]
 
 jobs:
   build:
