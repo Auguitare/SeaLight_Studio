@@ -2,9 +2,9 @@
 
 Application d'analyse des données photométriques et colorimétriques pour les feux de navigation maritime conformes aux normes Wheelmark et USCG/ABYC-C5.
 
+[![iso](https://img.shields.io/badge/LA-RACHE-blue.svg "ISO 1664")](https://www.la-rache.com/presentation.html)
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-[![iso](https://img.shields.io/badge/LA-RACHE-blue.svg "ISO 1664")](https://www.la-rache.com/presentation.html)
 
 
 ## Table des matières
