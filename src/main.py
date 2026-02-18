@@ -48,9 +48,11 @@ class Application(ctk.CTk):
         self.title("Analyse des données photométrique des feux de navigation")
         try:
             if platform.system() == "Windows":
-                self.iconbitmap("icon.ico")
+                icon_path = orga.resource_path("icon/icon.ico")
+                self.iconbitmap(icon_path)
             else:
-                icon = tk.PhotoImage(file="icon.png")
+                icon_path = orga.resource_path("icon/icon.png")
+                icon = tk.PhotoImage(file=icon_path)
                 self.iconphoto(False, icon)
         except tk.TclError as e:
             print(f"Impossible de charger l'icône: {e}")
