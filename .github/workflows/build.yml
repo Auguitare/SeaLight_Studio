@@ -54,16 +54,17 @@ jobs:
         with:
           path: artifacts
 
-      - name: Check GITHUB_TOKEN permissions
-        run: |
-          echo "GITHUB_TOKEN permissions: $GITHUB_TOKEN"
-          curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${{ github.repository }}/actions/permissions
+      # - name: Check GITHUB_TOKEN permissions
+      #   run: |
+      #     echo "GITHUB_TOKEN permissions: $GITHUB_TOKEN"
+      #     curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${{ github.repository }}/actions/permissions
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
@@ -77,7 +78,8 @@ jobs:
       - name: Upload Linux binary
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: artifacts/ubuntu-latest-SeaLight_Studio/SeaLight_Studio
@@ -87,7 +89,8 @@ jobs:
       - name: Upload Windows binary
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: artifacts/windows-latest-SeaLight_Studio/SeaLight_Studio.exe
