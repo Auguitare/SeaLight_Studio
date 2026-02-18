@@ -71,8 +71,11 @@ jobs:
 
       - name: List artifacts content
         run: |
+          echo dossier
           ls -la artifacts/
+          echo ==Linux==
           ls -la artifacts/Linux-SeaLight_Studio/
+          echo ==Win==
           ls -la artifacts/Windows-SeaLight_Studio/
 
       - name: Upload Linux binary
@@ -81,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/Linux-SeaLight_Studio
+          asset_path: artifacts/Linux-SeaLight_Studio/SeaLight_Studio
           asset_name: SeaLight_Studio_Linux
           asset_content_type: application/octet-stream
 
@@ -91,6 +94,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/Windows-SeaLight_Studio
+          asset_path: artifacts/Windows-SeaLight_Studio/SeaLight_Studio.exe
           asset_name: SeaLight_Studio_Windows.exe
           asset_content_type: application/octet-stream
