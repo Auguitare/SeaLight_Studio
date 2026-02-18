@@ -53,7 +53,7 @@ L'outil aide à la vérification de la conformité avec les zones réglementaire
 
 ### Prérequis
 
-- Python 3.10 ou supérieur
+- Python 3.12.3 ou supérieur
 - pip (gestionnaire de paquets Python)
 
 ### Installation du projet
@@ -87,21 +87,25 @@ python main.py
 ```
 
 6. Creez une application portable
-    - consultez le fichier [instruction.md](/instruction.md)
 
-## Utilisation
+    Il est pssible d'utiliser le code sur une application portable de 2 manières différentes :
+    - Soit en la compilant par cous même et pour cela veuilliez consultez le fichier [instruction.md](/instruction.md) pour connaitre les paramètres 
+    - Soit en la téléchargant depuis la dernière release directement sur [github](https://github.com/Auguitare/SeaLight_Studio/releases)
+
+## Utilisation 
 
 ### Lancement rapide
 
 1. **Démarrez l'application** :
-
+    - Via les fichiers sources:
     ```bash
     source .venv/bin/activate
     python main.py
     ```
+    - Via l'application télécharger dans les release [github](https://github.com/Auguitare/SeaLight_Studio/releases)
 
 2. **Choisissez un fichier de données** :
-    - Cliquez sur "Choisir un fichier"
+    - Cliquez sur "Choisir un fichier" (Ctrl+O)
     - Sélectionnez votre fichier CSV ou TXT
 
 3. **Configurez les paramètres** (uniquement onglet Photométrie) :
@@ -110,10 +114,10 @@ python main.py
     - Inclinaison du test  : 0° ou ±25° (±5° ayant les même contrainte qu'à 0°)
 
 4. **Tracez le graphique** :
-    - Cliquez sur "Tracer le graphique" ou appuyez sur Entrée
+    - Cliquez sur "Tracer le graphique" (ou appuyez sur Entrée)
 
 5. **Ajustez votre graphique**
-    - Utilisez l'entrée "Décalage [°]" pour ajuster la position de votre graphique dans les bornes des secteurs
+    - Utilisez l'entrée "Décalage [°]" pour ajuster la position de votre graphique dans les bornes des secteurs (modifiable via les flèches directionnelles)
 
 6. **Ajustez le visuel**
     - Ajustez si besoin le zoom et la position du graphique avec la toolbar en dessous 
@@ -138,7 +142,7 @@ python main.py
 **Lecture du graphique :**
 - **Courbe bleue** : Intensité mesurée
 - **Zones rouges** : Zones interdites (non-conformité)
-- **Point rouge** (si facteur activé) : Intensité minimale dans la zone
+- **Point rouge** (si facteur activé) : Intensité minimale et maximale dans la zone
 - **Ligne rouge pointillée** : Seuil du facteur 1.5
 
 #### <u> Onglet Colorimétrie</u>
@@ -154,25 +158,26 @@ Les points doivent se situer dans la zone correspondant à la couleur du feu.
 - `Entrée`  : Tracer le graphique de l'onglet actif (marche aussi avec le Keyboard)
 - `Ctrl+O`  : Ouvrir un fichier
 - `Ctrl+Tab`: Changer d'onglet
-- `Flèche direction Gauche\Droite` : +/- 0.2 au décalage
-- `Flèche direction Haut\Bas` : +/- 1 au décalage
+- `Flèche direction Gauche\Droite` : +/- 0.2° au décalage
+- `Flèche direction Haut\Bas` : +/- 1° au décalage
 
 ## Structure du projet
 
 ```
 SeaLight_Studio/
 ├
-├── main.py              # Application principale
-├── tab_photo.py         # Gestion de l'affichage photométrique
-├── tab_colo.py          # Gestion de l'affichage colorimétrique
-├── zone.py              # Calculs des zones de conformité
-├── file_orga.py         # Gestion des fichiers
+├──src/
+    ├── main.py              # Application principale
+    ├── tab_photo.py         # Affichage onglet photométrique
+    ├── tab_colo.py          # Affichage onglet colorimétrique
+    ├── zone.py              # Calculs des zones de conformité
+    ├── file_orga.py         # Gestion des fichiers
 ├
 ├──icon/
-    ├── icon.ico         # Icône Windows (optionnel)
-    ├── icon.png         # Icône UNIX (optionnel)
+    ├── icon.ico             # Icône Windows (optionnel)
+    ├── icon.png             # Icône UNIX (optionnel)
 ├
-├──rapid_test_file       # fichier pour tester et debug
+├──rapid_test_file           # fichier pour test et debug
     ├── babord_limit_boundaries.txt
     ├── hune_valide.txt
     ├── poupe.txt
@@ -181,10 +186,19 @@ SeaLight_Studio/
     ├── tribord_180.txt
     ├── unvalid_test.txt
 ├
-├── README.md            # Ce fichier
-├── instruction.md       # Instruction PyInstaller
-├── LICENCE              # Licence MIT
-└── requirements.txt     # Liste des dépendances
+├──.github/workflows/
+    ├── build.yml            # Fichier d'automatisation
+├
+├──archive/                  # Dossier d'anciens fichiers  
+├
+├──image_README/             # Image nécessaire pour le README  
+├
+├──patch/                    # Fichiers de conseil
+├
+├── README.md                # Ce fichier
+├── instruction.md           # Instruction PyInstaller
+├── LICENCE                  # Licence MIT
+└── requirements.txt         # Liste des dépendances
 ```
 
 ### Description des fichiers
@@ -215,6 +229,9 @@ Calculs des zones de conformité. Fonctions :
 Gestion des fichiers. Fonctions :
 - `choisir_fichier()` : Dialogue de sélection de fichier
 - `read_file()` : Lecture et parsing des données
+
+#### `build.yml`
+Gère l'automatisation de la compilation et des releases
 
 ## Format des données
 
@@ -313,7 +330,11 @@ Fin du fichier
 
 ### L'application ne se lance pas
 
-**Problème** : `ModuleNotFoundError: No module named 'customtkinter'`
+<u> ***ATTENDEZ !*** </u>  : Si vous avez lancer le fichier de la release, l'application peut mettre un peu de temps a démarrer. C'est le prix à payer pour avoir une application en un seul fichier. 
+
+Si vous lancer les code source:
+
+**Problème** : `ModuleNotFoundError: No module named 'customtkinter'` (par exemple)
 
 **Solution** :
 ```bash
@@ -333,29 +354,36 @@ pip install customtkinter
 **Problème** : Warning "Impossible de charger l'icône"
 
 **Solution** :
-- Placez `icon.ico` (pour windows) et `icon.png` (pour les OS UNIX) dans un dossier `icon/`
+- Placez `icon.ico` (pour windows) et `icon.png` (pour les OS UNIX) dans le même dossier que l'executable.
 - Ce warning n'empêche pas l'application de fonctionner
 
 ### Les zones ne s'affichent pas correctement
 
-**Problème** : Zones rouges absentes ou mal positionnées
+**Problème** : Zones rouges absentes, mal positionnées ou de mauvaise amplitude.
 
 **Solution** :
-- Vérifiez que vous avez sélectionné un secteur (pas "Vide")
-- Vérifiez que la portée est configurée (1-6)
+- Vérifiez que vous avez sélectionné un secteur (pas "Vide") et que c'est celui que vous souhaitez
+- Vérifiez que la portée est bien configurée (1-6)
+- Vérifier le décalage de votre graphe
 - Relancez le tracé avec "Tracer le graphique"
+
+### Autres problèmes
+
+N'hesitez pas a rapporter les erreurs que vous n'arrivez pas à résoudre.
 
 ## Contribuer
 
 Les contributions sont les bienvenues !
 
-### Axes d'amélioration
+### Axes d'amélioration possible
 
 - [x] Géré  les feux non normé (360° et 180°)
 - [ ] Modifier les couleurs/visuel de l'app
-- [ ] ajouter raccourcis
+- [x] ajouter raccourcis
   - [x] Ajouter Tab pour changer d'onglet
-  - [x] Ajouter flèche de direction pour augmenter le décalage  
+  - [x] Ajouter flèche de direction pour augmenter le décalage
+  - [x] Ctrl+f pour toggle le facteur d'intensité
+- [x] automatisation de PyInstaller (via runner github)
 - [ ] Export des résultats en PDF
 - [ ] Mode batch pour analyser plusieurs fichiers
 - [ ] Comparaison entre plusieurs feux
@@ -373,7 +401,7 @@ Développé avec ❤️ (et python) pour l'analyse de conformité des feux de na
 
 Pour toute question ou problème :
 - Ouvrez une issue sur GitHub
-- Consultez la documentation des normes USCG/ABYC-C5 ou wheelmark
+- Consultez la documentation des normes USCG/ABYC-C5 ou de la Wheelmark
 
 ---
 
