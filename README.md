@@ -384,6 +384,7 @@ Les contributions sont les bienvenues !
   - [x] Ajouter flèche de direction pour augmenter le décalage
   - [x] Ctrl+f pour toggle le facteur d'intensité
 - [x] automatisation de PyInstaller (via runner github)
+- [ ] Creer une AppImage plutôt qu'un PyInstaller pour Linux
 - [ ] Export des résultats en PDF
 - [ ] Mode batch pour analyser plusieurs fichiers
 - [ ] Comparaison entre plusieurs feux
