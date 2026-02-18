@@ -72,6 +72,8 @@ jobs:
       - name: List artifacts content
         run: |
           ls -la artifacts/
+          ls -la artifacts/Linux-SeaLight_Studio/
+          ls -la artifacts/Windows-SeaLight_Studio/
 
       - name: Upload Linux binary
         uses: actions/upload-release-asset@v1
