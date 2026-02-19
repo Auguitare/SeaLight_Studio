@@ -46,11 +46,14 @@ class Application(ctk.CTk):
     def _setup_window(self):
         """Configure la fenêtre principale"""
         self.title("Analyse des données photométrique des feux de navigation")
+        ctk.set_default_color_theme("green")  # Themes: "blue" (standard), "green", "dark-blue"
         try:
             if platform.system() == "Windows":
-                self.iconbitmap("icon.ico")
+                icon_path = orga.resource_path("icon/icon.ico")
+                self.iconbitmap(icon_path)
             else:
-                icon = tk.PhotoImage(file="icon.png")
+                icon_path = orga.resource_path("icon/icon.png")
+                icon = tk.PhotoImage(file=icon_path)
                 self.iconphoto(False, icon)
         except tk.TclError as e:
             print(f"Impossible de charger l'icône: {e}")
@@ -257,6 +260,7 @@ class Application(ctk.CTk):
         self.bind("<Right>", self.decal_handle)
         self.bind("<Up>", self.decal_handle)
         self.bind("<Down>", self.decal_handle)
+        self.bind("r", self.press_R)
 
     def _file_loaded(self):
         """
@@ -339,6 +343,7 @@ class Application(ctk.CTk):
                     self.ax_photo.get_legend().remove()
                     self.intensity_factor = None
 
+            self.ax_photo.set_autoscale_on(True)
             self.ax_photo.relim()
             self.ax_photo.autoscale_view()
             self.canvas_photo.draw()
@@ -429,6 +434,13 @@ class Application(ctk.CTk):
             val_decalage -= 1
 
         self.var_decalage.set(f"{val_decalage:0.1f}")
+
+    def press_R(self, _):
+        self.ax_photo.set_autoscale_on(True)
+        self.ax_photo.reset_position()
+        self.ax_photo.relim()
+        self.ax_photo.autoscale_view()
+        self.canvas_photo.draw()
 
 
 app = Application()
