@@ -6,6 +6,9 @@ Module de gestion des fichiers
 Gère l'import des fichiers et la la transmormation en donnée
 """
 
+import sys
+import os
+
 import tkinter as tk
 import pandas as pd
 
@@ -77,3 +80,13 @@ def read_file(fichier_selectionne):
             f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}"
         )
         return None
+
+
+def resource_path(relative_path):
+    """Obtenir le chemin absolu vers la ressource, fonctionne pour PyInstaller"""
+    try:
+        # PyInstaller crée un dossier temporaire et stocke le chemin dans _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
