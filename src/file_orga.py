@@ -11,6 +11,8 @@ import os
 
 import tkinter as tk
 import pandas as pd
+import sys
+import os
 
 
 def choisir_fichier():
@@ -56,7 +58,7 @@ def read_file(fichier_selectionne):
         data_file = pd.read_csv(
             fichier_selectionne,
             sep=";",
-            skiprows= ligne_header,
+            skiprows=ligne_header,
             skipfooter=2,
             engine="python",
             usecols=[
@@ -77,7 +79,7 @@ def read_file(fichier_selectionne):
     except ValueError as e:
         tk.messagebox.showerror(
             "Colone manquante",
-            f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}"
+            f"Colonnes manquantes dans le fichier : {str(e).rsplit('[', maxsplit=1)[-1].strip(']')}",
         )
         return None
 

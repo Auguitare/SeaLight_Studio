@@ -46,9 +46,7 @@ class Application(ctk.CTk):
     def _setup_window(self):
         """Configure la fenêtre principale"""
         self.title("Analyse des données photométrique des feux de navigation")
-        ctk.set_default_color_theme(
-            "green"
-        )  # Themes: "blue" (standard), "green", "dark-blue"
+        ctk.set_default_color_theme("src/theme.json")
         try:
             if platform.system() == "Windows":
                 icon_path = orga.resource_path("icon/icon.ico")
