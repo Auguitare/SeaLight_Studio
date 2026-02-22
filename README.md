@@ -378,16 +378,15 @@ Les contributions sont les bienvenues !
 ### Axes d'amélioration possible
 
 - [x] Géré  les feux non normé (360° et 180°)
-- [ ] Modifier les couleurs/visuel de l'app
+- [x] Modifier les couleurs/visuel de l'app
 - [x] ajouter raccourcis
   - [x] Ajouter Tab pour changer d'onglet
   - [x] Ajouter flèche de direction pour augmenter le décalage
   - [x] Ctrl+f pour toggle le facteur d'intensité
 - [x] automatisation de PyInstaller (via runner github)
-- [ ] Creer une AppImage plutôt qu'un PyInstaller pour Linux
-- [ ] Export des résultats en PDF
-- [ ] Mode batch pour analyser plusieurs fichiers
-- [ ] Comparaison entre plusieurs feux
+- [*] Comparaison entre plusieurs feux
+- [>] ~~Mode batch pour analyser plusieurs fichiers~~ => same as juste above
+- [>] ~~Export des résultats en PDF~~ => export des graphe en PNG
 - [ ] Génération de rapports de conformité
 
 ## Licence
