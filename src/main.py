@@ -85,6 +85,7 @@ class Application(ctk.CTk):
         self.var_angle = ctk.IntVar(value=0)
         self.var_decalage = ctk.StringVar(value="0.0")
         self.var_intensity_factor = ctk.BooleanVar(value=False)
+        self.var_compare_file = ctk.BooleanVar(value=False)
 
         # ===== Gestion des bouton/menu =====
         # position du feux
@@ -123,7 +124,16 @@ class Application(ctk.CTk):
             tab_photo, text="+/-25°", variable=self.var_angle, value=25
         )
         rb_0.grid(row=0, column=1, padx=10, pady=5, sticky="w")
-        rb_25.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        rb_25.grid(row=0, column=1, padx=100, pady=5, sticky="w")
+
+        # compare file button
+        compare = ctk.CTkCheckBox(
+            tab_photo,
+            text="Comparer des courbes",
+            variable=self.var_compare_file,
+            command=self.toggle_compare,
+        )
+        compare.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
         # Bouton de choix de fichier
         button_fichier = ctk.CTkButton(
