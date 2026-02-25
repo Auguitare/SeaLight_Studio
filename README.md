@@ -385,6 +385,7 @@ Les contributions sont les bienvenues !
   - [x] Ctrl+f pour toggle le facteur d'intensité
 - [x] automatisation de PyInstaller (via runner github)
 - [ ] Comparaison entre plusieurs feux
+- [ ] ajouter bouton mode clair/sombre
 - [ ] ~~Mode batch pour analyser plusieurs fichiers~~ => same as juste above
 - [ ] ~~Export des résultats en PDF~~ => export des graphe en PNG
 - [ ] Génération de rapports de conformité
