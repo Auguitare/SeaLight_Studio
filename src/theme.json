@@ -83,8 +83,8 @@
         "corner_radius": 6,
         "border_width": 1,
         "fg_color": [
-            "#FFFFFF",
-            "#000000"
+            "#0079D1",
+            "#0079D1"
         ],
         "border_color": [
             "#0079D1",
@@ -96,7 +96,7 @@
         ],
         "checkmark_color": [
             "white",
-            "white"
+            "#000000"
         ],
         "text_color": [
             "#000000",
