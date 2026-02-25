@@ -11,7 +11,7 @@ import tkinter as tk
 import zone as z
 
 
-def trace_graph(data, ax, decalage, previous_line=None):
+def trace_graph(data, ax, decalage, compare, previous_line=None):
     """
     Trace le graphique de l'intensité lumineuse en appliquant un décalage angulaire.
 
@@ -19,7 +19,7 @@ def trace_graph(data, ax, decalage, previous_line=None):
         data (pd.DataFrame): Données contenant les colonnes 'Angle °' et 'cd'.
         ax (matplotlib.axes.Axes): Axe matplotlib sur lequel tracer.
         decalage (tk.StringVar): Objet possédant une méthode get() pour obtenir le décalage.
-        previous_line (matplotlib.lines.Line2D, optional): Ligne précédemment tracée à supprimer.
+        previous_line (matplotlib.lines.Line2D, optional): Ligne précédemment tracée.
 
     Returns:
         matplotlib.lines.Line2D: L'objet ligne créé sur le graphique.
@@ -27,8 +27,9 @@ def trace_graph(data, ax, decalage, previous_line=None):
     if data is None:
         return
 
-    if previous_line is not None:
-        previous_line.remove()
+    if not compare:
+        if previous_line is not None:
+            previous_line.remove()
 
     try:
         val_decalage = eval(decalage.get())
@@ -40,8 +41,7 @@ def trace_graph(data, ax, decalage, previous_line=None):
     except SyntaxError:
         tk.messagebox.showwarning(
             "Avertissement",
-            """Le décalage DOIT être une valeur chiffrée\n
- Vérifier si un caractère ne s'y est pas glissé""",
+            "Le décalage DOIT être une valeur chiffrée. Vérifier si un caractère ne s'y est pas glissé",
         )
         val_decalage = 0
 

@@ -131,7 +131,6 @@ class Application(ctk.CTk):
             tab_photo,
             text="Comparer des courbes",
             variable=self.var_compare_file,
-            command=self.toggle_compare,
         )
         compare.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
@@ -296,7 +295,11 @@ class Application(ctk.CTk):
 
         self.data = orga.read_file(self.file_chosen)
         self.current_photo_line, decal_update = photo_file.trace_graph(
-            self.data, self.ax_photo, self.var_decalage, self.current_photo_line
+            self.data,
+            self.ax_photo,
+            self.var_decalage,
+            self.var_compare_file.get(),
+            self.current_photo_line,
         )
         self.var_decalage.set(decal_update)
         self.current_photo_limits = photo_file.trace_limit(
@@ -454,6 +457,7 @@ class Application(ctk.CTk):
         self.ax_photo.relim()
         self.ax_photo.autoscale_view()
         self.canvas_photo.draw()
+
 
 app = Application()
 app.mainloop()
