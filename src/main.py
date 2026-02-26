@@ -46,7 +46,9 @@ class Application(ctk.CTk):
     def _setup_window(self):
         """Configure la fenêtre principale"""
         self.title("Analyse des données photométrique des feux de navigation")
-        ctk.set_default_color_theme("src/theme.json")
+        theme_path = orga.resource_path("src/theme.json")
+        ctk.set_default_color_theme(theme_path)
+
         try:
             if platform.system() == "Windows":
                 icon_path = orga.resource_path("icon/icon.ico")
@@ -444,6 +446,7 @@ class Application(ctk.CTk):
         self.ax_photo.relim()
         self.ax_photo.autoscale_view()
         self.canvas_photo.draw()
+
 
 app = Application()
 app.mainloop()

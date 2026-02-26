@@ -11,8 +11,6 @@ import os
 
 import tkinter as tk
 import pandas as pd
-import sys
-import os
 
 
 def choisir_fichier():
