@@ -3,8 +3,6 @@ name: Build & Release SeaLight_Studio
 on:
   push:
     tags: ["v*"]
-    branches:
-      - New_Feature_setup_github_Action
 
 jobs:
   build:
@@ -51,10 +49,11 @@ jobs:
       - name: Sign executable
         uses: ricardoapaes/exe-sign@v1
         with:
-          executable-path: 'artifacts/Windows-SeaLight_Studio/SeaLight_Studio.exe'
-          signed-executable-name: 'SeaLight_Studio.exe'
+          executable-path: "artifacts/Windows-SeaLight_Studio/SeaLight_Studio.exe"
+          signed-executable-name: "SeaLight_Studio.exe"
           certificate-base64: ${{ secrets.CERTIFICATE_BASE64 }} # missing certificate
           certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }} # missing certificate
+
 
   # release:
   #   needs: build
