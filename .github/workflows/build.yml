@@ -46,13 +46,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download Raw Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Windows-SeaLight_Studio
+          path: raw_input
+
       - name: Sign executable
         uses: ricardoapaes/exe-sign@v1.1.1
         with:
-          executable-path: "artifacts/Windows-SeaLight_Studio/SeaLight_Studio.exe"
-          signed-executable-name: "SeaLight_Studio.exe"
+          executable-path: "raw_input/SeaLight_Studio.exe"
+          signed-executable-name: "SeaLight_Studio_Signed.exe"
           certificate-base64: ${{ secrets.CERTIFICATE_BASE64 }}
           certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+
+      - name: Upload Signed Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-SeaLight_Studio-SIGNED 
+          path: SeaLight_Studio_Signed.exe
+          retention-days: 1
 
 
   # release:
