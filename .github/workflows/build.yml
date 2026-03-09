@@ -60,6 +60,13 @@ jobs:
           certificate-base64: ${{ secrets.CERTIFICATE_BASE64 }}
           certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
 
+      - name: Find signed file
+        run: |
+          echo "=== Contenu du dossier courant ==="
+          ls -R
+          echo "=== Recherche du fichier signé ==="
+          find . -name "*Signed*" -o -name "*.exe" | head -20
+
       - name: Upload Signed Artifact
         uses: actions/upload-artifact@v4
         with:
