@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['main.py'],
+    ['src/main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('icon/icon.ico', 'icon'), ('src/theme.json', 'src')],
     hiddenimports=['PIL._tkinter_finder'],
     hookspath=[],
     hooksconfig={},
@@ -15,12 +15,23 @@ a = Analysis(
     optimize=2,
 )
 pyz = PYZ(a.pure)
+splash = Splash(
+    'icon/splash_screen.png',
+    binaries=a.binaries,
+    datas=a.datas,
+    text_pos=None,
+    text_size=12,
+    minify_script=True,
+    always_on_top=True,
+)
 
 exe = EXE(
     pyz,
     a.scripts,
     a.binaries,
     a.datas,
+    splash,
+    splash.binaries,
     [('O', None, 'OPTION'), ('O', None, 'OPTION')],
     name='SeaLight_Studio',
     debug=False,
@@ -35,5 +46,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['icon.ico'],
+    icon=['icon/icon.ico'],
 )
