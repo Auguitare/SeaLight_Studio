@@ -117,7 +117,7 @@ python src/main.py
     - Secteur : Hune, Poupe, Bâbord, Tribord ou Vide (sans zone limite tracée)
     - Portée : 1 à 6 miles nautiques
     - Inclinaison du test  : 0° ou ±25°
-        > [!NOTE]  
+        > [!NOTE]
         > Les tests à ±5° ont les même contrainte qu'à 0°, choisissez donc 0°.
 
 4. **Tracez le graphique** :
